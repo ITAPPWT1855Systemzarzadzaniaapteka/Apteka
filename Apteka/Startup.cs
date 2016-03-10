@@ -19,12 +19,12 @@ namespace Apteka
         {
             ApplicationDbContext context = new ApplicationDbContext();
 
-            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
             foreach (var role in AppConfig.defaultRoles) {
-                if (!roleManager.RoleExists(role)) {
-                    roleManager.Create(new IdentityRole { Name = role });
+                if (!RoleManager.RoleExists(role)) {
+                    RoleManager.Create(new IdentityRole { Name = role });
                 }
             }
             

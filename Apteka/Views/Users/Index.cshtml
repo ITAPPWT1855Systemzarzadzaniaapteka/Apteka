@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Users List";
+}
+
+<h2>Users List</h2>
+<ul class="list-group">
+    @foreach (var user in ViewBag.Users) {
+        <li class="list-group-item">
+            <span>
+                <i class="fa fa-user"></i>
+                @user.UserName
+            </span>
+            <span class="pull-right">
+                @if (!user.UserName.Contains("admin")) {
+                    <a href="@Url.Action("Delete", "Users", new { Id = user.Id })"><i class="fa fa-remove"></i></a>     
+                }
+            </span>
+        </li>
+    }
+</ul>
