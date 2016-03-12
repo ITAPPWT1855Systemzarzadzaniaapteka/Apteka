@@ -13,9 +13,16 @@
             </span>
             <span class="pull-right">
                 @if (!user.UserName.Contains("admin")) {
-                    <a href="@Url.Action("Delete", "Users", new { Id = user.Id })"><i class="fa fa-remove"></i></a>     
+                    <a href="@Url.Action("Delete", "Users", new { Id = user.Id })" data-username="@user.UserName" data-toggle="modal" class="delete-user"><i class="fa fa-remove"></i></a>     
                 }
             </span>
         </li>
     }
 </ul>
+
+<script>
+    $('.delete-user').click(function () {
+        var username = $(this).attr("data-username");
+        return confirm("Are you sure you want to delete user " + username + "?");
+    })
+</script>
