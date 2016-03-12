@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Apteka.Controllers
+namespace Apteka.Controllers 
 {
+
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
