@@ -17,7 +17,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Apteka - Logownie</title>
 
     <script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
     <link href="~/Content/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -80,20 +80,20 @@
 
         @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", role = "form" })) {
             @Html.AntiForgeryToken()
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading">Podaj dane logowania</h2>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder="Username" })            
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder="Nazwa użytkownika" })            
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło" })
 
             <div class="checkbox">
                 <label>
                     @Html.CheckBoxFor(m => m.RememberMe)
-                    Remember Me
+                    Zapamiętaj logowanie
                 </label>
             </div>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
         }
 
     </div>

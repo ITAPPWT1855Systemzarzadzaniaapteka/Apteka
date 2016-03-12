@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Users List";
+    ViewBag.Title = "Lista użytkowników";
 }
 
-<h2>Users List</h2>
+<h2>@ViewBag.Title</h2>
 <ul class="list-group">
     @foreach (var user in ViewBag.Users) {
         <li class="list-group-item">
@@ -19,11 +19,11 @@
     }
 </ul>
 
-<a href="@Url.Action("Create", "Users")" class="btn btn-info pull-right" role="button"><i class="fa fa-user-plus"></i> Create new user </a>
+<a href="@Url.Action("Create", "Users")" class="btn btn-info pull-right" role="button"><i class="fa fa-user-plus"></i> Dodaj nowego użytkownika </a>
 
 <script>
     $('.delete-user').click(function () {
         var username = $(this).attr("data-username");
-        return confirm("Are you sure you want to delete user " + username + "?");
+        return confirm("Czy na pewno chcesz usunąć użytkownika " + username + "?");
     })
 </script>

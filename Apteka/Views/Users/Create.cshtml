@@ -1,13 +1,13 @@
 ﻿@model Apteka.Models.CreateUserModel
 @{
-    ViewBag.Title = "Create User";
+    ViewBag.Title = "Utwórz użytkownika";
 }
 
 <h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
-    <h4>Create a new user.</h4>
+    <h4>Dodaj nowego użytkownika.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create" />
+            <input type="submit" class="btn btn-default" value="Dodaj" />
         </div>
     </div>
 }
