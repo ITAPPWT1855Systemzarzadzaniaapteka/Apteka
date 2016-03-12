@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Users List";
+}
+
+<h2>Users List</h2>
+<ul class="list-group">
+    @foreach (var user in ViewBag.Users) {
+        <li class="list-group-item">
+            <span>
+                <i class="fa fa-user"></i>
+                @user.UserName
+            </span>
+            <span class="pull-right">
+                @if (!user.UserName.Contains("admin")) {
+                    <a href="@Url.Action("Delete", "Users", new { Id = user.Id })" data-username="@user.UserName" data-toggle="modal" class="delete-user"><i class="fa fa-remove"></i></a>     
+                }
+            </span>
+        </li>
+    }
+</ul>
+
+<a href="@Url.Action("Create", "Users")" class="btn btn-info pull-right" role="button"><i class="fa fa-user-plus"></i> Create new user </a>
+
+<script>
+    $('.delete-user').click(function () {
+        var username = $(this).attr("data-username");
+        return confirm("Are you sure you want to delete user " + username + "?");
+    })
+</script>
