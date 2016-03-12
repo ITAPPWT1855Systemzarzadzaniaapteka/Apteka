@@ -1816,7 +1816,7 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

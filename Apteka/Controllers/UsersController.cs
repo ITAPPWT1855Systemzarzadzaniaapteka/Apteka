@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Apteka.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,18 +38,19 @@ namespace Apteka.Controllers
 
         // POST: Users/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public async Task<ActionResult> Create(CreateUserModel model)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            if (ModelState.IsValid) {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded) {
+                    return RedirectToAction("Index", "Users");
+                }
+                AddErrors(result);
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
         }
 
         // GET: Users/Delete/5
@@ -58,6 +61,12 @@ namespace Apteka.Controllers
             }
             ViewBag.result = await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id));
             return RedirectToAction("Index");
+        }
+
+        private void AddErrors(IdentityResult result) {
+            foreach (var error in result.Errors) {
+                ModelState.AddModelError("", error);
+            }
         }
     }
 }

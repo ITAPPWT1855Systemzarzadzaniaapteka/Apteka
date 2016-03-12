@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Users List";
 }
 
@@ -19,6 +18,8 @@
         </li>
     }
 </ul>
+
+<a href="@Url.Action("Create", "Users")" class="btn btn-info pull-right" role="button"><i class="fa fa-user-plus"></i> Create new user </a>
 
 <script>
     $('.delete-user').click(function () {
