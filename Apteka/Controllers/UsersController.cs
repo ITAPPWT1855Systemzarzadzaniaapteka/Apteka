@@ -1,18 +1,14 @@
 ﻿using Apteka.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Apteka.Controllers
-{
-    public class UsersController : Controller
-    {
+namespace Apteka.Controllers {
+    [Authorize(Roles = "Admin")]
+    public class UsersController : Controller {
         private ApplicationUserManager _userManager;
 
         public ApplicationUserManager UserManager {
@@ -31,19 +27,18 @@ namespace Apteka.Controllers
         }
 
         // GET: Users/Create
-        public ActionResult Create()
-        {
+        public ActionResult Create() {
             return View();
         }
 
         // POST: Users/Create
         [HttpPost]
-        public async Task<ActionResult> Create(CreateUserModel model)
-        {
-            if (ModelState.IsValid) {
+        public async Task<ActionResult> Create(CreateUserModel model) {
+            if (ModelState.IsValid && !model.UserName.Contains("admin")) {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
+                    await UserManager.AddToRoleAsync(user.Id, "Employee");
                     return RedirectToAction("Index", "Users");
                 }
                 AddErrors(result);
@@ -54,19 +49,23 @@ namespace Apteka.Controllers
         }
 
         // GET: Users/Delete/5
-        public async Task<ActionResult> Delete(string id)
-        {
+        public async Task<ActionResult> Delete(string id) {
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.result = await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id));
+            var user = UserManager.FindById(id);
+            if (!user.UserName.Contains("admin")) {
+                ViewBag.result = await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id));
+            }
             return RedirectToAction("Index");
         }
 
+        #region Helpers
         private void AddErrors(IdentityResult result) {
             foreach (var error in result.Errors) {
                 ModelState.AddModelError("", error);
             }
         }
+        #endregion
     }
 }
