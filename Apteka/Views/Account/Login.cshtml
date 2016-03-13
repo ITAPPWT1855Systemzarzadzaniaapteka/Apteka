@@ -77,24 +77,37 @@
 <body>
 
     <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Logowanie</h3>
+                    </div>
+                    <div class="panel-body">
+                    </div>
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h2 class="form-signin-heading">Podaj dane logowania</h2>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-signin", role = "form" })) {
-            @Html.AntiForgeryToken()
-            <h2 class="form-signin-heading">Podaj dane logowania</h2>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder="Nazwa użytkownika" })            
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło" })
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Nazwa użytkownika" })
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło" })
 
-            <div class="checkbox">
-                <label>
-                    @Html.CheckBoxFor(m => m.RememberMe)
-                    Zapamiętaj logowanie
-                </label>
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                Zapamiętaj logowanie
+                            </label>
+                        </div>
+
+                        <button class="btn btn-lg btn-success btn-block" type="submit">Zaloguj</button>
+                    }
+                
+                    </div>
+                </div>
             </div>
-
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj</button>
-        }
+    
 
     </div>
 </body>
