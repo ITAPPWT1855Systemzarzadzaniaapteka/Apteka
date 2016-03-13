@@ -46,6 +46,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EcmaScript.NET, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EcmaScript.Net.1.0.1.0\lib\net20\EcmaScript.NET.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.0.1011, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -1006,6 +1010,10 @@
     <Content Include="Content\bower_components\morrisjs\spec\viz\run.sh" />
     <Content Include="Content\bower_components\raphael\.bower.json" />
     <Content Include="Content\bower_components\raphael\bower.json" />
+    <None Include=".bin\bower.cmd" />
+    <None Include=".bin\git.cmd" />
+    <None Include=".bin\node.cmd" />
+    <Content Include="bower.json" />
     <None Include="Properties\PublishProfiles\apteka.pubxml" />
     <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\angular-touch.min.js.map" />

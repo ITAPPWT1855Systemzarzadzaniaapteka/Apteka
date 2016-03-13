@@ -4,26 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apteka</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+    @Styles.Render("~/bundles/css/dist")
+    @Scripts.Render("~/bundles/js/dist")
+    
     <script type="text/javascript">
-        var appInsights=window.appInsights||function(config){
-            function r(config){t[config]=function(){var i=arguments;t.queue.push(function(){t[config].apply(t,i)})}}var t={config:config},u=document,e=window,o="script",s=u.createElement(o),i,f;for(s.src=config.url||"//az416426.vo.msecnd.net/scripts/a/ai.0.js",u.getElementsByTagName(o)[0].parentNode.appendChild(s),t.cookie=u.cookie,t.queue=[],i=["Event","Exception","Metric","PageView","Trace"];i.length;)r("track"+i.pop());return r("setAuthenticatedUserContext"),r("clearAuthenticatedUserContext"),config.disableExceptionTracking||(i="onerror",r("_"+i),f=e[i],e[i]=function(config,r,u,e,o){var s=f&&f(config,r,u,e,o);return s!==!0&&t["_"+i](config,r,u,e,o),s}),t
+        var appInsights = window.appInsights || function (config) {
+            function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
         }({
-            instrumentationKey:"1225bddf-a666-4d1b-8421-3adbd5e09835"
+            instrumentationKey: "1225bddf-a666-4d1b-8421-3adbd5e09835"
         });
-        
-        window.appInsights=appInsights;
+
+        window.appInsights = appInsights;
         appInsights.trackPageView();
     </script>
-    <script src="~/Content/bower_components/jquery/dist/jquery.min.js"></script>
-    <link href="~/Content/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     <link href="~/Content/timeline.css" rel="stylesheet">
-    <link href="~/Content/sb-admin-2.css" rel="stylesheet">
-    <link href="~/Content/bower_components/morrisjs/morris.css" rel="stylesheet">
-    <link href="~/Content/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -339,24 +333,11 @@
                 <!-- /.col-lg-12 -->
             </div>
 
-                @RenderBody() 
-        
-    </div><!-- /#page-wrapper -->
-     </div><!-- /#wrapper -->
-    <!-- Bootstrap Core JavaScript -->
-    <script src="~/Content/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="~/Content/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-    <!-- Morris Charts JavaScript -->
-    <script src="~/Content/bower_components/raphael/raphael-min.js"></script>
-    <script src="~/Content/bower_components/morrisjs/morris.min.js"></script>
-    <script src="~/Scripts/morris-data.js"></script>
-    <!-- Custom Theme JavaScript -->
-    <script src="~/Scripts/sb-admin-2.js"></script>
+            @RenderBody()
 
+        </div><!-- /#page-wrapper -->
+    </div><!-- /#wrapper -->
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
