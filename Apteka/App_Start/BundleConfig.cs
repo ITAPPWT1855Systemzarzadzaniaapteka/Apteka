@@ -11,6 +11,7 @@ namespace Apteka {
                         "~/bower_components/datatables/media/js/jquery.dataTables.min.js",
                         "~/bower_components/datatables-responsive/js/datatables.responsive.js",
                         "~/bower_components/metisMenu/dist/metisMenu.min.js",
+                        "~/bower_components/modernizr/src/modernizr-*",
                         //"~/bower_components/jquery-validation/dist/jquery.validate.min.js",
                         "~/Scripts/*.js"
             ));
@@ -27,6 +28,13 @@ namespace Apteka {
                     "~/Content/less/*.less"
             ));
 
+            #region datetimepicker
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap-datepicker").Include(
+          "~/Scripts/bootstrap-datetimepicker.min.js"));
+
+            bundles.Add(new StyleBundle("~/Content/datepicker").Include(
+                      "~/Content/bootstrap-datetimepicker.min.css"));
+            #endregion
             #region login
             bundles.Add(new ScriptBundle("~/bundles/login/js").Include(
                         "~/bower_components/jquery/dist/jquery.min.js",

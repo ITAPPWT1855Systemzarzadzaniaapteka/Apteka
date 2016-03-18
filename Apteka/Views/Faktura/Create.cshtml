@@ -1,0 +1,95 @@
+﻿@model Apteka.Models.Faktura
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .inputs {
+        margin-bottom: 30px;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")"></script>
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Wprowadź nową fakturę</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <label for="date-input" class="col-md-3">Wprowadź datę:</label>
+</div>
+<div class="row inputs">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+            <input type="text" class="form-control datepicker">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <label for="warehouse-id" class="control-label col-md-3">Wybierz hurtownię:</label>
+    <div class="col-md-1"></div>
+    <label for="facture-id" class="col-md-3">Wprowadź numer faktury:</label>
+</div>
+<div class="row inputs">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <select id="warehouse-id" class="form-control"></select>
+        <div class="text-danger"></div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+        <input id="facture-id" type="text" class="form-control" />
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <label for="medicine-name" class="control-label col-md-5">Nazwa leku:</label>
+    <label for="unit-price" class="col-md-3">Cena jednostkowa netto:</label>
+    <label for="amount" class="col-md-3">Ilość:</label>
+</div>
+<div class="row inputs">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+        <input type="text" id="medicine-name" class="form-control"/>
+        <div class="text-danger"></div>
+    </div>
+    <div class="col-md-2">
+        <input type="text" id="unit-price" class="form-control" />
+        <div class="text-danger"></div>
+    </div>
+    <div class="col-md-2">
+        <input type="text" id="amount" class="form-control" />
+        <div class="text-danger"></div>
+    </div>
+    <div class="col-md-1 btn btn-success"><span class="glyphicon glyphicon-plus"></span></div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-7"></div>
+    <label for="netto" class="control-label col-md-2">Kwota netto:</label>
+    <div class="col-md-1"></div>
+    <label for="brutto" class="col-md-2">Kwota brutto:</label>
+</div>
+<div class="row inputs">
+    <div class="col-md-7"></div>
+    <div class="col-md-2">
+        <input id="netto" type="text" class="form-control" />
+        <div class="text-danger"></div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <input id="brutto" type="text" class="form-control" />
+    </div>
+</div>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-6">
+        <input type="submit" value="Create" class="btn btn-success" />
+    </div>
+</div>
+
+

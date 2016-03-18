@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="Apteka">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,15 @@
     @Scripts.Render("~/bundles/js/dist")
     @Styles.Render("~/bundles/css/dist")
     @Styles.Render("~/bundles/less")
+    @Scripts.Render("~/Scripts/angular.js")
+    @Scripts.Render("~/Scripts/angular-route.js")
+    @Scripts.Render("~/bundles/bootstrap-datepicker")
+    @Styles.Render("~/Content/datepicker")
+    @Scripts.Render("~/js/" + @ViewContext.RouteData.Values["Controller"].ToString().ToLower() + "Controller.js")
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+
+    <link rel="stylesheet" title="Style CSS" href="~/Content/cwcalendar.css" type="text/css" media="all" />
+    <link rel="stylesheet" title="Style CSS" href="~/Content/autocomplete.css" type="text/css" media="all" />
     <script type="text/javascript">
         var appInsights = window.appInsights || function (config) {
             function r(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, u = document, e = window, o = "script", s = u.createElement(o), i, f; for (s.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", u.getElementsByTagName(o)[0].parentNode.appendChild(s), t.cookie = u.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) r("track" + i.pop()); return r("setAuthenticatedUserContext"), r("clearAuthenticatedUserContext"), config.disableExceptionTracking || (i = "onerror", r("_" + i), f = e[i], e[i] = function (config, r, u, e, o) { var s = f && f(config, r, u, e, o); return s !== !0 && t["_" + i](config, r, u, e, o), s }), t
@@ -18,8 +27,7 @@
         appInsights.trackPageView();
     </script>
 </head>
-<body>
-
+<body ng-controller="@ViewContext.RouteData.Values["Controller"].ToString().ToLower()">
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -302,7 +310,8 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
                             <li>
                                 <a href="#"><i class="fa fa-users fa-fw"></i> Użytkownicy<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
@@ -322,18 +331,11 @@
             <!-- /.navbar-static-side -->
         </nav>
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Panel główny</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
 
             @RenderBody()
 
         </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
-
     @RenderSection("scripts", required: false)
 </body>
 </html>
