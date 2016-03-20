@@ -7,6 +7,26 @@
     .inputs {
         margin-bottom: 30px;
     }
+    input.ng-valid.ng-touched {
+    background-color: #ffffff;
+  }
+    input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+        myForm.ng-valid {
+    background-color: rgba(124, 192, 113, 0.27);
+  }
+    myForm.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+     .new-medicines div{
+        margin-bottom: 20px;
+        margin-left: 30px;
+    }
+    .medicines div{
+        margin-bottom: 20px;
+        margin-left: 30px;
+    }
 </style>
 <script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")"></script>
 <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
@@ -15,81 +35,91 @@
         <h1 class="page-header">Wprowadź nową fakturę</h1>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-1"></div>
-    <label for="date-input" class="col-md-3">Wprowadź datę:</label>
-</div>
-<div class="row inputs">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-            <input type="text" class="form-control datepicker">
+<form ng-model="myForm">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="date-input" class="col-md-3">Wprowadź datę:</label>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-1"></div>
-    <label for="warehouse-id" class="control-label col-md-3">Wybierz hurtownię:</label>
-    <div class="col-md-1"></div>
-    <label for="facture-id" class="col-md-3">Wprowadź numer faktury:</label>
-</div>
-<div class="row inputs">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-        <select id="warehouse-id" class="form-control"></select>
-        <div class="text-danger"></div>
+    <div class="row inputs">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <input type="date" class="form-control datepicker">
+        </div>
     </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
-        <input id="facture-id" type="text" class="form-control" />
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="warehouse-id" class="control-label col-md-3">Wybierz hurtownię:</label>
+        <div class="col-md-1"></div>
+        <label for="facture-id" class="col-md-3">Wprowadź numer faktury:</label>
     </div>
-</div>
+    <div class="row inputs">
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <select id="warehouse-id" class="form-control"></select>
+            <div class="text-danger"></div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-3">
+            <input id="facture-id" type="number" class="form-control" />
+        </div>
+    </div>
 
 
-<div class="row">
-    <div class="col-md-1"></div>
-    <label for="medicine-name" class="control-label col-md-5">Nazwa leku:</label>
-    <label for="unit-price" class="col-md-3">Cena jednostkowa netto:</label>
-    <label for="amount" class="col-md-3">Ilość:</label>
-</div>
-<div class="row inputs">
-    <div class="col-md-1"></div>
-    <div class="col-md-5">
-        <input type="text" id="medicine-name" class="form-control"/>
-        <div class="text-danger"></div>
+    <div class="row">
+        <label for="medicine-name" class="control-label col-md-5">Nazwa leku:</label>
+        <label for="unit-price" class="col-md-3">Cena jednostkowa netto:</label>
+        <label for="amount" class="col-md-3">Ilość:</label>
     </div>
-    <div class="col-md-2">
-        <input type="text" id="unit-price" class="form-control" />
-        <div class="text-danger"></div>
+    <div class="row">
+        <div class="medicines">
+            <div class="col-md-5">
+                <div class="dropdown">
+                    <input id="medicine-name" ng-change="displayMedicines()" ng-model="medicineName"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="text" class="form-control" />                        
+                    <ul ng-if="showTipForMedicineName"  class="dropdown-menu" aria-labelledby="medicine-name">
+                        <li ng-repeat="medicine in medicines"><a ng-click="setMedicine(medicine)">{{ medicine }}</a></li>
+                    </ul>
+                </div>
+                
+                <div class="text-danger"></div>
+            </div>
+            <div class="col-md-2">
+                <input type="number"  id="unit-price" min="0" max="999.99" step="0.5"
+                        class="netto form-control" />
+                <div class="text-danger"></div>
+            </div>
+            <div class="col-md-2">
+                <input type="number" id="amount" class="amount form-control" />
+                <div class="text-danger"></div>
+            </div>
+        </div>
+        <div class="new-medicines"></div>
+        <div class="col-md-1 btn btn-success" ng-click="addMedicine()" id="add-medicine"><span class="glyphicon glyphicon-plus"></span></div>
     </div>
-    <div class="col-md-2">
-        <input type="text" id="amount" class="form-control" />
-        <div class="text-danger"></div>
-    </div>
-    <div class="col-md-1 btn btn-success"><span class="glyphicon glyphicon-plus"></span></div>
-</div>
 
 
-<div class="row">
-    <div class="col-md-7"></div>
-    <label for="netto" class="control-label col-md-2">Kwota netto:</label>
-    <div class="col-md-1"></div>
-    <label for="brutto" class="col-md-2">Kwota brutto:</label>
-</div>
-<div class="row inputs">
-    <div class="col-md-7"></div>
-    <div class="col-md-2">
-        <input id="netto" type="text" class="form-control" />
-        <div class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-7"></div>
+        <label for="netto" class="control-label col-md-2">Kwota netto:</label>
+        <div class="col-md-1"></div>
+        <label for="brutto" class="col-md-2">Kwota brutto:</label>
     </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-2">
-        <input id="brutto" type="text" class="form-control" />
+    <div class="row inputs">
+        <div class="col-md-7"></div>
+        <div class="col-md-2">
+            <input id="netto" type="number" value="{{netto}}" min="0" max="999.99" step="0.5" class="form-control" disabled />
+            <div class="text-danger"></div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <input id="brutto" type="number" value="{{brutto}}" min="0" max="999.99" step="0.5" class="form-control" disabled />
+        </div>
     </div>
-</div>
 
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-6">
-        <input type="submit" value="Create" class="btn btn-success" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-6">
+            <input type="submit" value="Create" class="btn btn-success" />
+        </div>
     </div>
-</div>
-
+</form>
 

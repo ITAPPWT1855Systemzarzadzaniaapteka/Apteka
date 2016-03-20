@@ -92,6 +92,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -209,6 +211,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FakturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -216,8 +219,71 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AptekaDbContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AptekaDbContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AptekaDbContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AptekaDbContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AptekaDbContext1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Faktura.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Hurtownia.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Lek.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Operacja.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sprawdz_faktury.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sprawdz_zawartosc_faktury.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Stan_magazynu.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -1111,6 +1177,15 @@
     <Content Include="bower_components\modernizr\test\node\lib\options.js" />
     <Content Include="bower_components\modernizr\test\universal\lib\build-query.js" />
     <Content Include="bower_components\modernizr\test\universal\lib\generate-banner.js" />
+    <Content Include="Content\autocomplete.css" />
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\cwcalendar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1397,9 +1472,44 @@
     <Content Include="Content\less\timeline.less" />
     <Content Include="Content\mixins.less" />
     <Content Include="Content\variables.less" />
+    <EntityDeploy Include="Models\AptekaDbContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AptekaDbContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="js\FakturaController.js" />
+    <Content Include="Models\AptekaDbContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AptekaDbContext.edmx</DependentUpon>
+      <LastGenOutput>AptekaDbContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AptekaDbContext.edmx.diagram">
+      <DependentUpon>AptekaDbContext.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\AptekaDbContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AptekaDbContext.edmx</DependentUpon>
+      <LastGenOutput>AptekaDbContext1.cs</LastGenOutput>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Properties\PublishProfiles\apteka.pubxml" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1435,14 +1545,14 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Faktura\Create.cshtml" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
@@ -1454,6 +1564,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
