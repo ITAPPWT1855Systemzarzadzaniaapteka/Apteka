@@ -1,0 +1,1 @@
+var Apteka = angular.module('Apteka', []);

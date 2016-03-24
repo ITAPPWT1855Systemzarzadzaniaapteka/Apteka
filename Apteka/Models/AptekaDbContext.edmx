@@ -4,411 +4,309 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AptekaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__MigrationHistory">
-          <Key>
-            <PropertyRef Name="MigrationId" />
-            <PropertyRef Name="ContextKey" />
-          </Key>
-          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetRoles">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserClaims">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ClaimType" Type="nvarchar(max)" />
-          <Property Name="ClaimValue" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="AspNetUserLogins">
-          <Key>
-            <PropertyRef Name="LoginProvider" />
-            <PropertyRef Name="ProviderKey" />
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUserRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-        </EntityType>
-        <EntityType Name="AspNetUsers">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
-          <Property Name="PasswordHash" Type="nvarchar(max)" />
-          <Property Name="SecurityStamp" Type="nvarchar(max)" />
-          <Property Name="PhoneNumber" Type="nvarchar(max)" />
-          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
-          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
-          <Property Name="LockoutEndDateUtc" Type="datetime" />
-          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
-          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Faktura">
-          <Key>
-            <PropertyRef Name="Id_faktura" />
-          </Key>
-          <Property Name="Id_faktura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Id_hurtownia" Type="int" />
-          <Property Name="Numer" Type="varchar" MaxLength="50" />
-          <Property Name="Netto" Type="float" />
-          <Property Name="Brutto" Type="float" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'apteka.dbo.Faktura_operacja' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Faktura_operacja">
-          <Key>
-            <PropertyRef Name="ID_faktura" />
-            <PropertyRef Name="ID_operacja" />
-          </Key>
-          <Property Name="ID_faktura" Type="int" Nullable="false" />
-          <Property Name="ID_operacja" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Hurtownia">
-          <Key>
-            <PropertyRef Name="ID_hurtownia" />
-          </Key>
-          <Property Name="ID_hurtownia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nazwa" Type="varchar" MaxLength="50" />
-          <Property Name="NIP" Type="int" />
-        </EntityType>
-        <EntityType Name="Lek">
-          <Key>
-            <PropertyRef Name="Id_lek" />
-          </Key>
-          <Property Name="Id_lek" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nazwa" Type="varchar" MaxLength="200" />
-          <Property Name="Postac" Type="varchar" MaxLength="200" />
-          <Property Name="Opakowanie" Type="int" />
-          <Property Name="Dawka" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Operacja">
-          <Key>
-            <PropertyRef Name="ID_operacja" />
-          </Key>
-          <Property Name="ID_operacja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ID_lek" Type="int" Nullable="false" />
-          <Property Name="Data" Type="varchar" MaxLength="12" />
-          <Property Name="ID_user" Type="int" Nullable="false" />
-          <Property Name="Przychod" Type="int" />
-          <Property Name="Rozchod" Type="int" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="ID_user" />
-          </Key>
-          <Property Name="ID_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nazwa" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Haslo" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'apteka.dbo.Sprawdz_faktury' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Sprawdz_faktury">
-          <Key>
-            <PropertyRef Name="ID_faktura" />
-          </Key>
-          <Property Name="ID_faktura" Type="int" Nullable="false" />
-          <Property Name="Data" Type="varchar" MaxLength="12" />
-          <Property Name="Numer" Type="varchar" MaxLength="50" />
-          <Property Name="Nazwa" Type="varchar" MaxLength="50" />
-          <Property Name="Netto" Type="float" />
-          <Property Name="Brutto" Type="float" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'apteka.dbo.Sprawdz_zawartosc_faktury' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Sprawdz_zawartosc_faktury">
-          <Key>
-            <PropertyRef Name="Id_faktura" />
-          </Key>
-          <Property Name="Id_faktura" Type="int" Nullable="false" />
-          <Property Name="id_lek" Type="int" />
-          <Property Name="Nazwa" Type="varchar" MaxLength="200" />
-          <Property Name="Dawka" Type="varchar" MaxLength="100" />
-          <Property Name="Opakowanie" Type="int" />
-          <Property Name="Postac" Type="varchar" MaxLength="200" />
-          <Property Name="Ilość zakupionego leku" Type="int" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Stan_magazynu">
-          <Key>
-            <PropertyRef Name="ID_lek" />
-          </Key>
-          <Property Name="ID_lek" Type="int" Nullable="false" />
-          <Property Name="Nazwa" Type="varchar" MaxLength="200" />
-          <Property Name="Dawka" Type="varchar" MaxLength="100" />
-          <Property Name="Postac" Type="varchar" MaxLength="200" />
-          <Property Name="Opakowanie" Type="int" />
-          <Property Name="Obecny_Stan_Magazynu" Type="int" />
-        </EntityType>
-        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserClaims">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserLogins">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="AspNetUserRoles">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Faktura_operacja_ToFaktura">
-          <End Role="Faktura" Type="Self.Faktura" Multiplicity="1" />
-          <End Role="Faktura_operacja" Type="Self.Faktura_operacja" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faktura">
-              <PropertyRef Name="Id_faktura" />
-            </Principal>
-            <Dependent Role="Faktura_operacja">
-              <PropertyRef Name="ID_faktura" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Faktura_operacja_ToOperacja">
-          <End Role="Operacja" Type="Self.Operacja" Multiplicity="1" />
-          <End Role="Faktura_operacja" Type="Self.Faktura_operacja" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Operacja">
-              <PropertyRef Name="ID_operacja" />
-            </Principal>
-            <Dependent Role="Faktura_operacja">
-              <PropertyRef Name="ID_operacja" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Faktura_ToHurtownia">
-          <End Role="Hurtownia" Type="Self.Hurtownia" Multiplicity="0..1" />
-          <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Hurtownia">
-              <PropertyRef Name="ID_hurtownia" />
-            </Principal>
-            <Dependent Role="Faktura">
-              <PropertyRef Name="Id_hurtownia" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Operacja_ToLek">
-          <End Role="Lek" Type="Self.Lek" Multiplicity="1" />
-          <End Role="Operacja" Type="Self.Operacja" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Lek">
-              <PropertyRef Name="Id_lek" />
-            </Principal>
-            <Dependent Role="Operacja">
-              <PropertyRef Name="ID_lek" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Operacja_ToUser">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Operacja" Type="Self.Operacja" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID_user" />
-            </Principal>
-            <Dependent Role="Operacja">
-              <PropertyRef Name="ID_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
-        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="version" Type="int" Mode="In" />
-          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
-        </Function>
-        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
-          <Parameter Name="owner_id" Type="int" Mode="In" />
-          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
-        </Function>
-        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="AptekaModelStoreContainer">
-          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Faktura" EntityType="Self.Faktura" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Hurtownia" EntityType="Self.Hurtownia" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Lek" EntityType="Self.Lek" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Operacja" EntityType="Self.Operacja" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Faktura_operacja" EntityType="Self.Faktura_operacja" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Faktura_operacja].[ID_faktura] AS [ID_faktura], 
-    [Faktura_operacja].[ID_operacja] AS [ID_operacja]
-    FROM [dbo].[Faktura_operacja] AS [Faktura_operacja]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Sprawdz_faktury" EntityType="Self.Sprawdz_faktury" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sprawdz_faktury].[ID_faktura] AS [ID_faktura], 
-    [Sprawdz_faktury].[Data] AS [Data], 
-    [Sprawdz_faktury].[Numer] AS [Numer], 
-    [Sprawdz_faktury].[Nazwa] AS [Nazwa], 
-    [Sprawdz_faktury].[Netto] AS [Netto], 
-    [Sprawdz_faktury].[Brutto] AS [Brutto]
-    FROM [dbo].[Sprawdz_faktury] AS [Sprawdz_faktury]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Sprawdz_zawartosc_faktury" EntityType="Self.Sprawdz_zawartosc_faktury" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Sprawdz_zawartosc_faktury].[Id_faktura] AS [Id_faktura], 
-    [Sprawdz_zawartosc_faktury].[id_lek] AS [id_lek], 
-    [Sprawdz_zawartosc_faktury].[Nazwa] AS [Nazwa], 
-    [Sprawdz_zawartosc_faktury].[Dawka] AS [Dawka], 
-    [Sprawdz_zawartosc_faktury].[Opakowanie] AS [Opakowanie], 
-    [Sprawdz_zawartosc_faktury].[Postac] AS [Postac], 
-    [Sprawdz_zawartosc_faktury].[Ilość zakupionego leku] AS [Ilość zakupionego leku]
-    FROM [dbo].[Sprawdz_zawartosc_faktury] AS [Sprawdz_zawartosc_faktury]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="Stan_magazynu" EntityType="Self.Stan_magazynu" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Stan_magazynu].[ID_lek] AS [ID_lek], 
-    [Stan_magazynu].[Nazwa] AS [Nazwa], 
-    [Stan_magazynu].[Dawka] AS [Dawka], 
-    [Stan_magazynu].[Postac] AS [Postac], 
-    [Stan_magazynu].[Opakowanie] AS [Opakowanie], 
-    [Stan_magazynu].[Obecny_Stan_Magazynu] AS [Obecny_Stan_Magazynu]
-    FROM [dbo].[Stan_magazynu] AS [Stan_magazynu]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Faktura_operacja_ToFaktura" Association="Self.FK_Faktura_operacja_ToFaktura">
-            <End Role="Faktura" EntitySet="Faktura" />
-            <End Role="Faktura_operacja" EntitySet="Faktura_operacja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Faktura_operacja_ToOperacja" Association="Self.FK_Faktura_operacja_ToOperacja">
-            <End Role="Operacja" EntitySet="Operacja" />
-            <End Role="Faktura_operacja" EntitySet="Faktura_operacja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Faktura_ToHurtownia" Association="Self.FK_Faktura_ToHurtownia">
-            <End Role="Hurtownia" EntitySet="Hurtownia" />
-            <End Role="Faktura" EntitySet="Faktura" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Operacja_ToLek" Association="Self.FK_Operacja_ToLek">
-            <End Role="Lek" EntitySet="Lek" />
-            <End Role="Operacja" EntitySet="Operacja" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Operacja_ToUser" Association="Self.FK_Operacja_ToUser">
-            <End Role="User" EntitySet="User" />
-            <End Role="Operacja" EntitySet="Operacja" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="AptekaModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AptekaModelStoreContainer">
+    <EntitySet Name="C__MigrationHistory" EntityType="AptekaModel.Store.C__MigrationHistory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetRoles" EntityType="AptekaModel.Store.AspNetRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserClaims" EntityType="AptekaModel.Store.AspNetUserClaims" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserLogins" EntityType="AptekaModel.Store.AspNetUserLogins" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUsers" EntityType="AptekaModel.Store.AspNetUsers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Fakturas" EntityType="AptekaModel.Store.Fakturas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hurtownias" EntityType="AptekaModel.Store.Hurtownias" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Leks" EntityType="AptekaModel.Store.Leks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Operacjas" EntityType="AptekaModel.Store.Operacjas" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="AptekaModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sprawdz_faktury" EntityType="AptekaModel.Store.Sprawdz_faktury" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sprawdz_zawartosc_faktury" EntityType="AptekaModel.Store.Sprawdz_zawartosc_faktury" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stan_magazynu" EntityType="AptekaModel.Store.Stan_magazynu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AspNetUserRoles" EntityType="AptekaModel.Store.AspNetUserRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Faktura_operacja" EntityType="AptekaModel.Store.Faktura_operacja" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AptekaModel.Store.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AptekaModel.Store.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faktura_ToHurtownia" Association="AptekaModel.Store.FK_Faktura_ToHurtownia">
+      <End Role="Hurtownia" EntitySet="Hurtownias" />
+      <End Role="Faktura" EntitySet="Fakturas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Operacja_ToLek" Association="AptekaModel.Store.FK_Operacja_ToLek">
+      <End Role="Lek" EntitySet="Leks" />
+      <End Role="Operacja" EntitySet="Operacjas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetRoles" Association="AptekaModel.Store.FK_AspNetUserRoles_AspNetRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUserRoles_AspNetUsers" Association="AptekaModel.Store.FK_AspNetUserRoles_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faktura_operacja_Faktura" Association="AptekaModel.Store.FK_Faktura_operacja_Faktura">
+      <End Role="Faktura" EntitySet="Fakturas" />
+      <End Role="Faktura_operacja" EntitySet="Faktura_operacja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Faktura_operacja_Operacja" Association="AptekaModel.Store.FK_Faktura_operacja_Operacja">
+      <End Role="Operacja" EntitySet="Operacjas" />
+      <End Role="Faktura_operacja" EntitySet="Faktura_operacja" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="ContextKey" Type="nvarchar" Nullable="false" MaxLength="300" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" Nullable="false" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ClaimType" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="ProviderKey" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" Nullable="true" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" Nullable="true" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="Fakturas">
+    <Key>
+      <PropertyRef Name="Id_faktura" />
+    </Key>
+    <Property Name="Id_faktura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_hurtownia" Type="int" Nullable="true" />
+    <Property Name="Numer" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Netto" Type="float" Nullable="true" />
+    <Property Name="Brutto" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Hurtownias">
+    <Key>
+      <PropertyRef Name="ID_hurtownia" />
+    </Key>
+    <Property Name="ID_hurtownia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nazwa" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="NIP" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Leks">
+    <Key>
+      <PropertyRef Name="Id_lek" />
+    </Key>
+    <Property Name="Id_lek" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nazwa" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="Postac" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="Opakowanie" Type="int" Nullable="true" />
+    <Property Name="Dawka" Type="varchar" Nullable="true" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Operacjas">
+    <Key>
+      <PropertyRef Name="ID_operacja" />
+    </Key>
+    <Property Name="ID_operacja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID_lek" Type="int" Nullable="false" />
+    <Property Name="Data" Type="varchar" Nullable="true" MaxLength="12" />
+    <Property Name="ID_user" Type="int" Nullable="false" />
+    <Property Name="Przychod" Type="int" Nullable="true" />
+    <Property Name="Rozchod" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" Nullable="true" />
+    <Property Name="definition" Type="varbinary(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Sprawdz_faktury">
+    <Key>
+      <PropertyRef Name="ID_faktura" />
+    </Key>
+    <Property Name="ID_faktura" Type="int" Nullable="false" />
+    <Property Name="Data" Type="varchar" Nullable="true" MaxLength="12" />
+    <Property Name="Numer" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Nazwa" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Netto" Type="float" Nullable="true" />
+    <Property Name="Brutto" Type="float" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Sprawdz_zawartosc_faktury">
+    <Key>
+      <PropertyRef Name="Id_faktura" />
+    </Key>
+    <Property Name="Id_faktura" Type="int" Nullable="false" />
+    <Property Name="id_lek" Type="int" Nullable="true" />
+    <Property Name="Nazwa" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="Dawka" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="Opakowanie" Type="int" Nullable="true" />
+    <Property Name="Postac" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="Ilość_zakupionego_leku" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Stan_magazynu">
+    <Key>
+      <PropertyRef Name="ID_lek" />
+    </Key>
+    <Property Name="ID_lek" Type="int" Nullable="false" />
+    <Property Name="Nazwa" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="Dawka" Type="varchar" Nullable="true" MaxLength="100" />
+    <Property Name="Postac" Type="varchar" Nullable="true" MaxLength="200" />
+    <Property Name="Opakowanie" Type="int" Nullable="true" />
+    <Property Name="Obecny_Stan_Magazynu" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="AspNetRoles_Id" />
+      <PropertyRef Name="AspNetUsers_Id" />
+    </Key>
+    <Property Name="AspNetRoles_Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="AspNetUsers_Id" Type="nvarchar" Nullable="false" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="Faktura_operacja">
+    <Key>
+      <PropertyRef Name="Fakturas_Id_faktura" />
+      <PropertyRef Name="Operacjas_ID_operacja" />
+    </Key>
+    <Property Name="Fakturas_Id_faktura" Type="int" Nullable="false" />
+    <Property Name="Operacjas_ID_operacja" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="AptekaModel.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="AptekaModel.Store.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="AptekaModel.Store.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="AptekaModel.Store.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faktura_ToHurtownia">
+    <End Role="Hurtownia" Type="AptekaModel.Store.Hurtownias" Multiplicity="0..1" />
+    <End Role="Faktura" Type="AptekaModel.Store.Fakturas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hurtownia">
+        <PropertyRef Name="ID_hurtownia" />
+      </Principal>
+      <Dependent Role="Faktura">
+        <PropertyRef Name="Id_hurtownia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Operacja_ToLek">
+    <End Role="Lek" Type="AptekaModel.Store.Leks" Multiplicity="1" />
+    <End Role="Operacja" Type="AptekaModel.Store.Operacjas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Lek">
+        <PropertyRef Name="Id_lek" />
+      </Principal>
+      <Dependent Role="Operacja">
+        <PropertyRef Name="ID_lek" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetRoles">
+    <End Role="AspNetRoles" Type="AptekaModel.Store.AspNetRoles" Multiplicity="1" />
+    <End Role="AspNetUserRoles" Type="AptekaModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="AspNetRoles_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUserRoles_AspNetUsers">
+    <End Role="AspNetUserRoles" Type="AptekaModel.Store.AspNetUserRoles" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="AptekaModel.Store.AspNetUsers" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="AspNetUsers_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faktura_operacja_Faktura">
+    <End Role="Faktura" Type="AptekaModel.Store.Fakturas" Multiplicity="1" />
+    <End Role="Faktura_operacja" Type="AptekaModel.Store.Faktura_operacja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Faktura">
+        <PropertyRef Name="Id_faktura" />
+      </Principal>
+      <Dependent Role="Faktura_operacja">
+        <PropertyRef Name="Fakturas_Id_faktura" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Faktura_operacja_Operacja">
+    <End Role="Faktura_operacja" Type="AptekaModel.Store.Faktura_operacja" Multiplicity="*" />
+    <End Role="Operacja" Type="AptekaModel.Store.Operacjas" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Operacja">
+        <PropertyRef Name="ID_operacja" />
+      </Principal>
+      <Dependent Role="Faktura_operacja">
+        <PropertyRef Name="Operacjas_ID_operacja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AptekaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -514,7 +412,6 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="Przychod" Type="Int32" />
           <Property Name="Rozchod" Type="Int32" />
           <NavigationProperty Name="Lek" Relationship="Self.FK_Operacja_ToLek" FromRole="Operacja" ToRole="Lek" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Operacja_ToUser" FromRole="Operacja" ToRole="User" />
           <NavigationProperty Name="Fakturas" Relationship="Self.Faktura_operacja" FromRole="Operacja" ToRole="Faktura" />
         </EntityType>
         <EntityType Name="sysdiagram">
@@ -526,15 +423,6 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="ID_user" />
-          </Key>
-          <Property Name="ID_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Haslo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Operacjas" Relationship="Self.FK_Operacja_ToUser" FromRole="User" ToRole="Operacja" />
         </EntityType>
         <EntityType Name="Sprawdz_faktury">
           <Key>
@@ -622,18 +510,6 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Operacja_ToUser">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Operacja" Type="Self.Operacja" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="ID_user" />
-            </Principal>
-            <Dependent Role="Operacja">
-              <PropertyRef Name="ID_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="AspNetUserRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
           <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -653,7 +529,6 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <EntitySet Name="Leks" EntityType="Self.Lek" />
           <EntitySet Name="Operacjas" EntityType="Self.Operacja" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="Sprawdz_faktury" EntityType="Self.Sprawdz_faktury" />
           <EntitySet Name="Sprawdz_zawartosc_faktury" EntityType="Self.Sprawdz_zawartosc_faktury" />
           <EntitySet Name="Stan_magazynu" EntityType="Self.Stan_magazynu" />
@@ -671,10 +546,6 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           </AssociationSet>
           <AssociationSet Name="FK_Operacja_ToLek" Association="Self.FK_Operacja_ToLek">
             <End Role="Lek" EntitySet="Leks" />
-            <End Role="Operacja" EntitySet="Operacjas" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Operacja_ToUser" Association="Self.FK_Operacja_ToUser">
-            <End Role="User" EntitySet="Users" />
             <End Role="Operacja" EntitySet="Operacjas" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
@@ -731,206 +602,172 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="AptekaModelStoreContainer" CdmEntityContainer="aptekaEntities">
-          <EntitySetMapping Name="C__MigrationHistory">
-            <EntityTypeMapping TypeName="AptekaModel.C__MigrationHistory">
-              <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="AptekaModel.AspNetRole">
-              <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="AptekaModel.AspNetUserClaim">
-              <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="AptekaModel.AspNetUserLogin">
-              <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="AptekaModel.AspNetUser">
-              <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Fakturas">
-            <EntityTypeMapping TypeName="AptekaModel.Faktura">
-              <MappingFragment StoreEntitySet="Faktura">
-                <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
-                <ScalarProperty Name="Id_hurtownia" ColumnName="Id_hurtownia" />
-                <ScalarProperty Name="Numer" ColumnName="Numer" />
-                <ScalarProperty Name="Netto" ColumnName="Netto" />
-                <ScalarProperty Name="Brutto" ColumnName="Brutto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Hurtownias">
-            <EntityTypeMapping TypeName="AptekaModel.Hurtownia">
-              <MappingFragment StoreEntitySet="Hurtownia">
-                <ScalarProperty Name="ID_hurtownia" ColumnName="ID_hurtownia" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
-                <ScalarProperty Name="NIP" ColumnName="NIP" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Leks">
-            <EntityTypeMapping TypeName="AptekaModel.Lek">
-              <MappingFragment StoreEntitySet="Lek">
-                <ScalarProperty Name="Id_lek" ColumnName="Id_lek" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
-                <ScalarProperty Name="Postac" ColumnName="Postac" />
-                <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
-                <ScalarProperty Name="Dawka" ColumnName="Dawka" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Operacjas">
-            <EntityTypeMapping TypeName="AptekaModel.Operacja">
-              <MappingFragment StoreEntitySet="Operacja">
-                <ScalarProperty Name="ID_operacja" ColumnName="ID_operacja" />
-                <ScalarProperty Name="ID_lek" ColumnName="ID_lek" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
-                <ScalarProperty Name="Przychod" ColumnName="Przychod" />
-                <ScalarProperty Name="Rozchod" ColumnName="Rozchod" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AptekaModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="AptekaModel.User">
-              <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
-                <ScalarProperty Name="Haslo" ColumnName="Haslo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sprawdz_faktury">
-            <EntityTypeMapping TypeName="AptekaModel.Sprawdz_faktury">
-              <MappingFragment StoreEntitySet="Sprawdz_faktury">
-                <ScalarProperty Name="ID_faktura" ColumnName="ID_faktura" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Numer" ColumnName="Numer" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
-                <ScalarProperty Name="Netto" ColumnName="Netto" />
-                <ScalarProperty Name="Brutto" ColumnName="Brutto" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sprawdz_zawartosc_faktury">
-            <EntityTypeMapping TypeName="AptekaModel.Sprawdz_zawartosc_faktury">
-              <MappingFragment StoreEntitySet="Sprawdz_zawartosc_faktury">
-                <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
-                <ScalarProperty Name="id_lek" ColumnName="id_lek" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
-                <ScalarProperty Name="Dawka" ColumnName="Dawka" />
-                <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
-                <ScalarProperty Name="Postac" ColumnName="Postac" />
-                <ScalarProperty Name="Ilość_zakupionego_leku" ColumnName="Ilość zakupionego leku" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Stan_magazynu">
-            <EntityTypeMapping TypeName="AptekaModel.Stan_magazynu">
-              <MappingFragment StoreEntitySet="Stan_magazynu">
-                <ScalarProperty Name="ID_lek" ColumnName="ID_lek" />
-                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
-                <ScalarProperty Name="Dawka" ColumnName="Dawka" />
-                <ScalarProperty Name="Postac" ColumnName="Postac" />
-                <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
-                <ScalarProperty Name="Obecny_Stan_Magazynu" ColumnName="Obecny_Stan_Magazynu" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="AptekaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="Faktura_operacja" TypeName="AptekaModel.Faktura_operacja" StoreEntitySet="Faktura_operacja">
-            <EndProperty Name="Faktura">
-              <ScalarProperty Name="Id_faktura" ColumnName="ID_faktura" />
-            </EndProperty>
-            <EndProperty Name="Operacja">
-              <ScalarProperty Name="ID_operacja" ColumnName="ID_operacja" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="AptekaModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="AptekaModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="AptekaModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="AptekaModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AptekaModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="AptekaModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AptekaModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="AptekaModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="AptekaModel.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AptekaModelStoreContainer" CdmEntityContainer="aptekaEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.C__MigrationHistory)">
+        <MappingFragment StoreEntitySet="C__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.AspNetRole)">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.AspNetUserClaim)">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.AspNetUserLogin)">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.AspNetUser)">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fakturas">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Faktura)">
+        <MappingFragment StoreEntitySet="Fakturas">
+          <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
+          <ScalarProperty Name="Id_hurtownia" ColumnName="Id_hurtownia" />
+          <ScalarProperty Name="Numer" ColumnName="Numer" />
+          <ScalarProperty Name="Netto" ColumnName="Netto" />
+          <ScalarProperty Name="Brutto" ColumnName="Brutto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hurtownias">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Hurtownia)">
+        <MappingFragment StoreEntitySet="Hurtownias">
+          <ScalarProperty Name="ID_hurtownia" ColumnName="ID_hurtownia" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="NIP" ColumnName="NIP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Leks">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Lek)">
+        <MappingFragment StoreEntitySet="Leks">
+          <ScalarProperty Name="Id_lek" ColumnName="Id_lek" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Postac" ColumnName="Postac" />
+          <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
+          <ScalarProperty Name="Dawka" ColumnName="Dawka" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operacjas">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Operacja)">
+        <MappingFragment StoreEntitySet="Operacjas">
+          <ScalarProperty Name="ID_operacja" ColumnName="ID_operacja" />
+          <ScalarProperty Name="ID_lek" ColumnName="ID_lek" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="ID_user" ColumnName="ID_user" />
+          <ScalarProperty Name="Przychod" ColumnName="Przychod" />
+          <ScalarProperty Name="Rozchod" ColumnName="Rozchod" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.sysdiagram)">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sprawdz_faktury">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Sprawdz_faktury)">
+        <MappingFragment StoreEntitySet="Sprawdz_faktury">
+          <ScalarProperty Name="ID_faktura" ColumnName="ID_faktura" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Numer" ColumnName="Numer" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Netto" ColumnName="Netto" />
+          <ScalarProperty Name="Brutto" ColumnName="Brutto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sprawdz_zawartosc_faktury">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Sprawdz_zawartosc_faktury)">
+        <MappingFragment StoreEntitySet="Sprawdz_zawartosc_faktury">
+          <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
+          <ScalarProperty Name="id_lek" ColumnName="id_lek" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Dawka" ColumnName="Dawka" />
+          <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
+          <ScalarProperty Name="Postac" ColumnName="Postac" />
+          <ScalarProperty Name="Ilość_zakupionego_leku" ColumnName="Ilość_zakupionego_leku" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stan_magazynu">
+      <EntityTypeMapping TypeName="IsTypeOf(AptekaModel.Stan_magazynu)">
+        <MappingFragment StoreEntitySet="Stan_magazynu">
+          <ScalarProperty Name="ID_lek" ColumnName="ID_lek" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Dawka" ColumnName="Dawka" />
+          <ScalarProperty Name="Postac" ColumnName="Postac" />
+          <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
+          <ScalarProperty Name="Obecny_Stan_Magazynu" ColumnName="Obecny_Stan_Magazynu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="AptekaModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="AspNetRoles_Id" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="AspNetUsers_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Faktura_operacja" TypeName="AptekaModel.Faktura_operacja" StoreEntitySet="Faktura_operacja">
+      <EndProperty Name="Faktura">
+        <ScalarProperty Name="Id_faktura" ColumnName="Fakturas_Id_faktura" />
+      </EndProperty>
+      <EndProperty Name="Operacja">
+        <ScalarProperty Name="ID_operacja" ColumnName="Operacjas_ID_operacja" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -944,7 +781,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

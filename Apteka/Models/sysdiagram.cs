@@ -12,21 +12,12 @@ namespace Apteka.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Operacja
+    public partial class sysdiagram
     {
-        public Operacja()
-        {
-            this.Fakturas = new HashSet<Faktura>();
-        }
-    
-        public int ID_operacja { get; set; }
-        public int ID_lek { get; set; }
-        public string Data { get; set; }
-        public int ID_user { get; set; }
-        public Nullable<int> Przychod { get; set; }
-        public Nullable<int> Rozchod { get; set; }
-    
-        public virtual Lek Lek { get; set; }
-        public virtual ICollection<Faktura> Fakturas { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
