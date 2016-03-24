@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="AptekaModel.AspNetUser" Width="2.125" PointX="7.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AptekaModel.Faktura" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AptekaModel.Hurtownia" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AptekaModel.Lek" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AptekaModel.Lek" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AptekaModel.Operacja" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="AptekaModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AptekaModel.Sprawdz_faktury" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />

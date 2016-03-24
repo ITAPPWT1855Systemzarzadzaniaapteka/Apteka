@@ -1,8 +1,92 @@
-﻿
+﻿/* Sample Api Data */
+var sampleMedicinesData = [
+    {
+        id: 1,
+        name: "Aspiryna",
+        netto: 12.50
+    },
+    {
+        id: 2,
+        name: "Polopiryna",
+        netto: 13.50
+    },
+    {
+        id: 3,
+        name: "ASdasdfd",
+        netto: 11.50
+    }
+];
+var sampleWarehousesData = [
+    {
+        id: 1,
+        name: "Dudus",
+        address: "Słonczena 13\n52-321 Wrocław",
+        NIP: "000-000-00-00"
+    },
+    {
+        id: 1,
+        name: "Desert Eagle",
+        address: "Wrocławska 14\n53-112 Wrocław",
+        NIP: "854-456-55-11"
+    }
+];
+var sampleSellerData = [
+    {
+        name: "Apteka",
+        address1: "Apteczna 1",
+        address2: "53-001 Wrocław",
+        NIP: "123-456-78-90"
+    }
+]
+/* End Sample Data */
 var Apteka = angular.module('Apteka', []);
 
+function parseWarehouses(arr) {
+    return _.map(arr, function (warehouse) {
+        return {
+            value: warehouse.name + " " + warehouse.NIP,
+            data: warehouse.id
+        };
+    })
+};
 
-Apteka.service('fakturaService', function ($http) {
+function parseMedicines(arr) {
+    return _.map(arr, function (med) {
+        return {
+            value: med.name,
+            data: med.id
+        };
+    })
+}
+
+$(function(){
+    $("#warehouse-id").autocomplete({
+        lookup: parseWarehouses(sampleWarehousesData)
+    })
+
+    $(".medicine-name").autocomplete({
+        lookup: parseMedicines(sampleMedicinesData),
+        onSelect: function (selected) {
+            var med = _.find(sampleMedicinesData, function (a) { return a.id === selected.data; });
+            var row = $(this).parents(".med-row");
+            row.find(".netto").val(med.netto);
+            row.find(".amount").val(1).trigger('input');
+        }
+    });
+
+    $(".amount").on("input", function () {
+        var sum = 0;
+        $(".med-row").each(function () {
+            var row = $(this);
+            sum += row.find(".netto").val() * row.find(".amount").val();
+        });
+        $("#netto").val(sum);
+    });
+})
+
+
+
+/*Apteka.service('fakturaService', function ($http) {
     delete $http.defaults.headers.common['X-Requested-With'];
 
     this.getAllWarehouses = function () {
@@ -77,4 +161,4 @@ Apteka.controller('faktura', function ($scope, fakturaService) {
     }
    // $scope.getWarehouses();
 
-});
+});*/

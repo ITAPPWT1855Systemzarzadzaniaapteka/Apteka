@@ -53,7 +53,7 @@
     <div class="row inputs">
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <select id="warehouse-id" class="form-control"></select>
+            <input type="text" id="warehouse-id" class="form-control"/>
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
@@ -70,25 +70,22 @@
     </div>
     <div class="row">
         <div class="medicines">
-            <div class="col-md-5">
-                <div class="dropdown">
-                    <input id="medicine-name" ng-change="displayMedicines()" ng-model="medicineName"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" type="text" class="form-control" />                        
-                    <ul ng-if="showTipForMedicineName"  class="dropdown-menu" aria-labelledby="medicine-name">
-                        <li ng-repeat="medicine in medicines"><a ng-click="setMedicine(medicine)">{{ medicine }}</a></li>
-                    </ul>
+            <div class="med-row">
+                <div class="col-md-5">
+                    <div class="dropdown">
+                        <input class="medicine-name form-control" type="text" />
+                    </div>
+
+                    <div class="text-danger"></div>
                 </div>
-                
-                <div class="text-danger"></div>
-            </div>
-            <div class="col-md-2">
-                <input type="number"  id="unit-price" min="0" max="999.99" step="0.5"
-                        class="netto form-control" />
-                <div class="text-danger"></div>
-            </div>
-            <div class="col-md-2">
-                <input type="number" id="amount" class="amount form-control" />
-                <div class="text-danger"></div>
+                <div class="col-md-2">
+                    <input type="text" class="unit-price netto form-control" />
+                    <div class="text-danger"></div>
+                </div>
+                <div class="col-md-2">
+                    <input type="number" id="amount" class="amount form-control" />
+                    <div class="text-danger"></div>
+                </div>
             </div>
         </div>
         <div class="new-medicines"></div>
