@@ -61,35 +61,20 @@
             <input id="facture-id" type="number" class="form-control" />
         </div>
     </div>
-
-
     <div class="row">
-        <label for="medicine-name" class="control-label col-md-5">Nazwa leku:</label>
-        <label for="unit-price" class="col-md-3">Cena jednostkowa netto:</label>
-        <label for="amount" class="col-md-3">Ilość:</label>
-    </div>
-    <div class="row">
-        <div class="medicines">
-            <div class="med-row">
-                <div class="col-md-5">
-                    <div class="dropdown">
-                        <input class="medicine-name form-control" type="text" />
-                    </div>
-
-                    <div class="text-danger"></div>
-                </div>
-                <div class="col-md-2">
-                    <input type="text" class="unit-price netto form-control" />
-                    <div class="text-danger"></div>
-                </div>
-                <div class="col-md-2">
-                    <input type="number" id="amount" class="amount form-control" />
-                    <div class="text-danger"></div>
-                </div>
-            </div>
-        </div>
-        <div class="new-medicines"></div>
-        <div class="col-md-1 btn btn-success" ng-click="addMedicine()" id="add-medicine"><span class="glyphicon glyphicon-plus"></span></div>
+        <table class="table" id="product-table">
+            <tr>
+                <th class="col-xs-1"> Lp. </th>
+                <th class="col-xs-5"> Nazwa towaru </th>
+                <th class="col-xs-1"> Ilość </th>
+                <th class="col-xs-1"> J.m. </th>
+                <th class="col-xs-1"> Cena Netto </th>
+                <th class="col-xs-1"> Wartość Netto </th>
+                <th class="col-xs-1"> Vat </th>
+                <th class="col-xs-1"> Wartość Brutto </th>
+            </tr>
+        </table>
+        <div class="col-md-1 btn btn-success pull-right" id="add-row-button"><span class="glyphicon glyphicon-plus"></span></div>
     </div>
 
 
@@ -102,19 +87,18 @@
     <div class="row inputs">
         <div class="col-md-7"></div>
         <div class="col-md-2">
-            <input id="netto" type="number" value="{{netto}}" min="0" max="999.99" step="0.5" class="form-control" disabled />
+            <input id="netto" type="number" value="0" class="form-control" disabled />
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <input id="brutto" type="number" value="{{brutto}}" min="0" max="999.99" step="0.5" class="form-control" disabled />
+            <input id="brutto" type="number" value="0" class="form-control" disabled />
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-6">
-            <input type="submit" value="Create" class="btn btn-success" />
-        </div>
+            <input type="submit" value="Create" class="btn btn-success"></div>
     </div>
 </form>
 

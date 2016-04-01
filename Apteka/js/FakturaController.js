@@ -59,30 +59,56 @@ function parseMedicines(arr) {
     })
 }
 
-$(function(){
+$(function () {
+    addRow();
     $("#warehouse-id").autocomplete({
         lookup: parseWarehouses(sampleWarehousesData)
     })
+    $("#add-row-button").on("click", addRow);
+})
 
-    $(".medicine-name").autocomplete({
+function addRow() {
+    var rowId = $(".product-row").length + 1;
+    var newRow = $("<tr />", { "class": "product-row", "id": "product-row-" + rowId }).append([
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control lp", "value": rowId, "disabled": "true" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control med-name" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control quantity" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control unit", "disabled": "true" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control price", "disabled": "true" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control netto", "disabled": "true" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control vat", value: "23%", "disabled": "true" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control brutto", "disabled": "true" }))
+        ]);
+    $(newRow).find(".med-name").autocomplete({
         lookup: parseMedicines(sampleMedicinesData),
         onSelect: function (selected) {
             var med = _.find(sampleMedicinesData, function (a) { return a.id === selected.data; });
-            var row = $(this).parents(".med-row");
-            row.find(".netto").val(med.netto);
-            row.find(".amount").val(1).trigger('input');
+            var row = $(this).parents("tr");
+            row.find(".price").val(med.netto.toFixed(2));
+            row.find(".quantity").val(1).trigger('input');
         }
     });
+    $(newRow).find(".quantity").on("input", function () {
+        var row = $(this).parents("tr");
+        var priceVal = row.find(".price").val();
+        var quantVal = row.find(".quantity").val();
+        var nettoVal = priceVal * quantVal;
+        var bruttoVal = nettoVal * (100 + parseFloat(row.find(".vat").val())) / 100;
+        row.find(".netto").val(nettoVal.toFixed(2));
+        row.find(".brutto").val(bruttoVal.toFixed(2));
 
-    $(".amount").on("input", function () {
-        var sum = 0;
-        $(".med-row").each(function () {
+        var sumNetto = 0;
+        var sumBrutto = 0;
+        $(".product-row").each(function () {
             var row = $(this);
-            sum += row.find(".netto").val() * row.find(".amount").val();
+            sumNetto += +row.find(".netto").val();
+            sumBrutto += +row.find(".brutto").val();
         });
-        $("#netto").val(sum);
+        $("#netto").val(sumNetto.toFixed(2));
+        $("#brutto").val(sumBrutto.toFixed(2));
     });
-})
+    $("#product-table tr:last").after(newRow);
+};
 
 
 
