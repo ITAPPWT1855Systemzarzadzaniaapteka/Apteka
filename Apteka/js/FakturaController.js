@@ -39,7 +39,7 @@ var sampleSellerData = [
     }
 ]
 /* End Sample Data */
-var Apteka = angular.module('Apteka', []);
+
 
 function parseWarehouses(arr) {
     return _.map(arr, function (warehouse) {
@@ -71,7 +71,7 @@ function addRow() {
     var rowId = $(".product-row").length + 1;
     var newRow = $("<tr />", { "class": "product-row", "id": "product-row-" + rowId }).append([
             $("<td />").append($("<input />", { "type": "text", "class": "form-control lp", "value": rowId, "disabled": "true" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control med-name" })),
+            $("<td />").append($("<input />", { "type": "text", "class": "form-control med-name", "ng-model": "facture.name" })),
             $("<td />").append($("<input />", { "type": "text", "class": "form-control quantity" })),
             $("<td />").append($("<input />", { "type": "text", "class": "form-control unit", "disabled": "true" })),
             $("<td />").append($("<input />", { "type": "text", "class": "form-control price", "disabled": "true" })),
@@ -112,79 +112,36 @@ function addRow() {
 
 
 
-/*Apteka.service('fakturaService', function ($http) {
-    delete $http.defaults.headers.common['X-Requested-With'];
-
-    this.getAllWarehouses = function () {
-        $http({
-            method: 'GET',
-            url: '/Faktura/GetWarehouses',
-        }).success(function (data) {
-            callbackFunc(data);
-        }).error(function () {
-            alert("error");
+var Apteka = angular.module('Apteka', []);
+Apteka.controller('faktura', ["$scope", "$http", function ($scope, $http) {
+    $scope.master = {};
+    $scope.med = {};
+    $scope.error = '';
+    $scope.facture = { 'meds': []};
+    $scope.create = function (facture) {
+        $('#product-table tr').each(function () {
+            var row = $(this);
+            med = {};
+            console.log('nowy row ', row);
+            med['name'] = row.find('.med-name').val();
+            med['quantity'] = row.find('.quantity').val();
+            med['unit'] = row.find('.unit').val();
+            med['price'] = row.find('.price').val();
+            med['netto'] = row.find('.netto').val();
+            med['brutto'] = row.find('.brutto').val();
+            $scope.facture['meds'].push(med);
+            console.log($scope.facture);
         });
-    }
-});
-
-Apteka.controller('faktura', function ($scope, fakturaService) {
-    $scope.faktura = {};
-    $scope.medicineCount = 0;
-    $scope.medicines = [];
-    $scope.showTipForMedicineName = false;
-    $scope.netto = 100,00;
-    $scope.medicineName = "";
-  //  $scope.netto-unit = 0;
-    
-    $scope.displayMedicines = function () {
-        if ($scope.medicineName.length >= 3) {
-            $scope.showTipForMedicineName = true;
-            $scope.medicines = ['one', 'two'];
-
-        }
-    }
-    $scope.setMedicine = function (medicine) {
-        $scope.medicineName = medicine;
-    }
-    $scope.auto = function() {
-        $('.amount').on('keyup', function () {
-            
-            var amount = parseInt($(this).val());
-            var netto = parseFloat($(this).prev('input').val());
-            console.log('AMOUNT', amount, netto);
-            if (!isNaN(netto) && !isNaN(amount)) {
-                $scope.netto = $scope.netto + netto * amount;
-                console.log('touched', $(this).val(), $scope.netto);
-            }
-            
-        });
-        $('.netto').on('keyup', function () {
-            
-            var netto = parseFloat($(this).val());
-            var amount = parseInt($(this).closest('input').val());
-            console.log('netto', netto, amount);
-            if (!isNaN(netto) && !isNaN(amount)) {
-                $scope.netto = $scope.netto + netto * amount;
-                console.log('touched', $(this).val(), $scope.netto);
-            }
-            
-        });
-    }
-    $scope.auto();
-    $scope.getWarehouses = function () {
-        $scope.GetWarehouses = fakturaService.getAllWarehouses(function (response) {
-            var evidenceDate = response;
+        var promise = $http.post("/Faktura/Post");
+        var onSuccess = function (response) {
             console.log(response);
-        });
+        };
+        var onError = function (reponse) {
+            $scope.error = "Problem: " + reponse;
+        }
+        promise.then(onSuccess, onError);
     };
 
-    $scope.addMedicine = function () {
-        var medicinesHtml = $('.medicines').html();
-        $scope.medicineCount++;
-        $(medicinesHtml).find('input[id=medicine-name]').attr('id', 'medicine-' + $scope.medicineCount);
-        $('.new-medicines').append(medicinesHtml);
-        $scope.auto();
-    }
-   // $scope.getWarehouses();
+}]);
 
-});*/
+   

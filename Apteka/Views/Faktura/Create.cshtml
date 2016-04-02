@@ -33,6 +33,7 @@
         <h1 class="page-header">Wprowadź nową fakturę</h1>
     </div>
 </div>
+<div class="alert alert-danger">{{ error }}</div>
 <form ng-model="myForm">
     <div class="row">
         <div class="col-md-1"></div>
@@ -41,7 +42,7 @@
     <div class="row inputs">
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <input type="date" class="form-control datepicker">
+            <input type="date" ng-model="facture.date" class="form-control datepicker">
         </div>
     </div>
     <div class="row">
@@ -53,12 +54,12 @@
     <div class="row inputs">
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <input type="text" id="warehouse-id" class="form-control"/>
+            <input type="text" id="warehouse-id" ng-model="facture.warehouseNr" class="form-control" />
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <input id="facture-id" type="number" class="form-control" />
+            <input id="facture-id" type="number" ng-model="facture.nr" class="form-control" />
         </div>
     </div>
     <div class="row">
@@ -76,8 +77,6 @@
         </table>
         <div class="col-md-1 btn btn-success pull-right" id="add-row-button"><span class="glyphicon glyphicon-plus"></span></div>
     </div>
-
-
     <div class="row">
         <div class="col-md-7"></div>
         <label for="netto" class="control-label col-md-2">Kwota netto:</label>
@@ -98,7 +97,7 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-6">
-            <input type="submit" value="Create" class="btn btn-success"></div>
+            <input type="submit" ng-click="create(facture)" value="Dodaj" class="btn btn-success"></div>
     </div>
 </form>
 
