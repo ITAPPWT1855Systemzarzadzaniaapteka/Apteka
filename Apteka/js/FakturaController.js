@@ -61,23 +61,27 @@ function parseMedicines(arr) {
 
 $(function () {
     addRow();
-    $("#warehouse-id").autocomplete({
-        lookup: parseWarehouses(sampleWarehousesData)
+    $("#warehouse").autocomplete({
+        lookup: parseWarehouses(sampleWarehousesData),
+        onSelect: function (suggestion) {
+            $("#warehouse-id").val(suggestion.data);
+        }
     })
     $("#add-row-button").on("click", addRow);
 })
 
 function addRow() {
-    var rowId = $(".product-row").length + 1;
+    var rowId = $(".product-row").length;
+    var namePrefix = "Products["+rowId+"].";
     var newRow = $("<tr />", { "class": "product-row", "id": "product-row-" + rowId }).append([
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control lp", "value": rowId, "disabled": "true" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control med-name", "ng-model": "facture.name" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control quantity" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control unit", "disabled": "true" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control price", "disabled": "true" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control netto", "disabled": "true" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control vat", value: "23%", "disabled": "true" })),
-            $("<td />").append($("<input />", { "type": "text", "class": "form-control brutto", "disabled": "true" }))
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "lp", "class": "form-control lp", "value": rowId, "readonly": "true", "step": "1" })),
+            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "name", "class": "form-control med-name" })),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "quantity", "class": "form-control quantity", "step": "1" })),
+            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "unit", "class": "form-control unit"})),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "price", "class": "form-control price", "step": "0.01"})),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "netto", "class": "form-control netto", "readonly": "true", "step": "0.01" })),
+            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "vat", "class": "form-control vat", value: "23%"})),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "brutto", "class": "form-control brutto", "readonly": "true", "step": "0.01" }))
         ]);
     $(newRow).find(".med-name").autocomplete({
         lookup: parseMedicines(sampleMedicinesData),
@@ -88,7 +92,7 @@ function addRow() {
             row.find(".quantity").val(1).trigger('input');
         }
     });
-    $(newRow).find(".quantity").on("input", function () {
+    $(newRow).find(".quantity, .price, .vat").on("input", function () {
         var row = $(this).parents("tr");
         var priceVal = row.find(".price").val();
         var quantVal = row.find(".quantity").val();
@@ -114,6 +118,7 @@ function addRow() {
 
 var Apteka = angular.module('Apteka', []);
 Apteka.controller('faktura', ["$scope", "$http", function ($scope, $http) {
+    /*
     $scope.master = {};
     $scope.med = {};
     $scope.error = '';
@@ -141,7 +146,7 @@ Apteka.controller('faktura', ["$scope", "$http", function ($scope, $http) {
         }
         promise.then(onSuccess, onError);
     };
-
+    */
 }]);
 
    

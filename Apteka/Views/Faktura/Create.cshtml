@@ -7,25 +7,41 @@
     .inputs {
         margin-bottom: 30px;
     }
+
     input.ng-valid.ng-touched {
-    background-color: #ffffff;
-  }
+        background-color: #ffffff;
+    }
+
     input.ng-invalid.ng-touched {
-    background-color: #FA787E;
-  }
-        myForm.ng-valid {
-    background-color: rgba(124, 192, 113, 0.27);
-  }
+        background-color: #FA787E;
+    }
+
+    myForm.ng-valid {
+        background-color: rgba(124, 192, 113, 0.27);
+    }
+
     myForm.ng-invalid.ng-touched {
-    background-color: #FA787E;
-  }
-     .new-medicines div{
+        background-color: #FA787E;
+    }
+
+    .new-medicines div {
         margin-bottom: 20px;
         margin-left: 30px;
     }
-    .medicines div{
+
+    .medicines div {
         margin-bottom: 20px;
         margin-left: 30px;
+    }
+
+    .brutto::-webkit-inner-spin-button,
+    .brutto::-webkit-outer-spin-button,
+    .netto::-webkit-inner-spin-button,
+    .netto::-webkit-outer-spin-button,
+    .price::-webkit-inner-spin-button,
+    .price::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
     }
 </style>
 <div class="row">
@@ -34,7 +50,7 @@
     </div>
 </div>
 <div class="alert alert-danger">{{ error }}</div>
-<form ng-model="myForm">
+@using (Html.BeginForm("Create", "Faktura", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     <div class="row">
         <div class="col-md-1"></div>
         <label for="date-input" class="col-md-3">Wprowadź datę:</label>
@@ -42,24 +58,25 @@
     <div class="row inputs">
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <input type="date" ng-model="facture.date" class="form-control datepicker">
+            <input type="date" class="form-control datepicker" name="date">
         </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <label for="warehouse-id" class="control-label col-md-3">Wybierz hurtownię:</label>
+        <label for="warehouse" class="col-md-3">Wybierz hurtownię:</label>
         <div class="col-md-1"></div>
         <label for="facture-id" class="col-md-3">Wprowadź numer faktury:</label>
     </div>
     <div class="row inputs">
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <input type="text" id="warehouse-id" ng-model="facture.warehouseNr" class="form-control" />
+            <input type="hidden" name="warehouseId" id="warehouse-id" />
+            <input type="text" id="warehouse" class="form-control" />
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            <input id="facture-id" type="number" ng-model="facture.nr" class="form-control" />
+            <input id="invoiceId" type="text" class="form-control" />
         </div>
     </div>
     <div class="row">
@@ -86,18 +103,19 @@
     <div class="row inputs">
         <div class="col-md-7"></div>
         <div class="col-md-2">
-            <input id="netto" type="number" value="0" class="form-control" disabled />
+            <input id="netto" type="number" value="0" class="form-control" step="0.01" disabled />
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <input id="brutto" type="number" value="0" class="form-control" disabled />
+            <input id="brutto" type="number" value="0" class="form-control" step="0.01" disabled />
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-6">
-            <input type="submit" ng-click="create(facture)" value="Dodaj" class="btn btn-success"></div>
+            <input type="submit" value="Dodaj" class="btn btn-success">
+        </div>
     </div>
-</form>
+}
 

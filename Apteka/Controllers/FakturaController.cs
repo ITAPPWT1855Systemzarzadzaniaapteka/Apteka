@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Apteka.Models;
+using System.IO;
 
 namespace Apteka.Controllers
 {
@@ -18,6 +19,18 @@ namespace Apteka.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult Create(CreateInvoiceModel model) {
+            //if (!ModelState.IsValid) {
+            //    return View("Create", model);
+            //}
+
+            var sr = new StreamReader(Request.InputStream);
+            string content = sr.ReadToEnd();
+            System.Diagnostics.Debug.WriteLine(model.date.ToString() + " " + model.Products.Count);
+            System.Diagnostics.Debug.WriteLine("Pirate!" + content);
+            return RedirectToAction("Index");
         }
         [HttpGet]
         public JsonResult GetWarehouses()
