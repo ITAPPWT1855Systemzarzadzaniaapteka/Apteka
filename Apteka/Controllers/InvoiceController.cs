@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Apteka.Controllers
 {
-    public class FakturaController : Controller
+    public class InvoiceController : Controller
     {
         aptekaEntities context = new aptekaEntities();
         public ActionResult Index()
@@ -22,14 +22,7 @@ namespace Apteka.Controllers
         }
         [HttpPost]
         public ActionResult Create(CreateInvoiceModel model) {
-            //if (!ModelState.IsValid) {
-            //    return View("Create", model);
-            //}
-
-            var sr = new StreamReader(Request.InputStream);
-            string content = sr.ReadToEnd();
-            System.Diagnostics.Debug.WriteLine(model.date.ToString() + " " + model.Products.Count);
-            System.Diagnostics.Debug.WriteLine("Pirate!" + content);
+            System.Diagnostics.Debug.WriteLine(model.Date.ToString() + " " + model.Products[0].Name);
             return RedirectToAction("Index");
         }
         [HttpGet]

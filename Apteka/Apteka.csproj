@@ -224,7 +224,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\FakturaController.cs" />
+    <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductApiController.cs" />
@@ -325,7 +325,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AptekaDbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="js\FakturaController.js" />
+    <Content Include="js\HomeController.js" />
+    <Content Include="js\InvoiceController.js" />
     <Content Include="Models\AptekaDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AptekaDbContext.edmx</DependentUpon>
@@ -396,8 +397,8 @@
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
-    <Content Include="Views\Faktura\Create.cshtml" />
-    <Content Include="Views\Faktura\Index.cshtml" />
+    <Content Include="Views\Invoice\Create.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

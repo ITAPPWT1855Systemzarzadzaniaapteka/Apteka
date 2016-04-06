@@ -4,25 +4,6 @@
     ViewBag.Title = "Create";
 }
 <style>
-    .inputs {
-        margin-bottom: 30px;
-    }
-
-    input.ng-valid.ng-touched {
-        background-color: #ffffff;
-    }
-
-    input.ng-invalid.ng-touched {
-        background-color: #FA787E;
-    }
-
-    myForm.ng-valid {
-        background-color: rgba(124, 192, 113, 0.27);
-    }
-
-    myForm.ng-invalid.ng-touched {
-        background-color: #FA787E;
-    }
 
     .new-medicines div {
         margin-bottom: 20px;
@@ -50,7 +31,7 @@
     </div>
 </div>
 <div class="alert alert-danger">{{ error }}</div>
-@using (Html.BeginForm("Create", "Faktura", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+@using (Html.BeginForm("Create", "Invoice", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     <div class="row">
         <div class="col-md-1"></div>
         <label for="date-input" class="col-md-3">Wprowadź datę:</label>

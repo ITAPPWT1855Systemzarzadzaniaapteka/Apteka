@@ -4,27 +4,27 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Apteka.Models {
     public class InvoiceProductModel {
-        public int lp { get; set; }
-        public string name { get; set; }
-        public int quantity { get; set; }
-        public string unit { get; set; }
-        public float price { get; set; }
-        public string vat { get; set; }
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public string Unit { get; set; }
+        public float Price { get; set; }
+        public string Vat { get; set; }
     }
 
     public class CreateInvoiceModel {
         [Required]
         [Display(Name = "Data")]
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
         [Display(Name = "Hurtownia")]
-        public id warehouse { get; set; }
+        public int Warehouse { get; set; } //Warehouse id
 
         [Required]
         [Display(Name = "Numer faktury")]
-        public String invoiceId { get; set; }
-        
+        public String InvoiceId { get; set; }
+        //This id is not always a number, most likely it looks like "01/2016" but it depends
+
         public List<InvoiceProductModel> Products { get { return _products; } }
         private List<InvoiceProductModel> _products = new List<InvoiceProductModel>();
     }

@@ -61,6 +61,7 @@ function parseMedicines(arr) {
 
 $(function () {
     addRow();
+    $(".datepicker").val(new Date().toDateInputValue());
     $("#warehouse").autocomplete({
         lookup: parseWarehouses(sampleWarehousesData),
         onSelect: function (suggestion) {
@@ -74,14 +75,14 @@ function addRow() {
     var rowId = $(".product-row").length;
     var namePrefix = "Products["+rowId+"].";
     var newRow = $("<tr />", { "class": "product-row", "id": "product-row-" + rowId }).append([
-            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "lp", "class": "form-control lp", "value": rowId, "readonly": "true", "step": "1" })),
-            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "name", "class": "form-control med-name" })),
-            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "quantity", "class": "form-control quantity", "step": "1" })),
-            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "unit", "class": "form-control unit"})),
-            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "price", "class": "form-control price", "step": "0.01"})),
-            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "netto", "class": "form-control netto", "readonly": "true", "step": "0.01" })),
-            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "vat", "class": "form-control vat", value: "23%"})),
-            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "brutto", "class": "form-control brutto", "readonly": "true", "step": "0.01" }))
+            $("<td />").append($("<input />", { "type": "number", "class": "form-control lp", "value": rowId, "readonly": "true", "step": "1" })),
+            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "Name", "class": "form-control med-name" })),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "Quantity", "class": "form-control quantity", "step": "1" })),
+            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "Unit", "class": "form-control unit"})),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "Price", "class": "form-control price", "step": "0.01"})),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "Netto", "class": "form-control netto", "readonly": "true", "step": "0.01" })),
+            $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "Vat", "class": "form-control vat", value: "23%"})),
+            $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "Brutto", "class": "form-control brutto", "readonly": "true", "step": "0.01" }))
         ]);
     $(newRow).find(".med-name").autocomplete({
         lookup: parseMedicines(sampleMedicinesData),
