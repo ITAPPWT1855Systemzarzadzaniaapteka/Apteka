@@ -35,6 +35,16 @@ namespace Apteka.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        [HttpPost]
+        public ActionResult Create(Faktura faktura)
+        {
+            context.Fakturas.Add(faktura);
+            context.SaveChanges();
+           // var data = jsonFacture.Data;
+           // Faktura facture = new Faktura() { Numer = jsonFacture.nr, Hurtownia = jsonFacture.warehouseNr };
+
+            return RedirectToAction("Index", "Home");
+        }
 
     }
 }
