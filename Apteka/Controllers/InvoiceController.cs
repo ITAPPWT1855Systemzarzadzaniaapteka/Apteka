@@ -10,7 +10,7 @@ namespace Apteka.Controllers
 {
     public class InvoiceController : Controller
     {
-        aptekaEntities context = new aptekaEntities();
+        aptekaEntities1 context = new aptekaEntities1();
         public ActionResult Index()
         {
             return View();

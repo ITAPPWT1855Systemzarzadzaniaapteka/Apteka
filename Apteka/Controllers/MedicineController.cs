@@ -10,107 +10,129 @@ using Apteka.Models;
 
 namespace Apteka.Controllers
 {
-    public class StoreController : Controller
+    public class MedicineController : Controller
     {
         private aptekaEntities1 db = new aptekaEntities1();
 
-        // GET: Store
+        // GET: Medicine
         public ActionResult Index()
         {
-            return View(db.Stan_magazynu.ToList());
+            return View(db.Lek.ToList().Take(10));
         }
 
-        // GET: Store/Details/5
+        // GET: Medicine/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            if (stan_magazynu == null)
+            Lek lek = db.Lek.Find(id);
+            if (lek == null)
             {
                 return HttpNotFound();
             }
-            return View(stan_magazynu);
+            return View(lek);
         }
 
-        // GET: Store/Create
+        // GET: Medicine/Create
         public ActionResult Create()
         {
             return View();
         }
+        // GET: Medicines
+        public JsonResult GetMedicines(string text)
+        {
+            var medicines = db.Lek.Where(m => m.Nazwa.Contains(text)).Take(10).ToList();
+            return new JsonResult
+            {
+                Data = medicines.Select(m => m),
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
 
-        // POST: Store/Create
+        // GET: Medicine/Create
+        public ActionResult Sell()
+        {
+            ViewBag.Medicines = from item in db.Lek.Take(5)
+                                select new SelectListItem
+                                {
+                                    Text = item.Nazwa + " " + item.Postac + " " + item.Opakowanie,
+                                    Value = item.Id_lek.ToString()
+                                };
+            return View();
+        }
+
+        // POST: Medicine/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_lek,Nazwa,Dawka,Postac,Opakowanie,Obecny_Stan_Magazynu")] Stan_magazynu stan_magazynu)
+        public ActionResult Create([Bind(Include = "Id_lek,Nazwa,Postac,Opakowanie,Dawka")] Lek lek)
         {
             if (ModelState.IsValid)
             {
-                db.Stan_magazynu.Add(stan_magazynu);
+                db.Lek.Add(lek);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(stan_magazynu);
+            return View(lek);
         }
 
-        // GET: Store/Edit/5
+        // GET: Medicine/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            if (stan_magazynu == null)
+            Lek lek = db.Lek.Find(id);
+            if (lek == null)
             {
                 return HttpNotFound();
             }
-            return View(stan_magazynu);
+            return View(lek);
         }
 
-        // POST: Store/Edit/5
+        // POST: Medicine/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_lek,Nazwa,Dawka,Postac,Opakowanie,Obecny_Stan_Magazynu")] Stan_magazynu stan_magazynu)
+        public ActionResult Edit([Bind(Include = "Id_lek,Nazwa,Postac,Opakowanie,Dawka")] Lek lek)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(stan_magazynu).State = EntityState.Modified;
+                db.Entry(lek).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(stan_magazynu);
+            return View(lek);
         }
 
-        // GET: Store/Delete/5
+        // GET: Medicine/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            if (stan_magazynu == null)
+            Lek lek = db.Lek.Find(id);
+            if (lek == null)
             {
                 return HttpNotFound();
             }
-            return View(stan_magazynu);
+            return View(lek);
         }
 
-        // POST: Store/Delete/5
+        // POST: Medicine/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            db.Stan_magazynu.Remove(stan_magazynu);
+            Lek lek = db.Lek.Find(id);
+            db.Lek.Remove(lek);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

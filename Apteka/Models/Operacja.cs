@@ -22,10 +22,11 @@ namespace Apteka.Models
         public int ID_operacja { get; set; }
         public int ID_lek { get; set; }
         public string Data { get; set; }
-        public int ID_user { get; set; }
+        public string ID_user { get; set; }
         public Nullable<int> Przychod { get; set; }
         public Nullable<int> Rozchod { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         public virtual Lek Lek { get; set; }
         public virtual ICollection<Faktura> Fakturas { get; set; }
     }

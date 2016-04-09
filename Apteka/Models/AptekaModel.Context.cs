@@ -15,10 +15,10 @@ namespace Apteka.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class aptekaEntities : DbContext
+    public partial class aptekaEntities1 : DbContext
     {
-        public aptekaEntities()
-            : base("name=aptekaEntities")
+        public aptekaEntities1()
+            : base("name=aptekaEntities1")
         {
         }
     

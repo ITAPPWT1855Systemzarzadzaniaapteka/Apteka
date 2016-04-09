@@ -227,6 +227,7 @@
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\ProductApiController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -249,54 +250,69 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AptekaDbContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AptekaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AptekaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AptekaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AptekaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AptekaModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\AspNetRole.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserClaim.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUserLogin.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InvoiceViewModels.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Faktura.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Hurtownia.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lek.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Operacja.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Sprawdz_faktury.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sprawdz_zawartosc_faktury.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Stan_magazynu.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>AptekaDbContext.tt</DependentUpon>
+      <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -328,6 +344,7 @@
     </EntityDeploy>
     <Content Include="js\HomeController.js" />
     <Content Include="js\InvoiceController.js" />
+    <Content Include="js\MedicineController.js" />
     <Content Include="js\StoreController.js" />
     <Content Include="Models\AptekaDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -347,6 +364,23 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <EntityDeploy Include="Models\AptekaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AptekaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AptekaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AptekaModel.edmx</DependentUpon>
+      <LastGenOutput>AptekaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AptekaModel.edmx.diagram">
+      <DependentUpon>AptekaModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\AptekaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AptekaModel.edmx</DependentUpon>
+      <LastGenOutput>AptekaModel.cs</LastGenOutput>
+    </Content>
     <None Include="Properties\PublishProfiles\apteka.pubxml" />
     <Content Include="Scripts\jquery-latest.js" />
     <Content Include="Scripts\jquery.metadata.js" />
@@ -409,6 +443,12 @@
     <Content Include="Views\Store\Details.cshtml" />
     <Content Include="Views\Store\Edit.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Medicine\Create.cshtml" />
+    <Content Include="Views\Medicine\Delete.cshtml" />
+    <Content Include="Views\Medicine\Details.cshtml" />
+    <Content Include="Views\Medicine\Edit.cshtml" />
+    <Content Include="Views\Medicine\Index.cshtml" />
+    <Content Include="Views\Medicine\Sell.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
