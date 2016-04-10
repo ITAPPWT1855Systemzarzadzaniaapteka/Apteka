@@ -12,8 +12,14 @@
 <h4>Operacja</h4>
 <hr />
 <div ng-if="error" class="alert alert-danger">{{ error }}</div>
+@if (ViewBag.Operation.ID_lek != 0)
+{
+    <div class="alert alert-success">Dodano lek o numerze @ViewBag.Operation.ID_lek w ilości @ViewBag.Operation.Rozchod</div>
+}
+    
 @using (Html.BeginForm("SerializeSell", "Medicine", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) 
 {
+    
     
     @Html.AntiForgeryToken()
     <div class="form-horizontal">

@@ -15,7 +15,6 @@ namespace Apteka.Controllers
     public class MedicineController : Controller
     {
         private aptekaEntities1 db = new aptekaEntities1();
-
         // GET: Medicine
         public ActionResult Index()
         {
@@ -54,8 +53,9 @@ namespace Apteka.Controllers
         }
 
         // GET: Medicine/Create
-        public ActionResult Sell()
+        public ActionResult Sell(Operacja operacja = null)
         {
+            ViewBag.Operation = operacja;
             ViewBag.Medicines = from item in db.Lek.Take(5)
                                 select new SelectListItem
                                 {
@@ -66,7 +66,7 @@ namespace Apteka.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SerializeSell([Bind(Include = "ID_lek,Rozchod")] Operacja operacja)
+        public ActionResult SerializeSell([Bind(Include = "ID_lek, Rozchod")] Operacja operacja)
         {
             operacja.Data = DateTime.Now.ToString();
             operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
@@ -78,7 +78,7 @@ namespace Apteka.Controllers
             {
                 stream.WriteLine(serializedResult);
             }
-            return RedirectToAction("Sell");
+            return RedirectToAction("Sell", operacja);
         }
         // POST: Medicine/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
