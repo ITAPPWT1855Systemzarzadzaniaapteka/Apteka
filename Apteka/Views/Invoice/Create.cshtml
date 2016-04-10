@@ -83,12 +83,12 @@
     <div class="row inputs">
         <div class="col-md-7"></div>
         <div class="col-md-2">
-            <input id="netto" type="number" value="0" class="form-control" step="0.01" disabled />
+            <input id="netto" type="number" step="0.01" value="0" ng-model="facture.Netto" class="form-control" />
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-2">
-            <input id="brutto" type="number" value="0" class="form-control" step="0.01" disabled />
+            <input id="brutto" type="number" value="0" ng-model="facture.Brutto" class="form-control" disabled />
         </div>
     </div>
 

@@ -12,7 +12,7 @@ namespace Apteka.Controllers
     [Authorize]
     public class InvoiceController : Controller
     {
-        aptekaEntities context = new aptekaEntities();
+        aptekaEntities1 context = new aptekaEntities1();
         public ActionResult Index()
         {
             return View();
@@ -36,6 +36,16 @@ namespace Apteka.Controllers
                 Data = warehouses.Select(warehouse => warehouse),
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
+        }
+        [HttpPost]
+        public ActionResult Create(Faktura faktura)
+        {
+            context.Fakturas.Add(faktura);
+            context.SaveChanges();
+           // var data = jsonFacture.Data;
+           // Faktura facture = new Faktura() { Numer = jsonFacture.nr, Hurtownia = jsonFacture.warehouseNr };
+
+            return RedirectToAction("Index", "Home");
         }
 
     }

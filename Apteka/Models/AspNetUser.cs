@@ -18,6 +18,7 @@ namespace Apteka.Models
         {
             this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
             this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
+            this.Operacjas = new HashSet<Operacja>();
             this.AspNetRoles = new HashSet<AspNetRole>();
         }
     
@@ -36,6 +37,7 @@ namespace Apteka.Models
     
         public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual ICollection<Operacja> Operacjas { get; set; }
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

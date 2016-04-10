@@ -1,0 +1,57 @@
+﻿@model Apteka.Models.Lek
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Czy na pewno chcesz usunąć ten lek?</h3>
+    <div>
+        <h4>Usuń lek</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nazwa)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Nazwa)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Postac)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Postac)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Opakowanie)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Opakowanie)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Dawka)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Dawka)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Usuń" class="btn btn-default" /> |
+                @Html.ActionLink("Wróc do listy", "Index")
+            </div>
+        }
+    </div>
+</body>

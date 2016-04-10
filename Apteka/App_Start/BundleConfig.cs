@@ -7,7 +7,7 @@ namespace Apteka {
         public static void RegisterBundles(BundleCollection bundles) {
             bundles.Add(new ScriptBundle("~/bundles/js/dist").Include(
                         "~/Scripts/lib/jquery/*.js",
-                        "~/Scripts/lib/*.js",                        
+                        "~/Scripts/lib/*.js",                            
                         "~/Scripts/*.js"
             ));
 

@@ -89,7 +89,7 @@ function addRow() {
         onSelect: function (selected) {
             var med = _.find(sampleMedicinesData, function (a) { return a.id === selected.data; });
             var row = $(this).parents("tr");
-            row.find(".price").val(med.netto.toFixed(2));
+            row.find(".price").val(med.netto);
             row.find(".quantity").val(1).trigger('input');
         }
     });
@@ -99,18 +99,18 @@ function addRow() {
         var quantVal = row.find(".quantity").val();
         var nettoVal = priceVal * quantVal;
         var bruttoVal = nettoVal * (100 + parseFloat(row.find(".vat").val())) / 100;
-        row.find(".netto").val(nettoVal.toFixed(2));
-        row.find(".brutto").val(bruttoVal.toFixed(2));
+        row.find(".netto").val(nettoVal);
+        row.find(".brutto").val(bruttoVal);
 
         var sumNetto = 0;
         var sumBrutto = 0;
         $(".product-row").each(function () {
             var row = $(this);
-            sumNetto += +row.find(".netto").val();
-            sumBrutto += +row.find(".brutto").val();
+            sumNetto += row.find(".netto").val().replace(',','.');
+            sumBrutto += row.find(".brutto").val();
         });
-        $("#netto").val(sumNetto.toFixed(2));
-        $("#brutto").val(sumBrutto.toFixed(2));
+        $("#netto").val(sumNetto.replace(',', '.'));
+        $("#brutto").val(sumBrutto);
     });
     $("#product-table tr:last").after(newRow);
 };
@@ -133,12 +133,19 @@ Apteka.controller('faktura', ["$scope", "$http", function ($scope, $http) {
             med['quantity'] = row.find('.quantity').val();
             med['unit'] = row.find('.unit').val();
             med['price'] = row.find('.price').val();
-            med['netto'] = row.find('.netto').val();
-            med['brutto'] = row.find('.brutto').val();
+            //med['netto'] = row.find('.netto').val();
+         //   med['brutto'] = row.find('.brutto').val();
             $scope.facture['meds'].push(med);
             console.log($scope.facture);
         });
-        var promise = $http.post("/Faktura/Post");
+        // var mis= $scope.facture.Netto;
+        $scope.facture.Netto = 12.0;
+        $scope.facture.Netto = 15.5;
+        //$scope.facture['Operacja'] = 
+       // $scope.facture['Netto'] = parseFloat(String(mis).replace(',', '.'));
+     //   $scope.facture['Brutto']= $scope.facture['Brutto'].replace(',', '.');
+        console.log($scope.facture)
+        var promise = $http.post("/Faktura/Create", JSON.stringify($scope.facture));
         var onSuccess = function (response) {
             console.log(response);
         };

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Apteka.Models.Stan_magazynu>
+@*<script>
+    table.tablesorter thead tr .header {
+        background-image: url(bg.gif);
+    }
+</script>*@
+<head>
+    <title>Stan magazynu</title>
+    <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
+</head>
+<body>
+    <p>
+        @*@Html.ActionLink("Create New", "Create")*@
+    </p>
+    <input type="text" id="filter" class="form-control" />
+ {{ 1+3 }}
+    <table id="listagem" class="table table-striped tablesorter">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nazwa)<i class="fa fa-arrows-v"></i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dawka)<i class="fa fa-arrows-v"></i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Postac)<i class="fa fa-arrows-v"></i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Opakowanie)<i class="fa fa-arrows-v"></i>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Obecny_Stan_Magazynu)<i class="fa fa-arrows-v"></i>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nazwa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dawka)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postac)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opakowanie)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Obecny_Stan_Magazynu)
+                    </td>
+                    @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ID_lek }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ID_lek }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ID_lek })
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>

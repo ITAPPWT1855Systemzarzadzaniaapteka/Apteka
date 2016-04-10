@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Apteka.Models.Lek>
+
+<head>
+    <title>Dodaj Lek</title>
+</head>
+<div class="input-group custom-search-form">
+    <input type="text" id="filter" class="form-control" placeholder="Wpisz nazwę leku...">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+</div>
+    <table id="listagem" class="table table-striped tablesorter">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nazwa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Postac)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Opakowanie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dawka)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nazwa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postac)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opakowanie)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Dawka)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Zmień", "Edit", new { id = item.Id_lek }) |
+                        @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_lek }) |
+                        @Html.ActionLink("Usuń", "Delete", new { id = item.Id_lek })
+                    </td>
+                </tr>
+            }
+        </tbody>
+</table>
