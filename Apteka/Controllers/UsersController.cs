@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace Apteka.Controllers {
+
     [Authorize(Roles = "Admin")]
     public class UsersController : Controller {
         private ApplicationUserManager _userManager;
