@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Apteka.Models;
+using System.Web.Script.Serialization;
+using System.IO;
 
 namespace Apteka.Controllers
 {
@@ -62,7 +64,22 @@ namespace Apteka.Controllers
                                 };
             return View();
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SerializeSell([Bind(Include = "ID_lek,Rozchod")] Operacja operacja)
+        {
+            operacja.Data = DateTime.Now.ToString();
+            operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+            operacja.Przychod = 0;
+            var serializer = new JavaScriptSerializer();
+            var serializedResult = serializer.Serialize(operacja);
+            var dataFile = Server.MapPath("~/App_Data/sell/sell.json");
+            using (StreamWriter stream = System.IO.File.AppendText(dataFile))
+            {
+                stream.WriteLine(serializedResult);
+            }
+            return RedirectToAction("Sell");
+        }
         // POST: Medicine/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.

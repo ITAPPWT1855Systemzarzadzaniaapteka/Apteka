@@ -66,12 +66,18 @@ Apteka.controller('medicine', ["$scope", "$http", function ($scope, $http) {
         })
     }
     $('#medicines').on('keyup', function () {
+        
         var searchtext = $(this).val();
-        if (searchtext.length > 0) {
+        $scope.error = "";
+        if (searchtext.length > 3) {
             var promise = $http.get("/Medicine/GetMedicines", { params: { text: searchtext } });
             var onSuccess = function (response) {
                 $scope.medicines = response.data;
                 var txt = '';
+                if (response.data.length === 0) {
+                    $('#med').html("");
+                    txt = 'Nie znaleziono leku o tej nazwie';
+                }
                 for (var i = 0; i < response.data.length; i++) {
                     txt += '<button type="button" onclick="setMed(' + response.data[i].Id_lek + ', \''+ response.data[i].Nazwa +'\')">';
                     txt += response.data[i].Nazwa;
@@ -79,12 +85,15 @@ Apteka.controller('medicine', ["$scope", "$http", function ($scope, $http) {
                     txt += response.data[i].Postac;
                     txt += ',';
                     txt += response.data[i].Opakowanie;
+                    txt += ',';
+                    txt += response.data[i].Dawka;
                     txt += '</button>';
                 }
                 $("#med").append('<ul>' + txt + '</ul>');
             };
-            var onError = function (reponse) {
-                $scope.error = "Problem: " + reponse;
+            var onError = function (response) {
+                console.log(response);
+                $scope.error = "Problem: " + response.data;
             }
             promise.then(onSuccess, onError);
   
