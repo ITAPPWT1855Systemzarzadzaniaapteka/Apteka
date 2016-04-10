@@ -6,8 +6,10 @@ using System.Web.Mvc;
 using Apteka.Models;
 using System.IO;
 
-namespace Apteka.Controllers
+namespace Apteka.Controllers 
 {
+
+    [Authorize]
     public class InvoiceController : Controller
     {
         aptekaEntities1 context = new aptekaEntities1();

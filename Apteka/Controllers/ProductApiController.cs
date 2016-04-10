@@ -6,6 +6,8 @@ using System.Net;
 using System.Web.Http;
 
 namespace ProductsApp.Controllers {
+
+    [Authorize]
     public class ProductApiController : ApiController {
         Product[] products = new Product[]
         {

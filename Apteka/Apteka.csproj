@@ -48,6 +48,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.76.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="dotless.Core, Version=1.4.0.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\packages\dotless.1.4.0.0\lib\dotless.Core.dll</HintPath>
       <Private>True</Private>
@@ -230,6 +238,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\ProductApiController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -320,6 +329,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\lib\bootstrap-datepicker.css" />
     <Content Include="Content\lib\bootstrap-datepicker3.css" />
     <Content Include="Content\lib\bootstrap-theme.css" />
@@ -365,6 +375,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\mixins.less" />
+    <Content Include="Content\variables.less" />
     <EntityDeploy Include="Models\AptekaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AptekaModel.Designer.cs</LastGenOutput>
@@ -455,6 +472,7 @@
   <ItemGroup>
     <Folder Include="Views\Lek\" />
     <Folder Include="Views\ProductApi\" />
+    <Folder Include="Views\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
