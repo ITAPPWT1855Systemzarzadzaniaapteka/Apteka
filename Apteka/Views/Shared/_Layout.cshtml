@@ -273,7 +273,7 @@
                             <a href="#"><i class="fa fa-database"></i>Magazyn<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/Store/Index">Sprawdź stan magazynu</a>
+                                    <a href="@Url.Action("Store", "Index")">Sprawdź stan magazynu</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -282,16 +282,19 @@
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Leki</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="Medicine/Create">Sprzedaj lek</a>
+                                    <a href="@Url.Action("Sell", "Medicine")">Sprzedaj lek</a>
                                 </li>
                                 <li>
-                                    <a href="Medicine/Index">Baza leków</a>
+                                    <a href="@Url.Action("Summary", "Medicine")">Podsumowanie sprzedaży</a>
                                 </li>
                                 <li>
-                                    <a href="Medicine/Create">Nowy lek</a>
+                                    <a href="@Url.Action("Index", "Medicine")">Baza leków</a>
                                 </li>
                                 <li>
-                                    <a href="Medicine/Delete">Usuń lek</a>
+                                    <a href="@Url.Action("Create", "Medicine")">Nowy lek</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Delete", "Medicine")">Usuń lek</a>
                                 </li>
                             </ul>
                         </li>

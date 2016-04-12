@@ -52,6 +52,9 @@
       <HintPath>..\packages\ClosedXML.0.76.0\lib\net40-client\ClosedXML.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.13.5.0\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
       <Private>True</Private>
@@ -400,6 +403,7 @@
       <LastGenOutput>AptekaModel.cs</LastGenOutput>
     </Content>
     <Content Include="App_Data\sell\sell.json" />
+    <Content Include="App_Data\sell\sell.csv" />
     <None Include="Properties\PublishProfiles\apteka.pubxml" />
     <Content Include="Scripts\jquery-latest.js" />
     <Content Include="Scripts\jquery.metadata.js" />
@@ -468,6 +472,7 @@
     <Content Include="Views\Medicine\Edit.cshtml" />
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Medicine\Sell.cshtml" />
+    <Content Include="Views\Medicine\Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />

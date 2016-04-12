@@ -9,6 +9,9 @@ using System.Web.Mvc;
 using Apteka.Models;
 using System.Web.Script.Serialization;
 using System.IO;
+using CsvHelper;
+using System.Data.Entity.Validation;
+
 
 namespace Apteka.Controllers
 {
@@ -68,17 +71,63 @@ namespace Apteka.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SerializeSell([Bind(Include = "ID_lek, Rozchod")] Operacja operacja)
         {
-            operacja.Data = DateTime.Now.ToString();
-            operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
-            operacja.Przychod = 0;
-            var serializer = new JavaScriptSerializer();
-            var serializedResult = serializer.Serialize(operacja);
-            var dataFile = Server.MapPath("~/App_Data/sell/sell.json");
-            using (StreamWriter stream = System.IO.File.AppendText(dataFile))
-            {
-                stream.WriteLine(serializedResult);
-            }
+            //      operacja.Data = DateTime.Now.ToString();
+            //    operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
+
+            var dataFile = Server.MapPath("~/App_Data/sell/sell.csv");
+            string details = operacja.ID_lek + "," + operacja.Rozchod;
+            System.IO.File.AppendAllText(dataFile, details);
             return RedirectToAction("Sell", operacja);
+        }
+        private List<Operacja> readFromCsv(){
+              var dataFile = Server.MapPath("~/App_Data/sell/sell.csv");
+            List<Operacja> operations = System.IO.File.ReadAllLines(dataFile)
+                   .Select(x => x.Split(','))
+                   .Select(x => new Operacja
+                   {
+                       ID_lek = Int32.Parse(x[0]),
+                       Rozchod = Int32.Parse(x[1]),
+                   }).ToList();
+
+           return (from op in operations
+                          group op by op.ID_lek
+                              into newOp
+                              select new Operacja
+                              {
+                                  ID_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
+                                  ID_lek = newOp.First().ID_lek,
+                                  Rozchod = newOp.Sum(o => o.Rozchod),
+                                  Data =  DateTime.Now.ToString(),
+                                  Przychod = 0,
+                                  ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
+                              }).ToList();
+        }
+        public ActionResult Summary()
+        {
+            var grouped = readFromCsv();
+            return View(grouped);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SaveSell([Bind(Include = "ID_lek, Rozchod")] Operacja operacja)
+        {
+            var grouped = readFromCsv();
+            foreach (var op in grouped)
+            {
+                try
+                {
+                    db.Operacjas.Add(op);
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    throw e;
+                }
+              
+                
+            }
+                            return RedirectToAction("Index");
+     
         }
         // POST: Medicine/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

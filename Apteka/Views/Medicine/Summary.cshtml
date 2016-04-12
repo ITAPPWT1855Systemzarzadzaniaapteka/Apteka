@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Apteka.Models.Operacja>
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Summary</title>
+</head>
+@using (Html.BeginForm("SaveSell", "Medicine", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    <p>Podsumowanie sprzedaży:</p>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<table class="table">
+    <tr>
+        <th>
+            Nr leku
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rozchod)
+        </th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_lek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rozchod)
+        </td>
+
+    </tr>
+}
+    
+</table>
+    <input type="submit" value="Zatwierdź sprzedaż do bazy" class="btn btn-success" />
+}
