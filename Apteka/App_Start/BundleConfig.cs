@@ -11,7 +11,8 @@ namespace Apteka {
                         "~/Scripts/*.js"
             ));
 
-            bundles.Add(new StyleBundle("~/bundles/css/dist").Include("~/Content/lib/*.css"));
+            bundles.Add(new StyleBundle("~/bundles/css/dist")
+                .Include("~/Content/lib/*.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new LessBundle("~/bundles/less").Include(
                     "~/Content/less/*.less"
