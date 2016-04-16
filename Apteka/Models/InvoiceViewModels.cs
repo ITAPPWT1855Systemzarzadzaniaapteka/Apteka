@@ -18,13 +18,14 @@ namespace Apteka.Models {
 
         [Required]
         [Display(Name = "Hurtownia")]
-        public int Warehouse { get; set; } //Warehouse id
+        public int WarehouseId { get; set; } //Warehouse id
 
         [Required]
         [Display(Name = "Numer faktury")]
         public String InvoiceId { get; set; }
         //This id is not always a number, most likely it looks like "01/2016" but it depends
-
+        public List<Lek> Lek { get; set; }
+        public List<Operacja> Operacja { get; set; }
         public List<InvoiceProductModel> Products { get { return _products; } }
         private List<InvoiceProductModel> _products = new List<InvoiceProductModel>();
     }

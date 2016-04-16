@@ -33,6 +33,8 @@ function setMed(id, name) {
     $('#medicine-id').val(id);
     $('#medicines').val(name);
     $('#med').html("");
+    $('.alert-danger').html("");
+    
 }
 var Apteka = angular.module('Apteka', []);
 Apteka.service('medicineService', function ($http) {
@@ -70,6 +72,7 @@ Apteka.controller('medicine', ["$scope", "$http", function ($scope, $http) {
         var searchtext = $(this).val();
         $scope.error = "";
         if (searchtext.length > 3) {
+            console.log('text is', searchtext);
             var promise = $http.get("/Medicine/GetMedicines", { params: { text: searchtext } });
             var onSuccess = function (response) {
                 $scope.medicines = response.data;
@@ -93,7 +96,7 @@ Apteka.controller('medicine', ["$scope", "$http", function ($scope, $http) {
             };
             var onError = function (response) {
                 console.log(response);
-                $scope.error = "Problem: " + response.data;
+                $scope.error = "Problem: " + response.statusText;
             }
             promise.then(onSuccess, onError);
   

@@ -14,8 +14,8 @@ namespace Apteka.Models
     
     public partial class Sprawdz_faktury
     {
-        public int ID_faktura { get; set; }
-        public string Data { get; set; }
+        public int Id_faktura { get; set; }
+        public Nullable<System.DateTime> Data { get; set; }
         public string Numer { get; set; }
         public string Nazwa { get; set; }
         public Nullable<double> Netto { get; set; }

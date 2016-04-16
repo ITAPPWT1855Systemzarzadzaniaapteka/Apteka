@@ -16,13 +16,13 @@ namespace Apteka.Models
     {
         public Hurtownia()
         {
-            this.Fakturas = new HashSet<Faktura>();
+            this.Faktura = new HashSet<Faktura>();
         }
     
-        public int ID_hurtownia { get; set; }
+        public int Id_hurtownia { get; set; }
         public string Nazwa { get; set; }
         public Nullable<int> NIP { get; set; }
     
-        public virtual ICollection<Faktura> Fakturas { get; set; }
+        public virtual ICollection<Faktura> Faktura { get; set; }
     }
 }

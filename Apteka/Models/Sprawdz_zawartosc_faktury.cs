@@ -15,11 +15,11 @@ namespace Apteka.Models
     public partial class Sprawdz_zawartosc_faktury
     {
         public int Id_faktura { get; set; }
-        public Nullable<int> id_lek { get; set; }
+        public Nullable<int> Id_lek { get; set; }
         public string Nazwa { get; set; }
         public string Dawka { get; set; }
         public Nullable<int> Opakowanie { get; set; }
         public string Postac { get; set; }
-        public Nullable<int> Ilość_zakupionego_leku { get; set; }
+        public Nullable<int> Ilosc_zakupionego_leku { get; set; }
     }
 }

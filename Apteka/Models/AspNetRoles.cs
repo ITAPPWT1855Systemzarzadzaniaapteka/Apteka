@@ -12,12 +12,16 @@ namespace Apteka.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class AspNetRoles
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public AspNetRoles()
+        {
+            this.AspNetUsers = new HashSet<AspNetUsers>();
+        }
+    
+        public string Id { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

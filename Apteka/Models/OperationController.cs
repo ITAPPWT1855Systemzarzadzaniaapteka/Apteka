@@ -6,111 +6,119 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Apteka.Models;
 
-namespace Apteka.Controllers
+namespace Apteka.Models
 {
-    public class StoreController : Controller
+    public class OperationController : Controller
     {
         private aptekaEntities1 db = new aptekaEntities1();
 
-        // GET: Store
+        // GET: Operation
         public ActionResult Index()
         {
-            return View(db.Stan_magazynu.ToList());
+            var operacja = db.Operacja.Include(o => o.AspNetUsers).Include(o => o.Lek);
+            return View(operacja.ToList());
         }
 
-        // GET: Store/Details/5
+        // GET: Operation/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            if (stan_magazynu == null)
+            Operacja operacja = db.Operacja.Find(id);
+            if (operacja == null)
             {
                 return HttpNotFound();
             }
-            return View(stan_magazynu);
+            return View(operacja);
         }
 
-        // GET: Store/Create
+        // GET: Operation/Create
         public ActionResult Create()
         {
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa");
             return View();
         }
 
-        // POST: Store/Create
+        // POST: Operation/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID_lek,Nazwa,Dawka,Postac,Opakowanie,Obecny_Stan_Magazynu")] Stan_magazynu stan_magazynu)
+        public ActionResult Create([Bind(Include = "Id_operacja,Id_lek,Data,Id_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
         {
             if (ModelState.IsValid)
             {
-                db.Stan_magazynu.Add(stan_magazynu);
+                db.Operacja.Add(operacja);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(stan_magazynu);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
+            return View(operacja);
         }
 
-        // GET: Store/Edit/5
+        // GET: Operation/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            if (stan_magazynu == null)
+            Operacja operacja = db.Operacja.Find(id);
+            if (operacja == null)
             {
                 return HttpNotFound();
             }
-            return View(stan_magazynu);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
+            return View(operacja);
         }
 
-        // POST: Store/Edit/5
+        // POST: Operation/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_lek,Nazwa,Dawka,Postac,Opakowanie,Obecny_Stan_Magazynu")] Stan_magazynu stan_magazynu)
+        public ActionResult Edit([Bind(Include = "Id_operacja,Id_lek,Data,Id_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(stan_magazynu).State = EntityState.Modified;
+                db.Entry(operacja).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(stan_magazynu);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
+            return View(operacja);
         }
 
-        // GET: Store/Delete/5
+        // GET: Operation/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            if (stan_magazynu == null)
+            Operacja operacja = db.Operacja.Find(id);
+            if (operacja == null)
             {
                 return HttpNotFound();
             }
-            return View(stan_magazynu);
+            return View(operacja);
         }
 
-        // POST: Store/Delete/5
+        // POST: Operation/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Stan_magazynu stan_magazynu = db.Stan_magazynu.Find(id);
-            db.Stan_magazynu.Remove(stan_magazynu);
+            Operacja operacja = db.Operacja.Find(id);
+            db.Operacja.Remove(operacja);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -73,24 +73,22 @@
           <Property Name="Id_faktura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_hurtownia" Type="int" />
           <Property Name="Numer" Type="varchar" MaxLength="50" />
-          <Property Name="Netto" Type="float" />
-          <Property Name="Brutto" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'apteka.dbo.Faktura_operacja' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Faktura_operacja">
           <Key>
-            <PropertyRef Name="ID_faktura" />
-            <PropertyRef Name="ID_operacja" />
+            <PropertyRef Name="Id_faktura" />
+            <PropertyRef Name="Id_operacja" />
           </Key>
-          <Property Name="ID_faktura" Type="int" Nullable="false" />
-          <Property Name="ID_operacja" Type="int" Nullable="false" />
+          <Property Name="Id_faktura" Type="int" Nullable="false" />
+          <Property Name="Id_operacja" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Hurtownia">
           <Key>
-            <PropertyRef Name="ID_hurtownia" />
+            <PropertyRef Name="Id_hurtownia" />
           </Key>
-          <Property Name="ID_hurtownia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_hurtownia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" />
           <Property Name="NIP" Type="int" />
         </EntityType>
@@ -106,14 +104,16 @@ warning 6002: The table/view 'apteka.dbo.Faktura_operacja' does not have a prima
         </EntityType>
         <EntityType Name="Operacja">
           <Key>
-            <PropertyRef Name="ID_operacja" />
+            <PropertyRef Name="Id_operacja" />
           </Key>
-          <Property Name="ID_operacja" Type="int" Nullable="false" />
-          <Property Name="ID_lek" Type="int" Nullable="false" />
-          <Property Name="Data" Type="varchar" MaxLength="12" />
-          <Property Name="ID_user" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Id_operacja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_lek" Type="int" Nullable="false" />
+          <Property Name="Data" Type="date" />
+          <Property Name="Id_user" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Przychod" Type="int" />
           <Property Name="Rozchod" Type="int" />
+          <Property Name="Netto" Type="float" />
+          <Property Name="Brutto" Type="float" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -129,10 +129,10 @@ warning 6002: The table/view 'apteka.dbo.Faktura_operacja' does not have a prima
 warning 6002: The table/view 'apteka.dbo.Sprawdz_faktury' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Sprawdz_faktury">
           <Key>
-            <PropertyRef Name="ID_faktura" />
+            <PropertyRef Name="Id_faktura" />
           </Key>
-          <Property Name="ID_faktura" Type="int" Nullable="false" />
-          <Property Name="Data" Type="varchar" MaxLength="12" />
+          <Property Name="Id_faktura" Type="int" Nullable="false" />
+          <Property Name="Data" Type="date" />
           <Property Name="Numer" Type="varchar" MaxLength="50" />
           <Property Name="Nazwa" Type="varchar" MaxLength="50" />
           <Property Name="Netto" Type="float" />
@@ -145,20 +145,20 @@ warning 6002: The table/view 'apteka.dbo.Sprawdz_zawartosc_faktury' does not hav
             <PropertyRef Name="Id_faktura" />
           </Key>
           <Property Name="Id_faktura" Type="int" Nullable="false" />
-          <Property Name="id_lek" Type="int" />
+          <Property Name="Id_lek" Type="int" />
           <Property Name="Nazwa" Type="varchar" MaxLength="200" />
           <Property Name="Dawka" Type="varchar" MaxLength="100" />
           <Property Name="Opakowanie" Type="int" />
           <Property Name="Postac" Type="varchar" MaxLength="200" />
-          <Property Name="Ilość zakupionego leku" Type="int" />
+          <Property Name="Ilosc_zakupionego_leku" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Stan_magazynu">
           <Key>
-            <PropertyRef Name="ID_lek" />
+            <PropertyRef Name="Id_lek" />
           </Key>
-          <Property Name="ID_lek" Type="int" Nullable="false" />
+          <Property Name="Id_lek" Type="int" Nullable="false" />
           <Property Name="Nazwa" Type="varchar" MaxLength="200" />
           <Property Name="Dawka" Type="varchar" MaxLength="100" />
           <Property Name="Postac" Type="varchar" MaxLength="200" />
@@ -229,7 +229,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
               <PropertyRef Name="Id_faktura" />
             </Principal>
             <Dependent Role="Faktura_operacja">
-              <PropertyRef Name="ID_faktura" />
+              <PropertyRef Name="Id_faktura" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -238,10 +238,10 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <End Role="Faktura_operacja" Type="Self.Faktura_operacja" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Operacja">
-              <PropertyRef Name="ID_operacja" />
+              <PropertyRef Name="Id_operacja" />
             </Principal>
             <Dependent Role="Faktura_operacja">
-              <PropertyRef Name="ID_operacja" />
+              <PropertyRef Name="Id_operacja" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -250,7 +250,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hurtownia">
-              <PropertyRef Name="ID_hurtownia" />
+              <PropertyRef Name="Id_hurtownia" />
             </Principal>
             <Dependent Role="Faktura">
               <PropertyRef Name="Id_hurtownia" />
@@ -265,7 +265,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Operacja">
-              <PropertyRef Name="ID_user" />
+              <PropertyRef Name="Id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -277,7 +277,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
               <PropertyRef Name="Id_lek" />
             </Principal>
             <Dependent Role="Operacja">
-              <PropertyRef Name="ID_lek" />
+              <PropertyRef Name="Id_lek" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -326,13 +326,13 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Faktura_operacja" EntityType="Self.Faktura_operacja" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Faktura_operacja].[ID_faktura] AS [ID_faktura], 
-    [Faktura_operacja].[ID_operacja] AS [ID_operacja]
+    [Faktura_operacja].[Id_faktura] AS [Id_faktura], 
+    [Faktura_operacja].[Id_operacja] AS [Id_operacja]
     FROM [dbo].[Faktura_operacja] AS [Faktura_operacja]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Sprawdz_faktury" EntityType="Self.Sprawdz_faktury" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Sprawdz_faktury].[ID_faktura] AS [ID_faktura], 
+    [Sprawdz_faktury].[Id_faktura] AS [Id_faktura], 
     [Sprawdz_faktury].[Data] AS [Data], 
     [Sprawdz_faktury].[Numer] AS [Numer], 
     [Sprawdz_faktury].[Nazwa] AS [Nazwa], 
@@ -343,17 +343,17 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <EntitySet Name="Sprawdz_zawartosc_faktury" EntityType="Self.Sprawdz_zawartosc_faktury" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Sprawdz_zawartosc_faktury].[Id_faktura] AS [Id_faktura], 
-    [Sprawdz_zawartosc_faktury].[id_lek] AS [id_lek], 
+    [Sprawdz_zawartosc_faktury].[Id_lek] AS [Id_lek], 
     [Sprawdz_zawartosc_faktury].[Nazwa] AS [Nazwa], 
     [Sprawdz_zawartosc_faktury].[Dawka] AS [Dawka], 
     [Sprawdz_zawartosc_faktury].[Opakowanie] AS [Opakowanie], 
     [Sprawdz_zawartosc_faktury].[Postac] AS [Postac], 
-    [Sprawdz_zawartosc_faktury].[Ilość zakupionego leku] AS [Ilość zakupionego leku]
+    [Sprawdz_zawartosc_faktury].[Ilosc_zakupionego_leku] AS [Ilosc_zakupionego_leku]
     FROM [dbo].[Sprawdz_zawartosc_faktury] AS [Sprawdz_zawartosc_faktury]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="Stan_magazynu" EntityType="Self.Stan_magazynu" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [Stan_magazynu].[ID_lek] AS [ID_lek], 
+    [Stan_magazynu].[Id_lek] AS [Id_lek], 
     [Stan_magazynu].[Nazwa] AS [Nazwa], 
     [Stan_magazynu].[Dawka] AS [Dawka], 
     [Stan_magazynu].[Postac] AS [Postac], 
@@ -413,7 +413,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
           <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
-        <EntityType Name="AspNetRole">
+        <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -421,7 +421,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserClaim">
+        <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -429,9 +429,9 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUserLogin">
+        <EntityType Name="AspNetUserLogins">
           <Key>
             <PropertyRef Name="LoginProvider" />
             <PropertyRef Name="ProviderKey" />
@@ -440,9 +440,9 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
-        <EntityType Name="AspNetUser">
+        <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -460,7 +460,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Operacjas" Relationship="Self.FK_Operacja_AspNetUsers" FromRole="AspNetUsers" ToRole="Operacja" />
+          <NavigationProperty Name="Operacja" Relationship="Self.FK_Operacja_AspNetUsers" FromRole="AspNetUsers" ToRole="Operacja" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="Faktura">
@@ -470,19 +470,17 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="Id_faktura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_hurtownia" Type="Int32" />
           <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Netto" Type="Double" />
-          <Property Name="Brutto" Type="Double" />
           <NavigationProperty Name="Hurtownia" Relationship="Self.FK_Faktura_ToHurtownia" FromRole="Faktura" ToRole="Hurtownia" />
-          <NavigationProperty Name="Operacjas" Relationship="Self.Faktura_operacja" FromRole="Faktura" ToRole="Operacja" />
+          <NavigationProperty Name="Operacja" Relationship="Self.Faktura_operacja" FromRole="Faktura" ToRole="Operacja" />
         </EntityType>
         <EntityType Name="Hurtownia">
           <Key>
-            <PropertyRef Name="ID_hurtownia" />
+            <PropertyRef Name="Id_hurtownia" />
           </Key>
-          <Property Name="ID_hurtownia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_hurtownia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NIP" Type="Int32" />
-          <NavigationProperty Name="Fakturas" Relationship="Self.FK_Faktura_ToHurtownia" FromRole="Hurtownia" ToRole="Faktura" />
+          <NavigationProperty Name="Faktura" Relationship="Self.FK_Faktura_ToHurtownia" FromRole="Hurtownia" ToRole="Faktura" />
         </EntityType>
         <EntityType Name="Lek">
           <Key>
@@ -493,23 +491,25 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="Postac" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Opakowanie" Type="Int32" />
           <Property Name="Dawka" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Operacjas" Relationship="Self.FK_Operacja_ToLek" FromRole="Lek" ToRole="Operacja" />
+          <NavigationProperty Name="Operacja" Relationship="Self.FK_Operacja_ToLek" FromRole="Lek" ToRole="Operacja" />
         </EntityType>
         <EntityType Name="Operacja">
           <Key>
-            <PropertyRef Name="ID_operacja" />
+            <PropertyRef Name="Id_operacja" />
           </Key>
-          <Property Name="ID_operacja" Type="Int32" Nullable="false" />
-          <Property Name="ID_lek" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="ID_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id_operacja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_lek" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="Id_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Przychod" Type="Int32" />
           <Property Name="Rozchod" Type="Int32" />
-          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Operacja_AspNetUsers" FromRole="Operacja" ToRole="AspNetUsers" />
+          <Property Name="Netto" Type="Double" />
+          <Property Name="Brutto" Type="Double" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_Operacja_AspNetUsers" FromRole="Operacja" ToRole="AspNetUsers" />
           <NavigationProperty Name="Lek" Relationship="Self.FK_Operacja_ToLek" FromRole="Operacja" ToRole="Lek" />
-          <NavigationProperty Name="Fakturas" Relationship="Self.Faktura_operacja" FromRole="Operacja" ToRole="Faktura" />
+          <NavigationProperty Name="Faktura" Relationship="Self.Faktura_operacja" FromRole="Operacja" ToRole="Faktura" />
         </EntityType>
-        <EntityType Name="sysdiagram">
+        <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
@@ -521,10 +521,10 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
         </EntityType>
         <EntityType Name="Sprawdz_faktury">
           <Key>
-            <PropertyRef Name="ID_faktura" />
+            <PropertyRef Name="Id_faktura" />
           </Key>
-          <Property Name="ID_faktura" Type="Int32" Nullable="false" />
-          <Property Name="Data" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Id_faktura" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
           <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Netto" Type="Double" />
@@ -535,18 +535,18 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             <PropertyRef Name="Id_faktura" />
           </Key>
           <Property Name="Id_faktura" Type="Int32" Nullable="false" />
-          <Property Name="id_lek" Type="Int32" />
+          <Property Name="Id_lek" Type="Int32" />
           <Property Name="Nazwa" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Dawka" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Opakowanie" Type="Int32" />
           <Property Name="Postac" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Ilość_zakupionego_leku" Type="Int32" />
+          <Property Name="Ilosc_zakupionego_leku" Type="Int32" />
         </EntityType>
         <EntityType Name="Stan_magazynu">
           <Key>
-            <PropertyRef Name="ID_lek" />
+            <PropertyRef Name="Id_lek" />
           </Key>
-          <Property Name="ID_lek" Type="Int32" Nullable="false" />
+          <Property Name="Id_lek" Type="Int32" Nullable="false" />
           <Property Name="Nazwa" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Dawka" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Postac" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -554,10 +554,10 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <Property Name="Obecny_Stan_Magazynu" Type="Int32" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -568,10 +568,10 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -582,14 +582,14 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Operacja_AspNetUsers">
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Operacja" Type="Self.Operacja" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Operacja">
-              <PropertyRef Name="ID_user" />
+              <PropertyRef Name="Id_user" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -598,7 +598,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Hurtownia">
-              <PropertyRef Name="ID_hurtownia" />
+              <PropertyRef Name="Id_hurtownia" />
             </Principal>
             <Dependent Role="Faktura">
               <PropertyRef Name="Id_hurtownia" />
@@ -613,13 +613,13 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
               <PropertyRef Name="Id_lek" />
             </Principal>
             <Dependent Role="Operacja">
-              <PropertyRef Name="ID_lek" />
+              <PropertyRef Name="Id_lek" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
         </Association>
         <Association Name="Faktura_operacja">
           <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
@@ -627,15 +627,15 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
         </Association>
         <EntityContainer Name="aptekaEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
-          <EntitySet Name="Fakturas" EntityType="Self.Faktura" />
-          <EntitySet Name="Hurtownias" EntityType="Self.Hurtownia" />
-          <EntitySet Name="Leks" EntityType="Self.Lek" />
-          <EntitySet Name="Operacjas" EntityType="Self.Operacja" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
+          <EntitySet Name="Faktura" EntityType="Self.Faktura" />
+          <EntitySet Name="Hurtownia" EntityType="Self.Hurtownia" />
+          <EntitySet Name="Lek" EntityType="Self.Lek" />
+          <EntitySet Name="Operacja" EntityType="Self.Operacja" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Sprawdz_faktury" EntityType="Self.Sprawdz_faktury" />
           <EntitySet Name="Sprawdz_zawartosc_faktury" EntityType="Self.Sprawdz_zawartosc_faktury" />
           <EntitySet Name="Stan_magazynu" EntityType="Self.Stan_magazynu" />
@@ -649,23 +649,23 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           </AssociationSet>
           <AssociationSet Name="FK_Operacja_AspNetUsers" Association="Self.FK_Operacja_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Operacja" EntitySet="Operacjas" />
+            <End Role="Operacja" EntitySet="Operacja" />
           </AssociationSet>
           <AssociationSet Name="FK_Faktura_ToHurtownia" Association="Self.FK_Faktura_ToHurtownia">
-            <End Role="Hurtownia" EntitySet="Hurtownias" />
-            <End Role="Faktura" EntitySet="Fakturas" />
+            <End Role="Hurtownia" EntitySet="Hurtownia" />
+            <End Role="Faktura" EntitySet="Faktura" />
           </AssociationSet>
           <AssociationSet Name="FK_Operacja_ToLek" Association="Self.FK_Operacja_ToLek">
-            <End Role="Lek" EntitySet="Leks" />
-            <End Role="Operacja" EntitySet="Operacjas" />
+            <End Role="Lek" EntitySet="Lek" />
+            <End Role="Operacja" EntitySet="Operacja" />
           </AssociationSet>
           <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
           <AssociationSet Name="Faktura_operacja" Association="Self.Faktura_operacja">
-            <End Role="Faktura" EntitySet="Fakturas" />
-            <End Role="Operacja" EntitySet="Operacjas" />
+            <End Role="Faktura" EntitySet="Faktura" />
+            <End Role="Operacja" EntitySet="Operacja" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -726,7 +726,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
-            <EntityTypeMapping TypeName="aptekaModel.AspNetRole">
+            <EntityTypeMapping TypeName="aptekaModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -734,7 +734,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
-            <EntityTypeMapping TypeName="aptekaModel.AspNetUserClaim">
+            <EntityTypeMapping TypeName="aptekaModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -744,7 +744,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
-            <EntityTypeMapping TypeName="aptekaModel.AspNetUserLogin">
+            <EntityTypeMapping TypeName="aptekaModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
                 <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
                 <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
@@ -753,7 +753,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
-            <EntityTypeMapping TypeName="aptekaModel.AspNetUser">
+            <EntityTypeMapping TypeName="aptekaModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -770,27 +770,25 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Fakturas">
+          <EntitySetMapping Name="Faktura">
             <EntityTypeMapping TypeName="aptekaModel.Faktura">
               <MappingFragment StoreEntitySet="Faktura">
                 <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
                 <ScalarProperty Name="Id_hurtownia" ColumnName="Id_hurtownia" />
                 <ScalarProperty Name="Numer" ColumnName="Numer" />
-                <ScalarProperty Name="Netto" ColumnName="Netto" />
-                <ScalarProperty Name="Brutto" ColumnName="Brutto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Hurtownias">
+          <EntitySetMapping Name="Hurtownia">
             <EntityTypeMapping TypeName="aptekaModel.Hurtownia">
               <MappingFragment StoreEntitySet="Hurtownia">
-                <ScalarProperty Name="ID_hurtownia" ColumnName="ID_hurtownia" />
+                <ScalarProperty Name="Id_hurtownia" ColumnName="Id_hurtownia" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
                 <ScalarProperty Name="NIP" ColumnName="NIP" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Leks">
+          <EntitySetMapping Name="Lek">
             <EntityTypeMapping TypeName="aptekaModel.Lek">
               <MappingFragment StoreEntitySet="Lek">
                 <ScalarProperty Name="Id_lek" ColumnName="Id_lek" />
@@ -801,20 +799,22 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Operacjas">
+          <EntitySetMapping Name="Operacja">
             <EntityTypeMapping TypeName="aptekaModel.Operacja">
               <MappingFragment StoreEntitySet="Operacja">
-                <ScalarProperty Name="ID_operacja" ColumnName="ID_operacja" />
-                <ScalarProperty Name="ID_lek" ColumnName="ID_lek" />
+                <ScalarProperty Name="Id_operacja" ColumnName="Id_operacja" />
+                <ScalarProperty Name="Id_lek" ColumnName="Id_lek" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="ID_user" ColumnName="ID_user" />
+                <ScalarProperty Name="Id_user" ColumnName="Id_user" />
                 <ScalarProperty Name="Przychod" ColumnName="Przychod" />
                 <ScalarProperty Name="Rozchod" ColumnName="Rozchod" />
+                <ScalarProperty Name="Netto" ColumnName="Netto" />
+                <ScalarProperty Name="Brutto" ColumnName="Brutto" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="aptekaModel.sysdiagram">
+            <EntityTypeMapping TypeName="aptekaModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -827,7 +827,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           <EntitySetMapping Name="Sprawdz_faktury">
             <EntityTypeMapping TypeName="aptekaModel.Sprawdz_faktury">
               <MappingFragment StoreEntitySet="Sprawdz_faktury">
-                <ScalarProperty Name="ID_faktura" ColumnName="ID_faktura" />
+                <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Numer" ColumnName="Numer" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
@@ -840,19 +840,19 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
             <EntityTypeMapping TypeName="aptekaModel.Sprawdz_zawartosc_faktury">
               <MappingFragment StoreEntitySet="Sprawdz_zawartosc_faktury">
                 <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
-                <ScalarProperty Name="id_lek" ColumnName="id_lek" />
+                <ScalarProperty Name="Id_lek" ColumnName="Id_lek" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
                 <ScalarProperty Name="Dawka" ColumnName="Dawka" />
                 <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
                 <ScalarProperty Name="Postac" ColumnName="Postac" />
-                <ScalarProperty Name="Ilość_zakupionego_leku" ColumnName="Ilość zakupionego leku" />
+                <ScalarProperty Name="Ilosc_zakupionego_leku" ColumnName="Ilosc_zakupionego_leku" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Stan_magazynu">
             <EntityTypeMapping TypeName="aptekaModel.Stan_magazynu">
               <MappingFragment StoreEntitySet="Stan_magazynu">
-                <ScalarProperty Name="ID_lek" ColumnName="ID_lek" />
+                <ScalarProperty Name="Id_lek" ColumnName="Id_lek" />
                 <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
                 <ScalarProperty Name="Dawka" ColumnName="Dawka" />
                 <ScalarProperty Name="Postac" ColumnName="Postac" />
@@ -871,10 +871,10 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
           </AssociationSetMapping>
           <AssociationSetMapping Name="Faktura_operacja" TypeName="aptekaModel.Faktura_operacja" StoreEntitySet="Faktura_operacja">
             <EndProperty Name="Faktura">
-              <ScalarProperty Name="Id_faktura" ColumnName="ID_faktura" />
+              <ScalarProperty Name="Id_faktura" ColumnName="Id_faktura" />
             </EndProperty>
             <EndProperty Name="Operacja">
-              <ScalarProperty Name="ID_operacja" ColumnName="ID_operacja" />
+              <ScalarProperty Name="Id_operacja" ColumnName="Id_operacja" />
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="aptekaModel.Store.sp_alterdiagram" />
@@ -915,7 +915,7 @@ warning 6002: The table/view 'apteka.dbo.Stan_magazynu' does not have a primary 
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

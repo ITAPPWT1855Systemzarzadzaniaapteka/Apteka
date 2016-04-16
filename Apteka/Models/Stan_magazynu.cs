@@ -14,7 +14,7 @@ namespace Apteka.Models
     
     public partial class Stan_magazynu
     {
-        public int ID_lek { get; set; }
+        public int Id_lek { get; set; }
         public string Nazwa { get; set; }
         public string Dawka { get; set; }
         public string Postac { get; set; }

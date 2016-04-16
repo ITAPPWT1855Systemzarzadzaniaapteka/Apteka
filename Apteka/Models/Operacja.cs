@@ -16,18 +16,20 @@ namespace Apteka.Models
     {
         public Operacja()
         {
-            this.Fakturas = new HashSet<Faktura>();
+            this.Faktura = new HashSet<Faktura>();
         }
     
-        public int ID_operacja { get; set; }
-        public int ID_lek { get; set; }
-        public string Data { get; set; }
-        public string ID_user { get; set; }
+        public int Id_operacja { get; set; }
+        public int Id_lek { get; set; }
+        public Nullable<System.DateTime> Data { get; set; }
+        public string Id_user { get; set; }
         public Nullable<int> Przychod { get; set; }
         public Nullable<int> Rozchod { get; set; }
+        public Nullable<double> Netto { get; set; }
+        public Nullable<double> Brutto { get; set; }
     
-        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         public virtual Lek Lek { get; set; }
-        public virtual ICollection<Faktura> Fakturas { get; set; }
+        public virtual ICollection<Faktura> Faktura { get; set; }
     }
 }

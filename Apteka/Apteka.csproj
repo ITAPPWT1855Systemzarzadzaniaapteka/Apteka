@@ -236,6 +236,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FakturasController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -278,19 +279,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AptekaModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetRole.cs">
+    <Compile Include="Models\AptekaModel.Views.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUser.cs">
+    <Compile Include="Models\AspNetUserClaims.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUserClaim.cs">
+    <Compile Include="Models\AspNetUserLogins.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AspNetUserLogin.cs">
+    <Compile Include="Models\AspNetUsers.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\InvoiceViewModels.cs" />
     <Compile Include="Models\C__MigrationHistory.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
@@ -300,6 +301,7 @@
     <Compile Include="Models\Hurtownia.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InvoiceViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Lek.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
@@ -308,6 +310,7 @@
     <Compile Include="Models\Operacja.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OperationController.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Sprawdz_faktury.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
@@ -324,7 +327,7 @@
     <Compile Include="Models\Stan_magazynu.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UsersViewModel.cs" />
@@ -359,6 +362,7 @@
     <Content Include="js\HomeController.js" />
     <Content Include="js\InvoiceController.js" />
     <Content Include="js\MedicineController.js" />
+    <Content Include="js\OperationController.js" />
     <Content Include="js\StoreController.js" />
     <Content Include="Models\AptekaDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -385,6 +389,8 @@
     <Content Include="Content\fonts\FontAwesome.otf" />
     <Content Include="Content\mixins.less" />
     <Content Include="Content\variables.less" />
+    <Content Include="App_Data\sell\sell.json" />
+    <Content Include="App_Data\sell\sell.csv" />
     <EntityDeploy Include="Models\AptekaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AptekaModel.Designer.cs</LastGenOutput>
@@ -402,8 +408,6 @@
       <DependentUpon>AptekaModel.edmx</DependentUpon>
       <LastGenOutput>AptekaModel.cs</LastGenOutput>
     </Content>
-    <Content Include="App_Data\sell\sell.json" />
-    <Content Include="App_Data\sell\sell.csv" />
     <None Include="Properties\PublishProfiles\apteka.pubxml" />
     <Content Include="Scripts\jquery-latest.js" />
     <Content Include="Scripts\jquery.metadata.js" />
@@ -473,6 +477,19 @@
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Medicine\Sell.cshtml" />
     <Content Include="Views\Medicine\Summary.cshtml" />
+    <Content Include="Views\Operation\Create.cshtml" />
+    <Content Include="Views\Operation\Delete.cshtml" />
+    <Content Include="Views\Operation\Details.cshtml" />
+    <Content Include="Views\Operation\Edit.cshtml" />
+    <Content Include="Views\Operation\Index.cshtml" />
+    <Content Include="Views\Medicine\SaveAlert.cshtml" />
+    <Content Include="Views\Medicine\SaveAlerts.cshtml" />
+    <Content Include="Views\Invoice\CreateFacture.cshtml" />
+    <Content Include="Views\Fakturas\Create.cshtml" />
+    <Content Include="Views\Fakturas\Delete.cshtml" />
+    <Content Include="Views\Fakturas\Details.cshtml" />
+    <Content Include="Views\Fakturas\Edit.cshtml" />
+    <Content Include="Views\Fakturas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />
