@@ -20,12 +20,12 @@ namespace Apteka {
 
             #region login
             bundles.Add(new ScriptBundle("~/bundles/login/js").Include(
-                        "~/Scripts/lib/jquery/jquery.min.js",
-                        "~/Scripts/lib/bootstrap.min.js"
+                        "~/Scripts/lib/jquery/jquery.js",
+                        "~/Scripts/lib/bootstrap.js"
             ));
 
             bundles.Add(new StyleBundle("~/bundles/login/css").Include(
-                      "~/Content/lib/bootstrap.min.css"
+                      "~/Content/lib/bootstrap.css"
             ));
 
             bundles.Add(new LessBundle("~/bundles/login/less").Include(
