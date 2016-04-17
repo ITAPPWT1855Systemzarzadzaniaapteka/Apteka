@@ -12,19 +12,35 @@ namespace Apteka.Controllers
 {
     public class GenerateXLSXFile
     {
-        public byte[] Generate(List<Dictionary<string, string>> list)
+        public byte[] Generate(List<Dictionary<string, string>> list, string[] highlightColums = null, string horizontalSeparator = null)
         {
             //takes as input list of dictionaries and return as excel table ready to download, as byte array
             XLWorkbook workbook = new XLWorkbook();
             var worksheet = workbook.Worksheets.Add("Raport-" + DateTime.Now.Date.ToString("dd-MM-yyyy"));
 
-            if (list.Count > 1)
+            var highlighColumsIndexes = new List<int>();
+            int separatorColumnIndex = -1;
+            if (list.Count > 0)
             {
                 //Header
                 int c = 1;
                 foreach (var element in list[0])
                 {
                     worksheet.Cell(2, c).SetValue(element.Key);
+                    if (highlightColums != null)
+                    {
+                        if (Array.IndexOf(highlightColums, element.Key) != -1)
+                        {
+                            highlighColumsIndexes.Add(c);
+                        }
+                    }
+                    if (horizontalSeparator != null)
+                    {
+                        if (horizontalSeparator == element.Key)
+                        {
+                            separatorColumnIndex = c;
+                        }
+                    }
                     c++;
                 }
 
@@ -42,7 +58,9 @@ namespace Apteka.Controllers
                     r++;
                 }
 
-                styling(worksheet, list[0].Count, list.Count);
+                styling(worksheet, list[0].Count, list.Count, highlighColumsIndexes);
+                if (separatorColumnIndex > 0)
+                    addSeparators(worksheet, list[0].Count, list.Count, separatorColumnIndex);
 
                 //Pre
                 worksheet.Cell(1, 1).SetValue("Raport wygenerowany " + DateTime.Now.ToString());
@@ -58,8 +76,23 @@ namespace Apteka.Controllers
                 return memoryStream.ToArray();
             }
         }
+        private void addSeparators(IXLWorksheet ws, int width, int heigth, int separatorIndex)
+        {
+            string lastValue = "";
+            string currentValue = "";
+            for (int r = 3; r < heigth + 3; r++)
+            {
+                currentValue = ws.Cell(r, separatorIndex).Value.ToString();
+                if (lastValue != currentValue)
+                {
+                    ws.Range(r, 1, r, width).Style.Border.TopBorder = XLBorderStyleValues.Medium;
+                    ws.Range(r, 1, r, width).Style.Border.TopBorderColor = XLColor.DarkBlue;
+                }
+                lastValue = currentValue;
+            }
+        }
 
-        private void styling(IXLWorksheet ws, int width, int heigth)
+        private void styling(IXLWorksheet ws, int width, int heigth, List<int> columns)
         {
             ws.Style.Fill.BackgroundColor = OutsideBackgroundColor;
             ws.Range(1, 1, 1, width).Style.Fill.BackgroundColor = XLColor.White;
@@ -80,11 +113,21 @@ namespace Apteka.Controllers
                 else
                     ws.Range(rFirst + 1, i, heigth + rFirst, i).Style.Fill.BackgroundColor = TableBackgroundColor2;
             }
+
+            foreach (int c in columns)
+            {
+                ws.Range(rFirst + 1, c, heigth + rFirst, c).Style.Fill.BackgroundColor = TableHighlightColor;
+                ws.Range(rFirst + 1, c, heigth + rFirst, c).Style.Font.Bold = true;
+            }
+
             RangeData.Style.Border.InsideBorder = XLBorderStyleValues.Thin;
             RangeData.Style.Border.InsideBorderColor = TableBorderColor;
 
             ws.Columns(1, width).AdjustToContents();
             RangeTable.CreateTable();
+
+
+
         }
 
         public XLColor OutsideBackgroundColor { get; set; } = XLColor.FromHtml("#cccccc");
@@ -94,19 +137,22 @@ namespace Apteka.Controllers
         public XLColor TableBackgroundColorFirstCol { get; set; } = XLColor.FromHtml("#BFCCB3");
         public XLColor TableBackgroundColor1 { get; set; } = XLColor.FromHtml("#FAFeFF");
         public XLColor TableBackgroundColor2 { get; set; } = XLColor.FromHtml("#FFf7E3");
+        public XLColor TableHighlightColor { get; set; } = XLColor.FromHtml("#aFE3c7");
         public XLColor TableBorderColor { get; set; } = XLColor.FromHtml("#aDc1d2");
     }
 
+    [Authorize]
     public class ReportController : Controller
     {
         // GET: Report
         public ActionResult Index()
         {
-            List<Faktura> lista;
 
             return View();
         }
 
+
+        //Raport stan magazynu
         public ActionResult Store()
         {
             var data = new List<Stan_magazynu>();
@@ -120,7 +166,7 @@ namespace Apteka.Controllers
             foreach (Stan_magazynu sm in data)
             {
                 var d = new Dictionary<string, string>();
-                d["ID_lek"] = sm.ID_lek.ToString();
+                d["Id_lek"] = sm.Id_lek.ToString();
                 d["Nazwa"] = sm.Nazwa;
                 d["Opakowanie"] = sm.Opakowanie.ToString();
                 d["Dawka"] = sm.Dawka;
@@ -130,31 +176,7 @@ namespace Apteka.Controllers
             }
             var generator = new GenerateXLSXFile();
 
-            return File(generator.Generate(dataDict), "application/xlsx", "Raport-Stan-Magazynu_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
-        }
-
-        public ActionResult CheckInvoices()
-        {
-            var data = new List<Sprawdz_faktury>();
-
-            aptekaEntities1 context = new aptekaEntities1();
-                
-            var output = from p in context.Sprawdz_faktury select p;
-            data = output.ToList();
-              
-            var dataDict = new List<Dictionary<string, string>>();
-            foreach (Sprawdz_faktury inv in data)
-            {
-                var d = new Dictionary<string, string>();
-                d["ID_Faktura"] = inv.ID_faktura.ToString();
-                d["ID_Lek"] = inv.Netto.ToString();
-                d["Nazwa leku"] = inv.Nazwa;
-                
-                dataDict.Add(d);
-            }
-            var generator = new GenerateXLSXFile();
-
-            return File(generator.Generate(dataDict), "application/xlsx", "Raport-Faktury_" + DateTime.Now.Date.ToString("dd - MM - yyyy") + ".xlsx");
+            return File(generator.Generate(dataDict, new[] { "Obecny stan magazynu" }), "application/xlsx", "Raport-Stan-Magazynu_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
         }
 
         public ActionResult Medicine()
@@ -168,7 +190,7 @@ namespace Apteka.Controllers
             foreach (Lek l in data)
             {
                 var d = new Dictionary<string, string>();
-                d["ID_lek"] = l.Id_lek.ToString();
+                d["Id_lek"] = l.Id_lek.ToString();
                 d["Nazwa"] = l.Nazwa;
                 d["Opakowanie"] = l.Opakowanie.ToString();
                 d["Dawka"] = l.Dawka;
@@ -184,7 +206,6 @@ namespace Apteka.Controllers
         public ActionResult SellHistory(DateTime dateFrom, DateTime dateTo)
         {
             aptekaEntities1 context = new aptekaEntities1();
-
             var data = context.Operacjas.Where(o => o.Rozchod != 0)
             .Join(context.Lek, o => o.ID_lek, l => l.Id_lek, (o, l) => new {
                 Data = o.Data,
@@ -193,22 +214,55 @@ namespace Apteka.Controllers
                 Dawka = l.Dawka,
                 Opakowanie = l.Opakowanie,
                 Rozchod = o.Rozchod,
-                Przychod = o.Przychod,
-
+                Netto = o.Netto,
+                Brutto = o.Brutto
             }).ToList()
-            .Where(o => (DateTime.ParseExact(o.Data, "dd.MM.yyyy", CultureInfo.InvariantCulture) > dateFrom) && (DateTime.ParseExact(o.Data, "dd.MM.yyyy", CultureInfo.InvariantCulture) < dateTo));
+            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data)
             {
                 var d = new Dictionary<string, string>();
-                d["Data"] = sell.Data.ToString();
+                d["Data"] = sell.Data.Value.ToString("dd.MM.yyyy");
                 d["Nazwa"] = sell.Nazwa;
                 d["Postać"] = sell.Postac;
                 d["Dawka"] = sell.Dawka;
                 d["Opakowanie"] = sell.Opakowanie.ToString();
                 d["Sprzedanych"] = sell.Rozchod.ToString();
-                d["aa"] = sell.Przychod.ToString();
+                d["Cena netto"] = sell.Netto.ToString();
+                d["Cena brutto"] = sell.Brutto.ToString();
+                dataDict.Add(d);
+            }
+            var generator = new GenerateXLSXFile();
+
+            return File(generator.Generate(dataDict, new[] { "Sprzedanych", "Cena netto", "Cena brutto" }, "Data"), "application/xlsx", "Raport-Sprzedaz-Lekow_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
+        }
+
+      //Raport sprzedazy
+        public ActionResult SellSummary(string dateFrom, string dateTo)
+        {
+            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            aptekaEntities1 context = new aptekaEntities1();
+
+            var data = context.Operacja.Where(o => o.Rozchod != 0)
+            .GroupBy(o => o.Data)
+            .Select(o => new {
+                Data = o.FirstOrDefault().Data,
+                NettoDzienne = o.Sum(s => s.Netto),
+                BruttoDzienne = o.Sum(s => s.Brutto)
+            })
+            .ToList()
+            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+
+            var dataDict = new List<Dictionary<string, string>>();
+            foreach (var sell in data)
+            {
+                var d = new Dictionary<string, string>();
+                d["Data"] = sell.Data.Value.ToString("dd.MM.yyyy");
+                d["Kwota Netto"] = sell.NettoDzienne.ToString();
+                d["Kwota Brutto"] = sell.BruttoDzienne.ToString();
+
                 dataDict.Add(d);
             }
             var generator = new GenerateXLSXFile();
@@ -216,5 +270,95 @@ namespace Apteka.Controllers
             return File(generator.Generate(dataDict), "application/xlsx", "Raport-Sprzedaz_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
         }
 
+
+        //Raport kupna lekow
+        public ActionResult BuyHistory(string dateFrom, string dateTo)
+        {
+            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            aptekaEntities1 context = new aptekaEntities1();
+
+            var data = context.Operacja.Where(o => o.Przychod != 0)
+            .Join(context.Lek, o => o.Id_lek, l => l.Id_lek, (o, l) => new
+            {
+                Id_operacja = o.Id_operacja,
+                Data = o.Data,
+                Nazwa = l.Nazwa,
+                Postac = l.Postac,
+                Dawka = l.Dawka,
+                Opakowanie = l.Opakowanie,
+                Przychod = o.Przychod,
+                Netto = o.Netto,
+                Brutto = o.Brutto,
+                Faktura = o.Faktura
+            })
+            .ToList()
+            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+
+            var dataDict = new List<Dictionary<string, string>>();
+            foreach (var buy in data)
+            {
+                var d = new Dictionary<string, string>();
+                d["Data"] = buy.Data.Value.ToString("dd.MM.yyyy");
+                d["Nr faktury"] = buy.Faktura.ToArray()[0].Numer;
+                d["Hurtownia"] = buy.Faktura.ToArray()[0].Hurtownia.Nazwa;
+                d["NIP"] = buy.Faktura.ToArray()[0].Hurtownia.NIP.ToString();
+                d["Nazwa"] = buy.Nazwa;
+                d["Postać"] = buy.Postac;
+                d["Dawka"] = buy.Dawka;
+                d["Opakowanie"] = buy.Opakowanie.ToString();
+                d["Kupionych"] = buy.Przychod.ToString();
+                d["Cena netto"] = buy.Netto.ToString();
+                d["Cena brutto"] = buy.Brutto.ToString();
+                dataDict.Add(d);
+            }
+            var generator = new GenerateXLSXFile();
+
+            return File(generator.Generate(dataDict, new[] { "Kupionych", "Cena netto", "Cena brutto" }, "Nr faktury"), "application/xlsx", "Raport-Kupno-lekow_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
+        }
+
+        //Raport kupna
+        public ActionResult BuySummary(string dateFrom, string dateTo)
+        {
+            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            aptekaEntities1 context = new aptekaEntities1();
+
+            var data = context.Operacja.Where(o => o.Przychod != 0)
+            .Select(
+            o => new
+            {
+                Data = o.Data,
+                Id_faktura = o.Faktura.FirstOrDefault().Id_faktura,
+                Hurtownia=o.Faktura.FirstOrDefault().Hurtownia,
+                Netto=o.Netto,
+                Brutto=o.Brutto
+            })
+            .GroupBy(o => o.Id_faktura)
+            .Select(o => new {
+                Data = o.FirstOrDefault().Data,
+                Hurtownia = o.FirstOrDefault().Hurtownia.Nazwa,
+                NettoDzienne = o.Sum(s => s.Netto),
+                BruttoDzienne = o.Sum(s => s.Brutto)
+            })
+            .ToList()
+            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+
+            var dataDict = new List<Dictionary<string, string>>();
+            foreach (var sell in data)
+            {
+                var d = new Dictionary<string, string>();
+                d["Data"] = sell.Data.Value.ToString("dd.MM.yyyy");
+                d["Hurtownia"] = sell.Hurtownia;
+                d["Kwota Netto"] = sell.NettoDzienne.ToString();
+                d["Kwota Brutto"] = sell.BruttoDzienne.ToString();
+                dataDict.Add(d);
+            }
+            var generator = new GenerateXLSXFile();
+
+            return File(generator.Generate(dataDict,horizontalSeparator:"Data"), "application/xlsx", "Raport-Kupno_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
+        }
+
+        
     }
 }

@@ -45,13 +45,15 @@ namespace Apteka.Controllers
             return View();
         }
         // GET: Medicines
+               [HttpGet]
         public JsonResult GetMedicines(string text)
         {
             var medicines = db.Lek.Where(m => m.Nazwa.Contains(text)).Take(10).ToList();
             return new JsonResult
             {
                 Data = medicines.Select(m => m),
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+           
             };
         }
 
@@ -69,13 +71,13 @@ namespace Apteka.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SerializeSell([Bind(Include = "ID_lek, Rozchod")] Operacja operacja)
+        public ActionResult SerializeSell([Bind(Include = "Id_lek, Rozchod, Brutto, Netto")] Operacja operacja)
         {
             //      operacja.Data = DateTime.Now.ToString();
             //    operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
 
             var dataFile = Server.MapPath("~/App_Data/sell/sell.csv");
-            string details = operacja.ID_lek + "," + operacja.Rozchod;
+            string details = operacja.Id_lek + "," + operacja.Rozchod + "," + operacja.Brutto + "," + operacja.Netto;
             System.IO.File.AppendAllText(dataFile, details);
             return RedirectToAction("Sell", operacja);
         }
@@ -85,21 +87,25 @@ namespace Apteka.Controllers
                    .Select(x => x.Split(','))
                    .Select(x => new Operacja
                    {
-                       ID_lek = Int32.Parse(x[0]),
+                       Id_lek = Int32.Parse(x[0]),
                        Rozchod = Int32.Parse(x[1]),
+                       Brutto = Int32.Parse(x[2]),
+                       Netto = Int32.Parse(x[3])
                    }).ToList();
 
            return (from op in operations
-                          group op by op.ID_lek
+                          group op by op.Id_lek
                               into newOp
                               select new Operacja
                               {
-                                  ID_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
-                                  ID_lek = newOp.First().ID_lek,
+                                  Id_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
+                                  Id_lek = newOp.First().Id_lek,
                                   Rozchod = newOp.Sum(o => o.Rozchod),
-                                  Data =  DateTime.Now.ToString(),
+                                  Data =  DateTime.Now,
+                                  Netto = newOp.Sum(o => o.Netto),
+                                  Brutto = newOp.Sum(o => o.Brutto),
                                   Przychod = 0,
-                                  ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
+                                  Id_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
                               }).ToList();
         }
         public ActionResult Summary()
@@ -109,25 +115,27 @@ namespace Apteka.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveSell([Bind(Include = "ID_lek, Rozchod")] Operacja operacja)
+        public ActionResult SaveSell([Bind(Include = "Id_lek, Rozchod")] Operacja operacja)
         {
             var grouped = readFromCsv();
             foreach (var op in grouped)
             {
                 try
                 {
-                    db.Operacjas.Add(op);
+                    db.Operacja.Add(op);
                     db.SaveChanges();
                 }
                 catch (DbEntityValidationException e)
                 {
                     throw e;
-                }
-              
-                
+                }              
             }
-                            return RedirectToAction("Index");
+            return RedirectToAction("SaveAlert", "Medicine", grouped);
      
+        }
+        public PartialViewResult SaveAlert(List<Operacja> operation)
+        {
+            return PartialView("~/Views/Operation/SaveAlert.cshtml", operation);
         }
         // POST: Medicine/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

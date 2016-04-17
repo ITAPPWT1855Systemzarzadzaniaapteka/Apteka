@@ -12,14 +12,14 @@ namespace Apteka.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUser
+    public partial class AspNetUsers
     {
-        public AspNetUser()
+        public AspNetUsers()
         {
-            this.AspNetUserClaims = new HashSet<AspNetUserClaim>();
-            this.AspNetUserLogins = new HashSet<AspNetUserLogin>();
-            this.Operacjas = new HashSet<Operacja>();
-            this.AspNetRoles = new HashSet<AspNetRole>();
+            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.Operacja = new HashSet<Operacja>();
+            this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
         public string Id { get; set; }
@@ -35,9 +35,9 @@ namespace Apteka.Models
         public int AccessFailedCount { get; set; }
         public string UserName { get; set; }
     
-        public virtual ICollection<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual ICollection<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual ICollection<Operacja> Operacjas { get; set; }
-        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual ICollection<Operacja> Operacja { get; set; }
+        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }
 }

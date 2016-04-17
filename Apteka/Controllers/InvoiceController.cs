@@ -20,33 +20,44 @@ namespace Apteka.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.Id_hurtownia = new SelectList(context.Hurtownia, "Id_hurtownia", "Nazwa");
+            ViewBag.Id_lek = new SelectList(context.Lek, "Id_lek", "Nazwa");
             return View();
         }
+        //[HttpGet]
+        //public ActionResult CreateFacture()
+        //{
+        //    return View();
+        //}
+        
+     //   public ActionResult Create([Bind(Include = "Date,Id_hurtownia, InvoiceId")] CreateInvoiceModel model)
         [HttpPost]
-        public ActionResult Create(CreateInvoiceModel model) {
-            System.Diagnostics.Debug.WriteLine(model.Date.ToString() + " " + model.Products[0].Name);
-            return RedirectToAction("Index");
+        public ActionResult Create(CreateInvoiceModel model)
+   //     public ActionResult Create(int InvoiceId, List<Operacja> operations)       
+       {
+      //      System.Diagnostics.Debug.WriteLine(model.Date.ToString() + " " );
+            return View();
         }
         [HttpGet]
         public JsonResult GetWarehouses()
         {
-            var warehouses = context.Hurtownias.ToList();
+            var warehouses = context.Hurtownia.ToList();
             return new JsonResult
             {
                 Data = warehouses.Select(warehouse => warehouse),
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        [HttpPost]
-        public ActionResult Create(Faktura faktura)
-        {
-            context.Fakturas.Add(faktura);
-            context.SaveChanges();
-           // var data = jsonFacture.Data;
-           // Faktura facture = new Faktura() { Numer = jsonFacture.nr, Hurtownia = jsonFacture.warehouseNr };
+        //[HttpPost]
+        //public ActionResult Create(Faktura faktura)
+        //{
+        //    context.Faktura.Add(faktura);
+        //    context.SaveChanges();
+        //    var data = jsonFacture.Data;
+        //    Faktura facture = new Faktura() { Numer = jsonFacture.nr, Hurtownia = jsonFacture.warehouseNr };
 
-            return RedirectToAction("Index", "Home");
-        }
+        //    return RedirectToAction("Index", "Home");
+        //}
 
     }
 }

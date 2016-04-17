@@ -16,7 +16,7 @@ namespace Apteka.Models
     {
         public Lek()
         {
-            this.Operacjas = new HashSet<Operacja>();
+            this.Operacja = new HashSet<Operacja>();
         }
     
         public int Id_lek { get; set; }
@@ -25,6 +25,6 @@ namespace Apteka.Models
         public Nullable<int> Opakowanie { get; set; }
         public string Dawka { get; set; }
     
-        public virtual ICollection<Operacja> Operacjas { get; set; }
+        public virtual ICollection<Operacja> Operacja { get; set; }
     }
 }

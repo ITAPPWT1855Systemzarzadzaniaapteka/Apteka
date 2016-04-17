@@ -28,15 +28,15 @@ namespace Apteka.Models
         }
     
         public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
-        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
-        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
-        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
-        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        //public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        //public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        //public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        //public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Faktura> Fakturas { get; set; }
         public virtual DbSet<Hurtownia> Hurtownias { get; set; }
         public virtual DbSet<Lek> Lek { get; set; }
         public virtual DbSet<Operacja> Operacjas { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        //public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Sprawdz_faktury> Sprawdz_faktury { get; set; }
         public virtual DbSet<Sprawdz_zawartosc_faktury> Sprawdz_zawartosc_faktury { get; set; }
         public virtual DbSet<Stan_magazynu> Stan_magazynu { get; set; }

@@ -115,7 +115,7 @@
                             <a href="#"><i class="fa fa-database"></i> Magazyn<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="@Url.Action("Store", "Index")">Sprawdź stan magazynu</a>
+                                    <a href="@Url.Action("Index", "Store")">Sprawdź stan magazynu</a>
                                 </li>
                             </ul>
                         </li>
@@ -134,8 +134,19 @@
                                 <li>
                                     <a href="@Url.Action("Create", "Medicine")">Nowy lek</a>
                                 </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-calculator"></i> Operacje</a>
+                            <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="@Url.Action("Delete", "Medicine")">Usuń lek</a>
+                                    <a href="@Url.Action("Sell", "Operation")">Ostatnie operacje</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Operation")">Baza operacje</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Create", "Operation")">Nowe operacje</a>
                                 </li>
                             </ul>
                         </li>
