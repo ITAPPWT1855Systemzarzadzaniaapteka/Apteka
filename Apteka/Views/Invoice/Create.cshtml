@@ -39,8 +39,7 @@
     <div class="row inputs">
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            @Html.TextBoxFor(model => model.Date, new { @Value = DateTime.Now, id = "datepicker" })
-            @*<input type="date" class="form-control datepicker" name="date">*@
+            <input type="date" class="form-control datepicker" name="model.Date">
         </div>
     </div>
     <div class="row">
@@ -53,19 +52,11 @@
         <div class="col-md-1"></div>
         <div class="col-md-3">
             <input type="hidden" name="model.warehouseId" id="warehouse-id" />
-            @*@Html.DropDownListFor(model => model.WarehouseId, (IEnumerable<SelectListItem>)ViewBag.Id_hurtownia, null, htmlAttributes: new { @class = "form-control" })*@
-            @*<select>
-                @foreach (var item in @ViewBag.Id_hurtownia)
-                {
-                    <option value="@item.Id_hurtownia">@item.Nazwa</option>
-                }
-            </select>*@
             <input type="text" id="warehouse" class="form-control" />
             <div class="text-danger"></div>
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-3">
-            @*@Html.EditorFor(model => model.InvoiceId, new { htmlAttributes = new { @class = "form-control" } })*@
             <input id="invoiceId" name="model.InvoiceId" type="text" class="form-control" />
         </div>
     </div>
@@ -81,28 +72,6 @@
                 <th class="col-xs-1"> Vat </th>
                 <th class="col-xs-1"> Wartość Brutto </th>
             </tr>
-            @*@foreach (var item in Model.Operacja)
-            {
-                <tr>
-                    <td>
-                        @Html.DropDownList("Id_lek", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.DropDownListFor(modelItem => item.Lek, "Id_lek", null, htmlAttributes: new { @class = "form-control" })
-                    </td>
-                    <td>
-                       Html.EditorFor(modelItem => item.Przychod)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.Rozchod)
-                    </td>
-                    <td>
-                        @Html.EditorFor(modelItem => item.Netto)
-                    </td>
-                    <td>
-                        @Html.EditorFor(modelItem => item.Brutto)
-                    </td>
-
-                </tr>
-            }*@
         </table>
         <div class="col-md-1 btn btn-success pull-right" id="add-row-button"><span class="glyphicon glyphicon-plus"></span></div>
     </div>
@@ -112,19 +81,6 @@
         <div class="col-md-1"></div>
         <label for="brutto" class="col-md-2">Kwota brutto:</label>
     </div>
-    @*<div class="row inputs">
-        <div class="col-md-7"></div>
-        <div class="col-md-2">
-            <input id="netto" type="number" step="0.01" value="0"  name="model.Operacja[0].Netto" class="form-control" />
-            <div class="text-danger"></div>
-        </div>
-        <div class="col-md-1"></div>
-        <div class="col-md-2">
-            @Html.EditorFor(model => model.Operacja[0].Brutto, new { htmlAttributes = new { @class = "form-control" } })
-          
-        </div>
-    </div>*@
-      @*<input id="brutto" type="number" value="0" ng-model="facture.Brutto" class="form-control" disabled />*@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-6">
             <input type="submit" value="Dodaj" class="btn btn-success">

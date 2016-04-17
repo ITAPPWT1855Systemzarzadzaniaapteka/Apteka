@@ -44,11 +44,34 @@ var sampleSellerData = [
 function parseWarehouses(arr) {
     return _.map(arr, function (warehouse) {
         return {
-            value: warehouse.name + " " + warehouse.NIP,
-            data: warehouse.id
+            label: warehouse.label,
+            value: warehouse.value
         };
     })
 };
+
+function getWarehouses() {
+    var wareh = [];
+    $.get({
+        url: "/Invoice/GetWarehouses",
+        dataType: "application/json; charset=utf-8",
+        async: false,
+    }).done(function (data) {
+        
+        console.log("GetWarehouses Loaded: ", data);
+        wareh = data.result;
+    });
+    warehouses = []
+    wareh.forEach(function (elem) {
+        warehouses.push({
+            label: elem.label,
+            value: elem.value
+        })
+    })
+   
+    console.log(warehouses)
+    return warehouses
+}
 
 function getMedicines() {
     var medicines = [];
@@ -75,14 +98,58 @@ function parseMedicines(arr) {
 $(function () {
     //sampleMedicinesData = searchMedicines();
     addRow();
-//    $(".datepicker").val(new Date().toDateInputValue());
-   
     $("#warehouse").autocomplete({
-        lookup: parseWarehouses(sampleWarehousesData),
-        onSelect: function (suggestion) {
-            $("#warehouse-id").val(suggestion.data);
+
+        source: function (request, response) {
+                $.ajax({
+                    url: "/Invoice/GetWarehouses",
+                    dataType: "json",
+
+                    success: function (data) {
+                        response(data);
+                        log(data)
+                    }
+                });
+            },
+        select: function( event, ui ) {
+            log( ui.item ?
+                 "Selected: " + ui.item.value +" aka " + ui.item.id :
+                 "Nothing selected, input was " + this.value );
         }
-    })
+    });
+//    $(".datepicker").val(new Date().toDateInputValue());
+    //sampleWarehousesData = getWarehouses();
+    //$("#warehouse").autocomplete({
+
+    //    ///////////////////////////////////////
+
+    //    source: function (request, response) {
+    //        $.ajax({
+    //            url: "/Invoice/GetWarehouses",
+    //            dataType: "jsonp",
+         
+    //            success: function (data) {
+    //                response(data);
+    //                log(data)
+    //            }
+    //        });
+    //    },
+    //    //minLength: 3,
+    //    select: function (event, ui) {
+    //        log( ui.item ?
+    //      "Selected: " + ui.item.label :
+    //      "Nothing selected, input was " + this.value);
+        
+    //        $("#warehouse-id").val(ui.item.value);
+    //    },
+
+    //    //lookup: parseWarehouses(sampleWarehousesData),
+    //    //source: parseWarehouses(sampleWarehousesData),
+    //    //select: function (event, ui) {
+    //    //    $("#warehouse-id").val(ui.item.value);
+    //    //}
+    //})
+
     $("#add-row-button").on("click", addRow);
 $("#datepicker").datepicker({ });
 })
@@ -114,9 +181,7 @@ function searchMedicines() {
     return medicines;
 }
 function setMed(rowid, id, name) {
-    console.log('ser med');
     $('.product-row').find('#med-' + rowid).val(id);
-    console.log('found', $('.product-row').find('#med-' + id).val());
     $('#medname-' + rowid).val(name);
     $('.product-row ul').html("");
     $('.alert-danger').html("");
@@ -192,14 +257,8 @@ function addRow() {
                  txt += response[i].Id_lek;
                  txt += '</button>';
              }
-             console.log('rowid', rowId);
              $(newRow).append('<ul>' + txt + '</ul>');
          });
-            //$('#medicine-id').val(id);
-            //$('#medicines').val(name);
-            //$('.med-name ul').html("");
-            //$('.alert-danger').html("");
-     //   }
         })
 };
 
@@ -256,7 +315,6 @@ Apteka.controller('invoice', ["$scope", "$http", function ($scope, $http) {
         $('#product-table tr').each(function () {
             var row = $(this);
             med = {};
-            console.log('nowy row ', row);
             med['name'] = row.find('.med-name').val();
             med['quantity'] = row.find('.quantity').val();
             med['unit'] = row.find('.unit').val();
@@ -264,7 +322,6 @@ Apteka.controller('invoice', ["$scope", "$http", function ($scope, $http) {
             med['netto'] = row.find('.netto').val();
             med['brutto'] = row.find('.brutto').val();
             $scope.facture['meds'].push(med);
-            console.log($scope.facture);
         });
          var mis= $scope.facture.Netto;
         $scope.facture.Netto = 12.0;
