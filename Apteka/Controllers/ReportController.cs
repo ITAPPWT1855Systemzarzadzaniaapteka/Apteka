@@ -203,11 +203,14 @@ namespace Apteka.Controllers
             return File(generator.Generate(dataDict), "application/xlsx", "Raport-Leki_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
         }
 
+        //Raport sprzedazy lekow
         public ActionResult SellHistory(DateTime dateFrom, DateTime dateTo)
         {
             aptekaEntities1 context = new aptekaEntities1();
-            var data = context.Operacjas.Where(o => o.Rozchod != 0)
-            .Join(context.Lek, o => o.ID_lek, l => l.Id_lek, (o, l) => new {
+
+            var data = context.Operacja.Where(o => o.Rozchod != 0)
+            .Join(context.Lek, o => o.Id_lek, l => l.Id_lek, (o, l) => new
+            {
                 Data = o.Data,
                 Nazwa = l.Nazwa,
                 Postac = l.Postac,
@@ -217,7 +220,7 @@ namespace Apteka.Controllers
                 Netto = o.Netto,
                 Brutto = o.Brutto
             }).ToList()
-            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data)
@@ -239,10 +242,8 @@ namespace Apteka.Controllers
         }
 
       //Raport sprzedazy
-        public ActionResult SellSummary(string dateFrom, string dateTo)
+        public ActionResult SellSummary(DateTime dateFrom, DateTime dateTo)
         {
-            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
             aptekaEntities1 context = new aptekaEntities1();
 
             var data = context.Operacja.Where(o => o.Rozchod != 0)
@@ -253,7 +254,7 @@ namespace Apteka.Controllers
                 BruttoDzienne = o.Sum(s => s.Brutto)
             })
             .ToList()
-            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data)
@@ -272,10 +273,8 @@ namespace Apteka.Controllers
 
 
         //Raport kupna lekow
-        public ActionResult BuyHistory(string dateFrom, string dateTo)
+        public ActionResult BuyHistory(DateTime dateFrom, DateTime dateTo)
         {
-            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
             aptekaEntities1 context = new aptekaEntities1();
 
             var data = context.Operacja.Where(o => o.Przychod != 0)
@@ -293,7 +292,7 @@ namespace Apteka.Controllers
                 Faktura = o.Faktura
             })
             .ToList()
-            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var buy in data)
@@ -318,10 +317,8 @@ namespace Apteka.Controllers
         }
 
         //Raport kupna
-        public ActionResult BuySummary(string dateFrom, string dateTo)
+        public ActionResult BuySummary(DateTime dateFrom, DateTime dateTo)
         {
-            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
             aptekaEntities1 context = new aptekaEntities1();
 
             var data = context.Operacja.Where(o => o.Przychod != 0)
@@ -342,7 +339,7 @@ namespace Apteka.Controllers
                 BruttoDzienne = o.Sum(s => s.Brutto)
             })
             .ToList()
-            .Where(o => (o.Data >= _dateFrom) && (o.Data <= _dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data)
