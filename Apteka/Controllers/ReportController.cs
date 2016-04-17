@@ -181,15 +181,12 @@ namespace Apteka.Controllers
             return File(generator.Generate(dataDict), "application/xlsx", "Raport-Leki_" + DateTime.Now.Date.ToString("dd-MM-yyyy") + ".xlsx");
         }
 
-        public ActionResult SellHistory(string dateFrom, string dateTo)
+        public ActionResult SellHistory(DateTime dateFrom, DateTime dateTo)
         {
-            DateTime _dateFrom = DateTime.ParseExact(dateFrom, "dd.MM.yyyy", CultureInfo.InvariantCulture);
-            DateTime _dateTo = DateTime.ParseExact(dateTo, "dd.MM.yyyy", CultureInfo.InvariantCulture);
             aptekaEntities1 context = new aptekaEntities1();
 
             var data = context.Operacjas.Where(o => o.Rozchod != 0)
-            .Join(context.Lek, o => o.ID_lek, l => l.Id_lek, (o, l) => new
-            {
+            .Join(context.Lek, o => o.ID_lek, l => l.Id_lek, (o, l) => new {
                 Data = o.Data,
                 Nazwa = l.Nazwa,
                 Postac = l.Postac,
@@ -199,7 +196,7 @@ namespace Apteka.Controllers
                 Przychod = o.Przychod,
 
             }).ToList()
-            .Where(o => (DateTime.ParseExact(o.Data, "dd.MM.yyyy", CultureInfo.InvariantCulture) > _dateFrom) && (DateTime.ParseExact(o.Data, "dd.MM.yyyy", CultureInfo.InvariantCulture) < _dateTo));
+            .Where(o => (DateTime.ParseExact(o.Data, "dd.MM.yyyy", CultureInfo.InvariantCulture) > dateFrom) && (DateTime.ParseExact(o.Data, "dd.MM.yyyy", CultureInfo.InvariantCulture) < dateTo));
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data)

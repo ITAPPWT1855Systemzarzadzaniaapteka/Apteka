@@ -409,8 +409,6 @@
     <Content Include="Scripts\jquery-latest.js" />
     <Content Include="Scripts\jquery.metadata.js" />
     <Content Include="Scripts\jquery.tablesorter.js" />
-    <Content Include="Scripts\lib\angular-route.js" />
-    <Content Include="Scripts\lib\jquery\angular.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
     <Content Include="Scripts\jquery.autocomplete.js" />
@@ -475,10 +473,10 @@
     <Content Include="Views\Medicine\Summary.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />
-    <Folder Include="Views\Report\" />
     <Folder Include="Views\WeatherHelper\" />
   </ItemGroup>
   <ItemGroup>
