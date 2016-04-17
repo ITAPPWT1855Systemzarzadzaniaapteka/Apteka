@@ -481,12 +481,6 @@
     <Content Include="Views\Operation\Index.cshtml" />
     <Content Include="Views\Medicine\SaveAlert.cshtml" />
     <Content Include="Views\Medicine\SaveAlerts.cshtml" />
-    <Content Include="Views\Invoice\CreateFacture.cshtml" />
-    <Content Include="Views\Fakturas\Create.cshtml" />
-    <Content Include="Views\Fakturas\Delete.cshtml" />
-    <Content Include="Views\Fakturas\Details.cshtml" />
-    <Content Include="Views\Fakturas\Edit.cshtml" />
-    <Content Include="Views\Fakturas\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />

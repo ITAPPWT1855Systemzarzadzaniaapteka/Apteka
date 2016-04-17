@@ -25,14 +25,14 @@
                     <input type="date" class="form-control" name="dateTo" id="dateTo">
                 </div>
             </div><br/>
-                <div class="row">
-                    <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("SellHistory", "Report")">Historia sprzedaży</button>
-                    <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("SellSummary", "Report")">Podsumowanie sprzedaży</button>
-                    <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("BuyHistory", "Report")">Historia kupna</button>
-                    <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("BuySummary", "Report")">Podsumowanie kupna</button>
-                </div>
-                }
+            <div class="row">
+                <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("SellHistory", "Report")">Historia sprzedaży</button>
+                <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("SellSummary", "Report")">Podsumowanie sprzedaży</button>
+                <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("BuyHistory", "Report")">Historia kupna</button>
+                <button action="submit" class="btn btn-default SaleButton" _href="@Url.Action("BuySummary", "Report")">Podsumowanie kupna</button>
             </div>
+        }
+    </div>
 
     <script>
         Date.prototype.toDateInputValue = (function () {
@@ -52,3 +52,4 @@
             });
         })
     </script>
+</div>
