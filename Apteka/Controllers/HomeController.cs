@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Apteka.Helpers;
+using Newtonsoft.Json;
+using Apteka.Models;
 
 namespace Apteka.Controllers 
 {
@@ -10,6 +13,8 @@ namespace Apteka.Controllers
     [Authorize]
     public class HomeController : Controller
     {
+        private WeatherHelper weatherHelper = new WeatherHelper();
+
         public ActionResult Index()
         {
             return View();
@@ -27,6 +32,12 @@ namespace Apteka.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Weather() 
+        {
+            CityWeather JsonObject = weatherHelper.CityWeather;
+            return View(JsonObject);
         }
     }
 }

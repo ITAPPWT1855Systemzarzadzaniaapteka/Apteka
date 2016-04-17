@@ -1,0 +1,77 @@
+﻿@model Apteka.Models.CityWeather
+@{
+    ViewBag.Title = "View";
+    string json = Newtonsoft.Json.JsonConvert.SerializeObject(Model.list);
+}
+
+<h2>View</h2>
+
+<div id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
+<script>
+    $(function () {
+        data = @Html.Raw(json);
+        $('#container').highcharts({
+            title: {
+                text: 'Prognoza Pogody - Wrocław'
+            },
+            xAxis: [{
+                categories: _.map(data, function(day){
+                    var date = new Date(day.dt * 1000);
+                    console.log(date, day.dt);
+                    return date.getDate() + "/" + date.getMonth();
+                }),
+                crosshair: true
+            }],
+            yAxis: [{ // Primary yAxis
+                labels: {
+                    format: '{value}°C',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                },
+                title: {
+                    text: 'Temperatura',
+                    style: {
+                        color: Highcharts.getOptions().colors[1]
+                    }
+                }
+            }, { // Secondary yAxis
+                title: {
+                    text: 'Opady',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                labels: {
+                    format: '{value} mm',
+                    style: {
+                        color: Highcharts.getOptions().colors[0]
+                    }
+                },
+                opposite: true
+            }],
+            series: [{
+                name: 'Opady',
+                type: 'column',
+                yAxis: 1,
+                data: _.map(data, function(day){
+                    return +day.rain;
+                }),
+                tooltip: {
+                    valueSuffix: ' mm'
+                }
+
+            }, {
+                name: 'Temperatura',
+                type: 'spline',
+                data: _.map(data, function(day){
+                    return +day.temp.day;
+                }),
+                tooltip: {
+                    valueSuffix: '°C'
+                }
+            }]
+        });
+    });
+</script>
+
