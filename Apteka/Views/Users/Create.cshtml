@@ -4,6 +4,12 @@
 }
 
 <h2>@ViewBag.Title.</h2>
+@section PanelName
+{
+    Dodawanie nowego użytkownika
+}
+@section Panel
+{
 
 @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
@@ -40,7 +46,11 @@
         </div>
     </div>
 }
-
+    }
+@section PanelFooter
+{
+    <p>  </p>
+}
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

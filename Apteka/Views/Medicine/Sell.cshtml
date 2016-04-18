@@ -14,7 +14,12 @@
 {
     <div class="alert alert-success">Dodano lek o numerze @ViewBag.Operation.Id_lek w ilości @ViewBag.Operation.Rozchod</div>
 }
-    
+@section PanelName
+{
+    Podsumowanie sprzedaży
+}
+@section Panel
+{    
 @using (Html.BeginForm("SerializeSell", "Medicine", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) 
 {
     @Html.AntiForgeryToken()
@@ -60,7 +65,11 @@
         </div>
     </div>
 }
-    
+    }
+@section PanelFooter
+{
+
+}
     <div>
         @Html.ActionLink("Wróć do Leków", "Index")
         @Html.ActionLink("Podsumowanie sprzedaży", "Summary")

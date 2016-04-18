@@ -4,7 +4,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>Create</title>
 </head>
-<body>
+@section PanelName
+{
+Dodawanie nowego leku
+}
+    @section Panel
+{
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     
@@ -56,8 +63,11 @@
             </div>
         </div>
     }
-    
+    }
+@section PanelFooter
+{
+    <p>  </p>
+}
     <div>
         @Html.ActionLink("Wróć do listy", "Index")
     </div>
-</body>

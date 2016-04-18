@@ -31,6 +31,13 @@
 </div>
 <div ng-if="error!=''" class="alert alert-danger">{{ error }}</div>
 @*@using (Html.BeginForm("Create", "Invoice", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {*@
+@section PanelName
+{
+    Dodawanie nowej faktury
+}
+@section Panel
+{
+
 @using (Html.BeginForm()) {   
   <div class="row">
         <div class="col-md-1"></div>
@@ -88,3 +95,8 @@
     </div>
 }
 
+    }
+@section PanelFooter
+{
+    <p>   Copyright Apteka</p>
+}

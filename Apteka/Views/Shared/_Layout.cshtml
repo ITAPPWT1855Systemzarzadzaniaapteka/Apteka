@@ -353,9 +353,23 @@
         <div id="page-wrapper">
 
             @RenderBody()
+            @if (IsSectionDefined("Panel"))
+            {
+                <div class="panel panel-primary">
+                <div class="panel-heading">@RenderSection("PanelName", required: false)</div>
+                    <div class="panel-body" style="background-color:rgba(29, 93, 143, 0.20)">
+                        <div class="row">@RenderSection("Panel", required: false)</div>
+                    </div>
+                <div class="panel-footer">@RenderSection("PanelFooter", required: false)</div>
+            </div>
+            }else
+{
+    <div></div>
+}
 
         </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

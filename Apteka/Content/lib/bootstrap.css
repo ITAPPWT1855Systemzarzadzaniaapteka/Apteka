@@ -181,6 +181,7 @@ optgroup {
 }
 table {
   border-spacing: 0;
+  background-color:rgba(60, 244, 237, 0.22);
   border-collapse: collapse;
 }
 td,

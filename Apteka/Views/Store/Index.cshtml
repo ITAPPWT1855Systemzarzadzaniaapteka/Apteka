@@ -8,8 +8,15 @@
     <title>Stan magazynu</title>
     <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
 </head>
-<body>
-    <p>
+@section PanelName
+{
+    Dodawanie nowego leku
+}
+@section Panel
+{
+
+
+  <p>
         @*@Html.ActionLink("Create New", "Create")*@
     </p>
     <input type="text" id="filter" class="form-control" />
@@ -63,4 +70,8 @@
             }
         </tbody>
     </table>
-</body>
+    }
+@section PanelFooter
+{
+    <p>  </p>
+}
