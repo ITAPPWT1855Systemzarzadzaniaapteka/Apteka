@@ -36,7 +36,7 @@ namespace Apteka.Controllers {
         [HttpPost]
         public async Task<ActionResult> Create(CreateUserModel model) {
             if (ModelState.IsValid && !model.UserName.Contains("admin")) {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, EmailConfirmed = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded) {
                     await UserManager.AddToRoleAsync(user.Id, "Employee");
