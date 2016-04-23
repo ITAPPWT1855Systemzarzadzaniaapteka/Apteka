@@ -2,7 +2,15 @@
     ViewBag.Title = "Lista użytkowników";
 }
 
-<h2>@ViewBag.Title</h2>
+<h4>@ViewBag.Title</h4>
+@section PanelName
+{
+
+}
+@section Panel
+{
+
+
 <ul class="list-group">
     @foreach (var user in ViewBag.Users) {
         <li class="list-group-item">
@@ -10,17 +18,20 @@
                 <i class="fa fa-user"></i>
                 @user.UserName
             </span>
-            <span class="pull-right">
+            @*<span class="pull-right">
                 @if (!user.UserName.Contains("admin")) {
                     <a href="@Url.Action("Delete", "Users", new { Id = user.Id })" data-username="@user.UserName" data-toggle="modal" class="delete-user"><i class="fa fa-remove"></i></a>     
                 }
-            </span>
+            </span>*@
         </li>
     }
 </ul>
 
-<a href="@Url.Action("Create", "Users")" class="btn btn-info pull-right" role="button"><i class="fa fa-user-plus"></i> Dodaj nowego użytkownika </a>
-
+}
+@section PanelFooter
+{
+    <p>  </p>
+}
 <script>
     $('.delete-user').click(function () {
         var username = $(this).attr("data-username");

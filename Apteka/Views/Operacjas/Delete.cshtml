@@ -1,0 +1,81 @@
+﻿@model Apteka.Models.Operacja
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Operacja</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Przychod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Przychod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rozchod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rozchod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Netto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Netto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brutto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brutto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lek.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lek.Nazwa)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

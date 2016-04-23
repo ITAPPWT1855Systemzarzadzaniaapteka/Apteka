@@ -237,6 +237,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CheckContentInvoiceController.cs" />
+    <Compile Include="Controllers\CheckInvoiceController.cs" />
     <Compile Include="Controllers\FakturasController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -315,7 +316,7 @@
     <Compile Include="Models\Operacja.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\OperationController.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Sprawdz_faktury.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
@@ -366,11 +367,15 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AptekaDbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="js\CheckInvoiceContentController.js" />
+    <Content Include="js\CheckInvoiceController.js" />
     <Content Include="js\HomeController.js" />
     <Content Include="js\InvoiceController.js" />
     <Content Include="js\MedicineController.js" />
     <Content Include="js\OperationController.js" />
     <Content Include="js\StoreController.js" />
+    <Content Include="js\UsersController.js" />
+    <Content Include="js\WarehouseController.js" />
     <Content Include="Models\AptekaDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AptekaDbContext.edmx</DependentUpon>
@@ -505,6 +510,12 @@
     <Content Include="Views\Operacjas\Details.cshtml" />
     <Content Include="Views\Operacjas\Edit.cshtml" />
     <Content Include="Views\Operacjas\Index.cshtml" />
+    <Content Include="Views\CheckInvoice\Create.cshtml" />
+    <Content Include="Views\CheckInvoice\Delete.cshtml" />
+    <Content Include="Views\CheckInvoice\Details.cshtml" />
+    <Content Include="Views\CheckInvoice\Edit.cshtml" />
+    <Content Include="Views\CheckInvoice\Index.cshtml" />
+    <Content Include="Views\Home\SellPlot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />

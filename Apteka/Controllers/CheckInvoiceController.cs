@@ -10,31 +10,30 @@ using Apteka.Models;
 
 namespace Apteka.Controllers
 {
-    public class CheckContentInvoiceController : Controller
+    public class CheckInvoiceController : Controller
     {
         private aptekaEntities1 db = new aptekaEntities1();
 
-        // GET: CheckContentInvoice
+        // GET: CheckInvoice
         public ActionResult Index()
         {
-            return View(db.Sprawdz_zawartosc_faktury.ToList());
+            return View(db.Sprawdz_faktury.ToList());
         }
 
-        // GET: CheckContentInvoice/Details/5
+        // GET: CheckInvoice/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Sprawdz_zawartosc_faktury sprawdz_zawartosc_faktury = db.Sprawdz_zawartosc_faktury.Find(id);
-            if (sprawdz_zawartosc_faktury == null)
+            Sprawdz_faktury sprawdz_faktury = db.Sprawdz_faktury.Find(id);
+            if (sprawdz_faktury == null)
             {
                 return HttpNotFound();
             }
-            return View(sprawdz_zawartosc_faktury);
+            return View(sprawdz_faktury);
         }
-
 
     }
 }

@@ -14,7 +14,7 @@ namespace Apteka.Controllers
     public class HomeController : Controller
     {
         private WeatherHelper weatherHelper = new WeatherHelper();
-
+        private aptekaEntities1 db = new aptekaEntities1();
         public ActionResult Index()
         {
             return View();
@@ -38,6 +38,24 @@ namespace Apteka.Controllers
         {
             CityWeather JsonObject = weatherHelper.CityWeather;
             return View(JsonObject);
+        }
+        public ActionResult SellPlot()
+        {
+          //  var groupByDayOperations = db.Operacja.GroupBy(x => x.Data.ToString("dd/M/yyyy")).First();
+            List<Operacja> JsonObject = db.Operacja.ToList();
+
+            var warehouses = db.Operacja.ToList();
+            List<JsonOperationSell> misioweHurtownie = new List<JsonOperationSell>();
+
+            foreach (var warehouse in warehouses)
+            {
+                var misiu = new JsonOperationSell();
+                misiu.day = warehouse.Data;
+                misiu.value = warehouse.Przychod;
+                misioweHurtownie.Add(misiu);
+            }
+
+            return View(misioweHurtownie);
         }
     }
 }
