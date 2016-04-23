@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Apteka.Models.Sprawdz_faktury>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Numer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Netto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Brutto)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nazwa)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Netto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Brutto)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id_faktura }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id_faktura }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id_faktura })
+        </td>
+    </tr>
+}
+
+</table>

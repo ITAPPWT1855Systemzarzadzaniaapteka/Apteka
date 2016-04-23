@@ -249,9 +249,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\ChartController.cs" />
+=======
     <Compile Include="Controllers\CheckContentInvoiceController.cs" />
     <Compile Include="Controllers\CheckInvoiceController.cs" />
+    <Compile Include="Controllers\FakturasController.cs" />
+>>>>>>> 86543c9... Prepare to presentation: Warehouses and layout
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -504,7 +508,9 @@
     <Content Include="Views\Medicine\SaveAlerts.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\Report\Index.cshtml" />
+=======
     <Content Include="Views\CheckContentInvoice\Create.cshtml" />
     <Content Include="Views\CheckContentInvoice\Delete.cshtml" />
     <Content Include="Views\CheckContentInvoice\Details.cshtml" />

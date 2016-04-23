@@ -34,11 +34,20 @@ namespace Apteka.Controllers {
 
         // POST: Users/Create
         [HttpPost]
+<<<<<<< HEAD
         public async Task<ActionResult> Create(CreateUserModel model) {
             if (ModelState.IsValid && !model.UserName.Contains("admin")) {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, EmailConfirmed = true };
+=======
+        public async Task<ActionResult> Create(CreateUserModel model)
+        {
+            if (ModelState.IsValid && !model.UserName.Contains("admin"))
+            {
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+>>>>>>> 86543c9... Prepare to presentation: Warehouses and layout
                 var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded) {
+                if (result.Succeeded)
+                {
                     await UserManager.AddToRoleAsync(user.Id, "Employee");
                     return RedirectToAction("Index", "Users");
                 }
@@ -50,16 +59,16 @@ namespace Apteka.Controllers {
         }
 
         // GET: Users/Delete/5
-        public async Task<ActionResult> Delete(string id) {
-            if (id == null) {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var user = UserManager.FindById(id);
-            if (!user.UserName.Contains("admin")) {
-                ViewBag.result = await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id));
-            }
-            return RedirectToAction("Index");
-        }
+        //public async Task<ActionResult> Delete(string id) {
+        //    if (id == null) {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    var user = UserManager.FindById(id);
+        //    if (!user.UserName.Contains("admin")) {
+        //        ViewBag.result = await UserManager.DeleteAsync(await UserManager.FindByIdAsync(id));
+        //    }
+        //    return RedirectToAction("Index");
+        //}
 
         #region Helpers
         private void AddErrors(IdentityResult result) {

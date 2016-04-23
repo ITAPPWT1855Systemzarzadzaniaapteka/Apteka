@@ -1,0 +1,35 @@
+﻿@model Apteka.Models.Hurtownia
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Szczegóły</h2>
+
+<div>
+    <h4>Hurtownia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NIP)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id_hurtownia }) |
+    @Html.ActionLink("Powrót", "Index")
+</p>

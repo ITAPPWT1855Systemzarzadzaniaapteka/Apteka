@@ -19,7 +19,7 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <IISExpressSSLPort>44300</IISExpressSSLPort>
+    <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -100,22 +100,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SendGrid, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGrid.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SendGrid.SmtpApi, Version=1.3.1.0, Culture=neutral, PublicKeyToken=2ae73662c35d80e4, processorArchitecture=MSIL">
-      <HintPath>..\packages\SendGrid.SmtpApi.1.3.1\lib\net40\SendGrid.SmtpApi.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SendGridMail, Version=6.3.4.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sendgrid.6.3.4\lib\SendGridMail.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -194,6 +178,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -249,16 +236,18 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\CheckContentInvoiceController.cs" />
-    <Compile Include="Controllers\CheckInvoiceController.cs" />
+    <Compile Include="Controllers\FakturasController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Controllers\OperacjasController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\Sprawdz_fakturyController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -318,6 +307,7 @@
     </Compile>
     <Compile Include="Models\InvoiceViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JsonWarehouse.cs" />
     <Compile Include="Models\Lek.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
@@ -325,7 +315,7 @@
     <Compile Include="Models\Operacja.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\OperationController.cs" />
+    <Compile Include="Models\OperationController.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Sprawdz_faktury.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
@@ -376,15 +366,11 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>AptekaDbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="js\CheckInvoiceContentController.js" />
-    <Content Include="js\CheckInvoiceController.js" />
     <Content Include="js\HomeController.js" />
     <Content Include="js\InvoiceController.js" />
     <Content Include="js\MedicineController.js" />
     <Content Include="js\OperationController.js" />
     <Content Include="js\StoreController.js" />
-    <Content Include="js\UsersController.js" />
-    <Content Include="js\WarehouseController.js" />
     <Content Include="Models\AptekaDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>AptekaDbContext.edmx</DependentUpon>
@@ -432,7 +418,8 @@
     <Content Include="Scripts\jquery-latest.js" />
     <Content Include="Scripts\jquery.metadata.js" />
     <Content Include="Scripts\jquery.tablesorter.js" />
-    <Content Include="Scripts\jquery.toaster.js" />
+    <Content Include="Scripts\lib\angular-route.js" />
+    <Content Include="Scripts\lib\jquery\angular.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
     <Content Include="Scripts\jquery.autocomplete.js" />
@@ -495,16 +482,8 @@
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Medicine\Sell.cshtml" />
     <Content Include="Views\Medicine\Summary.cshtml" />
-    <Content Include="Views\Operation\Create.cshtml" />
-    <Content Include="Views\Operation\Delete.cshtml" />
-    <Content Include="Views\Operation\Details.cshtml" />
-    <Content Include="Views\Operation\Edit.cshtml" />
-    <Content Include="Views\Operation\Index.cshtml" />
-    <Content Include="Views\Medicine\SaveAlert.cshtml" />
-    <Content Include="Views\Medicine\SaveAlerts.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
-    <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\CheckContentInvoice\Create.cshtml" />
     <Content Include="Views\CheckContentInvoice\Delete.cshtml" />
     <Content Include="Views\CheckContentInvoice\Details.cshtml" />
@@ -526,16 +505,10 @@
     <Content Include="Views\Operacjas\Details.cshtml" />
     <Content Include="Views\Operacjas\Edit.cshtml" />
     <Content Include="Views\Operacjas\Index.cshtml" />
-    <Content Include="Views\CheckInvoice\Create.cshtml" />
-    <Content Include="Views\CheckInvoice\Delete.cshtml" />
-    <Content Include="Views\CheckInvoice\Details.cshtml" />
-    <Content Include="Views\CheckInvoice\Edit.cshtml" />
-    <Content Include="Views\CheckInvoice\Index.cshtml" />
-    <Content Include="Views\Home\SellPlot.cshtml" />
->>>>>>> 86543c9... Prepare to presentation: Warehouses and layout
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />
+    <Folder Include="Views\Report\" />
     <Folder Include="Views\WeatherHelper\" />
   </ItemGroup>
   <ItemGroup>
@@ -568,7 +541,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51115</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44300/</IISUrl>
+          <IISUrl>http://localhost:51115/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
