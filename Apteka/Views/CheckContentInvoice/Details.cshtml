@@ -1,0 +1,67 @@
+﻿@model Apteka.Models.Sprawdz_zawartosc_faktury
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sprawdz_zawartosc_faktury</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_lek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_lek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nazwa)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nazwa)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dawka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dawka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opakowanie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opakowanie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Postac)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Postac)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ilosc_zakupionego_leku)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ilosc_zakupionego_leku)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id_faktura }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

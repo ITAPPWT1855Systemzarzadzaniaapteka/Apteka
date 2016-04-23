@@ -355,10 +355,10 @@
             @RenderBody()
             @if (IsSectionDefined("Panel"))
             {
-                <div class="panel panel-primary">
+                <div class="panel panel-primary" style="width:80%;margin:10px;">
                 <div class="panel-heading">@RenderSection("PanelName", required: false)</div>
-                    <div class="panel-body" style="background-color:rgba(29, 93, 143, 0.20)">
-                        <div class="row">@RenderSection("Panel", required: false)</div>
+                    <div class="panel-body" style="background-color:rgba(29, 93, 143, 0.20);">
+                        <div class="row" style="margin:25px;">@RenderSection("Panel", required: false)</div>
                     </div>
                 <div class="panel-footer">@RenderSection("PanelFooter", required: false)</div>
             </div>

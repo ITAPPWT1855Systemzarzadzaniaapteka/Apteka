@@ -18,7 +18,8 @@ namespace Apteka.Models
             
             return userIdentity;
         }
-
+    //    public string Name { get; set; }
+    //    public string Surname { get; set; }
 
     }
 

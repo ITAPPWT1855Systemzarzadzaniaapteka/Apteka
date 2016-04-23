@@ -242,6 +242,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Controllers\OperacjasController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\Sprawdz_fakturyController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -498,6 +499,12 @@
     <Content Include="Views\Warehouse\Details.cshtml" />
     <Content Include="Views\Warehouse\Edit.cshtml" />
     <Content Include="Views\Warehouse\Index.cshtml" />
+    <Content Include="Views\Shared\_Panel.cshtml" />
+    <Content Include="Views\Operacjas\Create.cshtml" />
+    <Content Include="Views\Operacjas\Delete.cshtml" />
+    <Content Include="Views\Operacjas\Details.cshtml" />
+    <Content Include="Views\Operacjas\Edit.cshtml" />
+    <Content Include="Views\Operacjas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />
