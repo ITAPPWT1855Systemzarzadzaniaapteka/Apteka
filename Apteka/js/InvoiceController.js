@@ -20,7 +20,7 @@ function parseWarehouses(arr) {
 function parseMedicines(arr) {
     return _.map(arr, function (med) {
         return {
-            value: med.Nazwa.toLowerCase(),
+            value: med.Nazwa.toLowerCase() + med.,
             data: med.Id_lek
         };
     })
@@ -34,7 +34,7 @@ function addRow() {
     var namePrefix = "Products[" + rowId + "].";
     var newRow = $("<tr />", { "class": "product-row", "id": "product-row-" + rowId }).append([
             $("<input />", { "type": "hidden", "class": "med-id", "name": namePrefix + "Id", "readonly": "true"}),
-            $("<td />").append($("<input />", { "type": "number", "class": "form-control lp", "value": rowId, "readonly": "true", "step": "1", "tabindex":"-1"})),
+            $("<td />").append($("<input />", { "type": "number", "class": "form-control lp", "value": rowId+1, "readonly": "true", "step": "1", "tabindex":"-1"})),
             $("<td />").append($("<input />", { "type": "text", "name": namePrefix + "Name", "class": "form-control med-name" })),
             $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "Quantity", "class": "form-control quantity", "step": "1" })),
             $("<td />").append($("<input />", { "type": "number", "name": namePrefix + "Price", "class": "form-control price", "step": "0.01" })),
