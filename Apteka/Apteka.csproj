@@ -474,7 +474,6 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Create.cshtml" />
     <Content Include="Views\Invoice\Create.cshtml" />
-    <Content Include="Views\Invoice\Index.cshtml" />
     <Content Include="Views\Store\Create.cshtml" />
     <Content Include="Views\Store\Delete.cshtml" />
     <Content Include="Views\Store\Details.cshtml" />
@@ -516,6 +515,7 @@
     <Content Include="Views\CheckInvoice\Edit.cshtml" />
     <Content Include="Views\CheckInvoice\Index.cshtml" />
     <Content Include="Views\Home\SellPlot.cshtml" />
+    <Content Include="Views\Invoice\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />

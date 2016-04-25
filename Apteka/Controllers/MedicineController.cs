@@ -21,7 +21,7 @@ namespace Apteka.Controllers
         // GET: Medicine
         public ActionResult Index()
         {
-            return View(db.Lek.ToList().Take(10));
+            return View(db.Lek.ToList());
         }
 
         // GET: Medicine/Details/5
