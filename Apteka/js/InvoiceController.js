@@ -20,7 +20,7 @@ function parseWarehouses(arr) {
 function parseMedicines(arr) {
     return _.map(arr, function (med) {
         return {
-            value: med.Nazwa.toLowerCase() + med.,
+            value: med.Nazwa.toLowerCase() + "(" + med.Postac + " " + med.Opakowanie + ")",
             data: med.Id_lek
         };
     })
@@ -45,6 +45,9 @@ function addRow() {
     ]);
     $(newRow).find(".med-name").autocomplete({
         lookup: parseMedicines(sampleMedicinesData),
+        minChars: 2,
+        delay: 150,
+        lookupLimit: 15,
         onSelect: function (selected) {
             var med = _.find(sampleMedicinesData, function (a) { return a.Id_lek === selected.data; });
             if (!med.Id_lek) throw new Error("Leku nie znaleziono.");

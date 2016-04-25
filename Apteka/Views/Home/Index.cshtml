@@ -49,16 +49,27 @@
 
     function toDate(date) {
         var a = new Date(parseInt(date.substr(6)));
-        console.log(a);
-        return Date.UTC(a.getYear(), a.getMonth(), a.getDate());
+        return a.getTime();
     }
 
+    function toHour(date) {
+        var a = new Date(parseInt(date.substr(6)));
+        return a.getTime();
+    }
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
     $(function () {
         getPromise("/Chart/SalesToday").then(function (dane) {
+            var later = new Date();
+            later.setTime(today.getTime() + (1 * 24 * 60 * 60 * 1000))
+            var serier = [{
+                yAxis: 0,
+                name: "Sprzedaż",
+                data: _.map(dane, function (i) { return [toHour(i.Date), i.Count]; })
+            }];
+            console.log(serier);
             $('#TodaySales').highcharts({
-                chart: {
-                    type: 'spline'
-                },
                 title: {
                     text: ''
                 },
@@ -66,48 +77,41 @@
                     text: ''
                 },
                 xAxis: {
-                    type: 'datetime',
-                    dateTimeLabelFormats: { // don't display the dummy year
-                        month: '%e. %b',
-                        year: '%b'
-                    },
                     title: {
-                        text: 'Data'
+                        text: 'Godzina'
                     },
+                    type: 'datetime',
+                    tickInterval: 3600 * 1000,
+                    min: today.getTime(),
+                    max: later.getTime()
                 },
-                yAxis: {
+                yAxis: [{
                     title: {
                         text: 'Sprzedaż'
                     },
                     min: 0
-                },
+                }],
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>'
                 },
-                series: [{
-                    name: "",
-                    data: _.map(dane, function (i) {
-                        return [toDate(i.Data), i.value];
-                    })
-                }]
+                series: serier
             });
         });
 
         Promise.all([getPromise("/Chart/EarningsDaily?days=31"), getPromise("/Chart/ExpensesDaily?days=31")]).then(function (dane) {
+            var start = new Date();
+            start.setTime(today.getTime() - (31 * 24 * 60 * 60 * 1000));
             var serier = [{
                 yAxis: 0,
                 name: 'Przychód',
-                data: _.map(dane[0], function (i) { console.log([toDate(i.Key), i.value]); return [toDate(i.Key), i.value]; })
+                data: _.map(dane[0], function (i) { return [toDate(i.Date), i.Count]; })
             }, {
                 yAxis: 1,
                 name: 'Rozchód',
-                data: _.map(dane[1], function (i) { console.log([toDate(i.Key), i.value]);  return [toDate(i.Key), i.value]; })
+                data: _.map(dane[1], function (i) { return [toDate(i.Date), i.Count]; })
             }];
             console.log(serier);
             $('#MonthlySummary').highcharts({
-                chart: {
-                    type: 'spline'
-                },
                 title: {
                     text: ''
                 },
@@ -116,12 +120,15 @@
                 },
                 xAxis: {
                     type: 'datetime',
+                    tickInterval: 24 * 3600 * 1000,
+                    min: start.getTime(),
+                    max: today.getTime(),
                     dateTimeLabelFormats: { // don't display the dummy year
                         month: '%e. %b',
                         year: '%b'
                     },
                     title: {
-                        text: 'Date'
+                        text: 'Data'
                     }
                 },
                 yAxis: [{
