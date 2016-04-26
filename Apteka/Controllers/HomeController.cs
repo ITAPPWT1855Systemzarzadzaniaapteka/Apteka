@@ -39,5 +39,10 @@ namespace Apteka.Controllers
             CityWeather JsonObject = weatherHelper.CityWeather;
             return View(JsonObject);
         }
+        
+        public ActionResult Error()
+        {
+            return View();
+        }
     }
 }

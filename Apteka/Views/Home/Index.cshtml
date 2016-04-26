@@ -103,11 +103,11 @@
             start.setTime(today.getTime() - (31 * 24 * 60 * 60 * 1000));
             var serier = [{
                 yAxis: 0,
-                name: 'Przychód',
+                name: 'Rozchód',
                 data: _.map(dane[0], function (i) { return [toDate(i.Date), i.Count]; })
             }, {
                 yAxis: 1,
-                name: 'Rozchód',
+                name: 'Przychód',
                 data: _.map(dane[1], function (i) { return [toDate(i.Date), i.Count]; })
             }];
             console.log(serier);
@@ -133,13 +133,13 @@
                 },
                 yAxis: [{
                     title: {
-                        text: 'Zarobki'
+                        text: 'Rozchód'
                     },
                     min: 0
                 },
                 {
                     title: {
-                        text: 'Wydatki'
+                        text: 'Przychód'
                     },
                     min: 0
                 }],
@@ -156,55 +156,7 @@
                     }
                 },
                 series: serier
-            });/*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            console.log(_.map(dane[1], function (i) {
-                return [toDate(i.Key), i.value];
-            }));
-            $('#MonthlySummary').highcharts({
-               title: {
-                    text: 'Przychód/Rozchód'
-                },
-
-                series: [{
-                    name: "Przychód",
-                    data: _.map(dane[0], function (i) {
-                        var a = [toDate(i.Key), i.value];
-                        console.log(a);
-                        return a;
-                    }),
-                },{
-                    name: "Rozchód",
-                    data: _.map(dane[1], function (i) {
-                        var a = [toDate(i.Key), i.value];
-                        console.log(a);
-                        return a;
-                    }), 
-                }]
-            });*/
+            });
         });
     });
 </script>
