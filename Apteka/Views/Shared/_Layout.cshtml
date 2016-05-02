@@ -64,9 +64,15 @@
                             <a href="#"><i class="fa fa-file-text fa-fw"></i> Faktury<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
+                                    <a href="@Url.Action("Index", "CheckContentInvoice")">Zawartość faktury</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "CheckInvoice")">Stan faktury</a>
+                                </li>
+                                <li>
                                     <a href="@Url.Action("Index", "Invoice")">Wyświetl wszystkie</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a href="@Url.Action("Create", "Invoice")">Wprowadż fakturę</a>
                                 </li>
                             </ul>
@@ -86,41 +92,6 @@
                             <a href="@Url.Action("Index", "Store")"><i class="fa fa-building fa-fw"></i> Stan magazynu</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "Report")"><i class="fa fa-line-chart fa-fw"></i> Raporty</a>
-                        </li>
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin")) {
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i> Użytkownicy<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="@Url.Action("Index", "Users")">Lista użytkowników</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Create", "Users")">Dodaj użytkownika</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
-                        <!--<li>
-                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Predykcja<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="flot.html">Generuj diagram</a>
-                                </li>
-                                <li>
-                                    <a href="morris.html">Przebiegi</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-database"></i> Magazyn<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Index", "Store")">Sprawdź stan magazynu</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Leki</a>
                             <ul class="nav nav-second-level">
                                 <li>
@@ -137,46 +108,14 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="tables.html"><i class="fa fa-calculator"></i> Operacje</a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Sell", "Operacjas")">Ostatnie operacje</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "Operacjas")">Baza operacje</a>
-                                </li>
-                                @*<li>
-                                    <a href="@Url.Action("Create", "Operacjas")">Nowe operacje</a>
-                                </li>*@
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Stan faktur</a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Index", "CheckContentInvoice")">Zawartość faktury</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "CheckInvoice")">Stan faktury</a>
-                                </li>
-                            </ul>
-                        </li>
-<<<<<<< HEAD
-                        -->
-=======
-                        <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i>Faktury<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="#">Pobierz rozliczenie</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Create", "Invoice")">Wprowadż rozliczenie</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="@Url.Action("Index", "Operation")"><i class="fa fa-calculator"></i> Operacje</a>
+                            </li>
+                        }
+
+
                         <li>
                             <a href="tables.html"><i class="fa fa-list-alt"></i> Hurtownie</a>
                             <ul class="nav nav-second-level">
@@ -184,28 +123,33 @@
                                     <a href="@Url.Action("Index", "Warehouse")">Lista hurtowni</a>
                                 </li>
                                 <li>
-                                    <a href="@Url.Action("Create", "Warehouse")">Nowa</a>
+                                    <a href="@Url.Action("Create", "Warehouse")">Wprowadź hurtownię</a>
                                 </li>
                             </ul>
                         </li>
-                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
-                        {
-                            <li>
-                                <a href="#"><i class="fa fa-users fa-fw"></i> Użytkownicy<span class="fa arrow"></span></a>
-                                <ul class="nav nav-second-level">
-                                    <li>
-                                        <a href="@Url.Action("Index", "Users")">Lista użytkowników</a>
-                                    </li>
-                                    <li>
-                                        <a href="@Url.Action("Create", "Users")">Dodaj użytkownika</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        }
->>>>>>> 86543c9... Prepare to presentation: Warehouses and layout
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
+                        <li>
+                            <a href="@Url.Action("Index", "Report")"><i class="fa fa-line-chart fa-fw"></i> Raporty</a>
+                        </li>
+                       
+        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+        {
+            <li>
+                <a href="#"><i class="fa fa-users fa-fw"></i> Użytkownicy<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="@Url.Action("Index", "Users")">Lista użytkowników</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Users")">Dodaj użytkownika</a>
+                    </li>
+                </ul>
+            </li>
+        }
+        </ul>
+        </div>
+
+        <!-- /.sidebar-collapse -->
+
             </div>
             <!-- /.navbar-static-side -->
         </nav>

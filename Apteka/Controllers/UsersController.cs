@@ -34,17 +34,10 @@ namespace Apteka.Controllers {
 
         // POST: Users/Create
         [HttpPost]
-<<<<<<< HEAD
+
         public async Task<ActionResult> Create(CreateUserModel model) {
             if (ModelState.IsValid && !model.UserName.Contains("admin")) {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, EmailConfirmed = true };
-=======
-        public async Task<ActionResult> Create(CreateUserModel model)
-        {
-            if (ModelState.IsValid && !model.UserName.Contains("admin"))
-            {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
->>>>>>> 86543c9... Prepare to presentation: Warehouses and layout
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
