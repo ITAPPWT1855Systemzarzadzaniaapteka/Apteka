@@ -7,12 +7,20 @@ using System.Web;
 namespace Apteka.Models {
     public class CreateUserModel {
         [Required]
-        [Display(Name = "Nazwa użytkownika")]
+        [Display(Name = "Login")]
         public string UserName { get; set; }
 
         [Required]
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Nazwisko")]
+        public string Surname { get; set; }
+
+        [Required]
         [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [Required]

@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>Details</title>
 </head>
-<body>
+@section PanelName
+{
+ Szczegóły
+}
+@section Panel
+{
     <div>
         <h4>Lek</h4>
         <hr />
@@ -13,39 +18,43 @@
             <dt>
                 @Html.DisplayNameFor(model => model.Nazwa)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Nazwa)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Postac)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Postac)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Opakowanie)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Opakowanie)
             </dd>
-    
+
             <dt>
                 @Html.DisplayNameFor(model => model.Dawka)
             </dt>
-    
+
             <dd>
                 @Html.DisplayFor(model => model.Dawka)
             </dd>
-    
+
         </dl>
     </div>
     <p>
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id_lek }) |
         @Html.ActionLink("Back to List", "Index")
     </p>
-</body>
+}
+@section PanelFooter
+{
+    <p>  </p>
+}

@@ -4,11 +4,6 @@
     <title>Stan magazynu</title>
     <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
 </head>
-<<<<<<< HEAD
-<body>
-    <p>
-        @*@Html.ActionLink("Create New", "Create")*@
-=======
 @section PanelName
 {
     Dodawanie nowego leku
@@ -18,9 +13,9 @@
 
 
   <p>
->>>>>>> 86543c9... Prepare to presentation: Warehouses and layout
     </p>
     <input type="text" id="filter" class="form-control" />
+
     <table id="listagem" class="table table-striped tablesorter">
         <thead>
             <tr>
@@ -70,4 +65,8 @@
             }
         </tbody>
     </table>
-</body>
+    }
+@section PanelFooter
+{
+    <p>  </p>
+}

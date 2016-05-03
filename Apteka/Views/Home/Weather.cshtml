@@ -4,7 +4,13 @@
     string json = Newtonsoft.Json.JsonConvert.SerializeObject(Model.list);
 }
 
-<h2>View</h2>
+<h2>Prognozy dla dni: 18.03 - 01.04</h2>
+@section PanelName
+{
+    Prezentacja prognozy pogody
+}
+@section Panel
+{
 
 <div id="container" style="min-width: 310px; height: 500px; margin: 0 auto"></div>
 <script>
@@ -75,3 +81,8 @@
     });
 </script>
 
+    }
+@section PanelFooter
+{
+    Ostatnia aktualizacja: 2016-04-18
+}

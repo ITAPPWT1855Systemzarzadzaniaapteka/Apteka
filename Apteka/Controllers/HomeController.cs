@@ -15,7 +15,6 @@ namespace Apteka.Controllers
     {
         private WeatherHelper weatherHelper = new WeatherHelper();
         private aptekaEntities1 db = new aptekaEntities1();
-
         public ActionResult Index()
         {
             return View();
@@ -35,7 +34,6 @@ namespace Apteka.Controllers
             return View();
         }
 
-        public ActionResult Weather()
         {
             CityWeather JsonObject = weatherHelper.CityWeather;
             return View(JsonObject);

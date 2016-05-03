@@ -36,10 +36,23 @@ namespace Apteka.Controllers
         [HttpGet]
         public ActionResult GetWarehouses()
         {
-            var warehouses = context.Hurtownia.ToList()
-                .Select(i => new { i.Id_hurtownia, i.Nazwa, i.NIP })
-                .ToList();
-            return Json(warehouses, JsonRequestBehavior.AllowGet);
+            var warehouses = context.Hurtownia.ToList();
+            List<JsonWarehouse> misioweHurtownie = new List<JsonWarehouse>();
+
+            foreach (var warehouse in warehouses)
+            {
+                var misiu = new JsonWarehouse();
+                misiu.label = warehouse.Nazwa;
+                misiu.value = warehouse.Id_hurtownia;
+                misioweHurtownie.Add(misiu);
+            }
+           
+            return new JsonResult
+            {
+                Data = misioweHurtownie,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+                
+            };
         }
 
         [HttpGet]

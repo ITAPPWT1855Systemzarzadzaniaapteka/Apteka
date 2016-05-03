@@ -249,16 +249,19 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\CheckContentInvoiceController.cs" />
     <Compile Include="Controllers\CheckInvoiceController.cs" />
+    <Compile Include="Controllers\FakturasController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
+    <Compile Include="Controllers\OperacjasController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\Sprawdz_fakturyController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\WarehouseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -318,6 +321,7 @@
     </Compile>
     <Compile Include="Models\InvoiceViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JsonWarehouse.cs" />
     <Compile Include="Models\Lek.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
@@ -494,16 +498,14 @@
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Medicine\Sell.cshtml" />
     <Content Include="Views\Medicine\Summary.cshtml" />
+    <Content Include="Views\Fakturas\Index.cshtml" />
     <Content Include="Views\Operation\Create.cshtml" />
     <Content Include="Views\Operation\Delete.cshtml" />
     <Content Include="Views\Operation\Details.cshtml" />
     <Content Include="Views\Operation\Edit.cshtml" />
     <Content Include="Views\Operation\Index.cshtml" />
-    <Content Include="Views\Medicine\SaveAlert.cshtml" />
-    <Content Include="Views\Medicine\SaveAlerts.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
-    <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\CheckContentInvoice\Create.cshtml" />
     <Content Include="Views\CheckContentInvoice\Delete.cshtml" />
     <Content Include="Views\CheckContentInvoice\Details.cshtml" />
