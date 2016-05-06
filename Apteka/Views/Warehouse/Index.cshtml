@@ -4,7 +4,10 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<head>
+    <title>Hurtownie</title>
+    <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
+</head>
 <h4>Hurtownie</h4>
 
 @section PanelName
@@ -18,10 +21,10 @@
 <table id="listagem" class="table table-striped tablesorter">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nazwa)
+            @Html.DisplayNameFor(model => model.Nazwa)<i class="fa fa-arrows-v"></i>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NIP)
+            @Html.DisplayNameFor(model => model.NIP)<i class="fa fa-arrows-v"></i>
         </th>
         <th></th>
     </tr>

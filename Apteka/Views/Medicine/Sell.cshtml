@@ -9,7 +9,7 @@
     
 <h4>Operacja</h4>
 <hr />
-<div ng-if="error" class="alert alert-danger">{{ error}}</div>
+@*<div ng-if="error" class="alert alert-danger">{{ error}}</div>*@
 @if (ViewBag.Operation.Id_lek != 0)
 {
     <div class="alert alert-success">Dodano lek o numerze @ViewBag.Operation.Id_lek w ilości @ViewBag.Operation.Rozchod</div>
@@ -28,10 +28,10 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     
         <div class="form-group">
-            @Html.LabelFor(model => model.Id_lek, "Nazwa leku", htmlAttributes: new { @class = "control-label col-md-3"})
+            @Html.LabelFor(model => model.Id_lek, "Nazwa leku", htmlAttributes: new { @class = "control-label col-md-4"})
             @Html.LabelFor(model => model.Rozchod, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.LabelFor(model => model.Netto, htmlAttributes: new { @class = "control-label col-md-1" })
-            @Html.LabelFor(model => model.Brutto, htmlAttributes: new { @class = "control-label col-md-1" })
+            @Html.LabelFor(model => model.Netto, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Brutto, htmlAttributes: new { @class = "control-label col-md-2" })
         </div>
         <div class="form-group">
             <div class="col-md-4">
@@ -40,13 +40,13 @@
                 <div id="med" >
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 @Html.EditorFor(model => model.Rozchod, new { htmlAttributes = new { @class = "form-control" } })
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 @Html.EditorFor(model => model.Netto, new { htmlAttributes = new { @class = "form-control" } })
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 @Html.EditorFor(model => model.Brutto, new { htmlAttributes = new { @class = "form-control" } })
             </div>
             </div>
@@ -70,7 +70,4 @@
 {
 
 }
-    <div>
-        @Html.ActionLink("Wróć do Leków", "Index")
-        @Html.ActionLink("Podsumowanie sprzedaży", "Summary")
-    </div>
+ 

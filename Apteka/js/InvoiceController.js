@@ -1,7 +1,22 @@
 ﻿var sampleMedicinesData;
 var sampleWarehousesData;
 
+$(function () {
 
+    $("#listagem").tablesorter();
+    function search(search) {
+
+        $("#listagem tr:not(:contains('" + search + "'))").css("display", "none");
+        $("#listagem tr:contains('" + search + "')").css("display", "");
+    }
+    $('#filter').on('keyup', function () {
+        var text = $(this).val();
+        console.log(text);
+        search(text);
+    });
+
+
+});
 Date.prototype.toDateInputValue = (function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());

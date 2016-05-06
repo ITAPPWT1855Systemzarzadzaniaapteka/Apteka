@@ -41,22 +41,12 @@
 
                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Nazwa użytkownika" })
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło" })
-
-<<<<<<< .mine
-                            <div class="checkbox">
+                  <div class="checkbox">
                                 <label>
                                     @Html.CheckBoxFor(m => m.RememberMe)
                                     Zapamiętaj logowanie
                                 </label>
                             </div>
-=======
-                        <div class="checkbox">
-                            <label>
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                Zapamiętaj logowanie
-                            </label>
-                        </div>
->>>>>>> .theirs
 
                         <button class="btn btn-lg btn-success btn-block" type="submit">Zaloguj</button>
                     }
