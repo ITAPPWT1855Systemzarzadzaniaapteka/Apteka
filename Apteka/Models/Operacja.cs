@@ -19,10 +19,10 @@ namespace Apteka.Models
             this.Faktura = new HashSet<Faktura>();
         }
     
-        public int Id_operacja { get; set; }
-        public int Id_lek { get; set; }
+        public int ID_operacja { get; set; }
+        public int ID_lek { get; set; }
         public Nullable<System.DateTime> Data { get; set; }
-        public string Id_user { get; set; }
+        public string ID_user { get; set; }
         public Nullable<int> Przychod { get; set; }
         public Nullable<int> Rozchod { get; set; }
         public Nullable<double> Netto { get; set; }

@@ -22,7 +22,7 @@ namespace Apteka.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Id_hurtownia = new SelectList(context.Hurtownia, "Id_hurtownia", "Nazwa");
+            ViewBag.ID_hurtownia = new SelectList(context.Hurtownia, "ID_hurtownia", "Nazwa");
             ViewBag.Id_lek = new SelectList(context.Lek, "Id_lek", "Nazwa");
             return View();
         }
@@ -43,7 +43,7 @@ namespace Apteka.Controllers
             {
                 var misiu = new JsonWarehouse();
                 misiu.label = warehouse.Nazwa;
-                misiu.value = warehouse.Id_hurtownia;
+                misiu.value = warehouse.ID_hurtownia;
                 misioweHurtownie.Add(misiu);
             }
            

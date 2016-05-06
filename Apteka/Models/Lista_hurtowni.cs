@@ -12,17 +12,10 @@ namespace Apteka.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Hurtownia
+    public partial class Lista_hurtowni
     {
-        public Hurtownia()
-        {
-            this.Faktura = new HashSet<Faktura>();
-        }
-    
         public int ID_hurtownia { get; set; }
         public string Nazwa { get; set; }
         public Nullable<int> NIP { get; set; }
-    
-        public virtual ICollection<Faktura> Faktura { get; set; }
     }
 }

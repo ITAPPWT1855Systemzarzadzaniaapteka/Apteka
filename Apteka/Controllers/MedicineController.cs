@@ -71,13 +71,13 @@ namespace Apteka.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SerializeSell([Bind(Include = "Id_lek, Rozchod, Brutto, Netto")] Operacja operacja)
+        public ActionResult SerializeSell([Bind(Include = "ID_lek, Rozchod, Brutto, Netto")] Operacja operacja)
         {
             //      operacja.Data = DateTime.Now.ToString();
             //    operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
 
             var dataFile = Server.MapPath("~/App_Data/sell/sell.csv");
-            string details = operacja.Id_lek + "," + operacja.Rozchod + "," + operacja.Brutto + "," + operacja.Netto;
+            string details = operacja.ID_lek + "," + operacja.Rozchod + "," + operacja.Brutto + "," + operacja.Netto;
             System.IO.File.AppendAllText(dataFile, details);
             return RedirectToAction("Sell", operacja);
         }
@@ -87,25 +87,25 @@ namespace Apteka.Controllers
                    .Select(x => x.Split(','))
                    .Select(x => new Operacja
                    {
-                       Id_lek = Int32.Parse(x[0]),
+                       ID_lek = Int32.Parse(x[0]),
                        Rozchod = Int32.Parse(x[1]),
                        Brutto = Int32.Parse(x[2]),
                        Netto = Int32.Parse(x[3])
                    }).ToList();
 
            return (from op in operations
-                          group op by op.Id_lek
+                          group op by op.ID_lek
                               into newOp
                               select new Operacja
                               {
-                                  Id_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
-                                  Id_lek = newOp.First().Id_lek,
+                                  ID_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
+                                  ID_lek = newOp.First().ID_lek,
                                   Rozchod = newOp.Sum(o => o.Rozchod),
                                   Data =  DateTime.Now,
                                   Netto = newOp.Sum(o => o.Netto),
                                   Brutto = newOp.Sum(o => o.Brutto),
                                   Przychod = 0,
-                                  Id_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
+                                  ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
                               }).ToList();
         }
         public ActionResult Summary()
@@ -115,7 +115,7 @@ namespace Apteka.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SaveSell([Bind(Include = "Id_lek, Rozchod")] Operacja operacja)
+        public ActionResult SaveSell([Bind(Include = "ID_lek, Rozchod")] Operacja operacja)
         {
             var grouped = readFromCsv();
             foreach (var op in grouped)
@@ -142,7 +142,7 @@ namespace Apteka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_lek,Nazwa,Postac,Opakowanie,Dawka")] Lek lek)
+        public ActionResult Create([Bind(Include = "ID_lek,Nazwa,Postac,Opakowanie,Dawka")] Lek lek)
         {
             if (ModelState.IsValid)
             {
@@ -174,7 +174,7 @@ namespace Apteka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_lek,Nazwa,Postac,Opakowanie,Dawka")] Lek lek)
+        public ActionResult Edit([Bind(Include = "ID_lek,Nazwa,Postac,Opakowanie,Dawka")] Lek lek)
         {
             if (ModelState.IsValid)
             {
