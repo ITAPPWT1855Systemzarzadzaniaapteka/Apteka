@@ -249,6 +249,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\CheckContentInvoiceController.cs" />
     <Compile Include="Controllers\CheckInvoiceController.cs" />
     <Compile Include="Controllers\FakturasController.cs" />
@@ -258,7 +259,6 @@
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\OperacjasController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
-    <Compile Include="Controllers\Sprawdz_fakturyController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
