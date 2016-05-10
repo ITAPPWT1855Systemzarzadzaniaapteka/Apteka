@@ -38,8 +38,8 @@ namespace Apteka.Models
         // GET: Operation/Create
         public ActionResult Create()
         {
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email");
-            ViewBag.ID_lek = new SelectList(db.Lek, "ID_lek", "Nazwa");
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace Apteka.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_operacja,ID_lek,Data,ID_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
+        public ActionResult Create([Bind(Include = "Id_operacja,Id_lek,Data,Id_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
         {
             if (ModelState.IsValid)
             {
@@ -57,8 +57,8 @@ namespace Apteka.Models
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
-            ViewBag.ID_lek = new SelectList(db.Lek, "ID_lek", "Nazwa", operacja.ID_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
             return View(operacja);
         }
 
@@ -74,8 +74,8 @@ namespace Apteka.Models
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
-            ViewBag.ID_lek = new SelectList(db.Lek, "ID_lek", "Nazwa", operacja.ID_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
             return View(operacja);
         }
 
@@ -84,7 +84,7 @@ namespace Apteka.Models
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_operacja,ID_lek,Data,ID_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
+        public ActionResult Edit([Bind(Include = "Id_operacja,Id_lek,Data,Id_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
         {
             if (ModelState.IsValid)
             {
@@ -92,8 +92,8 @@ namespace Apteka.Models
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
-            ViewBag.ID_lek = new SelectList(db.Lek, "ID_lek", "Nazwa", operacja.ID_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
             return View(operacja);
         }
 

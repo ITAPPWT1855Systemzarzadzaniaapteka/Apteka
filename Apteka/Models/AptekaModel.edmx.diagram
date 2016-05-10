@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="70d60200b86f41c498c20285078a0e5c" Name="Diagram1">
+      <Diagram DiagramId="aaf2a756283e4c429d16fbabc1218e95" Name="Diagram1">
         <EntityTypeShape EntityType="aptekaModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="aptekaModel.AspNetRoles" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="aptekaModel.AspNetUserClaims" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
@@ -15,14 +15,12 @@
         <EntityTypeShape EntityType="aptekaModel.Lek" Width="1.5" PointX="6" PointY="9.5" IsExpanded="true" />
         <EntityTypeShape EntityType="aptekaModel.Operacja" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="aptekaModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="aptekaModel.Lista_hurtowni" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="aptekaModel.Lista_lekow" Width="1.5" PointX="2.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="aptekaModel.Sprawdz_faktury" Width="1.5" PointX="8.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="aptekaModel.Sprawdz_zawartosc_faktury" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="aptekaModel.Stan_magazynu" Width="1.5" PointX="10.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aptekaModel.Sprawdz_faktury" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aptekaModel.Sprawdz_zawartosc_faktury" Width="1.5" PointX="2.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="aptekaModel.Stan_magazynu" Width="1.5" PointX="8.75" PointY="9.5" IsExpanded="true" />
         <AssociationConnector Association="aptekaModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="aptekaModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="aptekaModel.FK_Operacja_ToUser" ManuallyRouted="false" />
+        <AssociationConnector Association="aptekaModel.FK_Operacja_AspNetUsers" ManuallyRouted="false" />
         <AssociationConnector Association="aptekaModel.FK_Faktura_ToHurtownia" ManuallyRouted="false" />
         <AssociationConnector Association="aptekaModel.FK_Operacja_ToLek" ManuallyRouted="false" />
         <AssociationConnector Association="aptekaModel.AspNetUserRoles" ManuallyRouted="false" />

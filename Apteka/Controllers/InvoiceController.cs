@@ -22,7 +22,7 @@ namespace Apteka.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.ID_hurtownia = new SelectList(context.Hurtownia, "ID_hurtownia", "Nazwa");
+            ViewBag.Id_hurtownia = new SelectList(context.Hurtownia, "Id_hurtownia", "Nazwa");
             ViewBag.Id_lek = new SelectList(context.Lek, "Id_lek", "Nazwa");
             return View();
         }

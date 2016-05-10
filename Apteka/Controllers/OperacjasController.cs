@@ -39,7 +39,7 @@ namespace Apteka.Controllers
         // GET: Operacjas/Create
         public ActionResult Create()
         {
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa");
             return View();
         }
@@ -49,7 +49,7 @@ namespace Apteka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id_operacja,Id_lek,Data,ID_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
+        public ActionResult Create([Bind(Include = "Id_operacja,Id_lek,Data,Id_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +58,8 @@ namespace Apteka.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
-            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.ID_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
             return View(operacja);
         }
 
@@ -75,8 +75,8 @@ namespace Apteka.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
-            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.ID_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
             return View(operacja);
         }
 
@@ -85,7 +85,7 @@ namespace Apteka.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id_operacja,Id_lek,Data,ID_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
+        public ActionResult Edit([Bind(Include = "Id_operacja,Id_lek,Data,Id_user,Przychod,Rozchod,Netto,Brutto")] Operacja operacja)
         {
             if (ModelState.IsValid)
             {
@@ -93,8 +93,8 @@ namespace Apteka.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ID_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
-            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.ID_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
             return View(operacja);
         }
 

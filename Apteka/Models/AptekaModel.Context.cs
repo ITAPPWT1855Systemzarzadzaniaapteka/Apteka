@@ -37,8 +37,6 @@ namespace Apteka.Models
         public virtual DbSet<Lek> Lek { get; set; }
         public virtual DbSet<Operacja> Operacja { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Lista_hurtowni> Lista_hurtowni { get; set; }
-        public virtual DbSet<Lista_lekow> Lista_lekow { get; set; }
         public virtual DbSet<Sprawdz_faktury> Sprawdz_faktury { get; set; }
         public virtual DbSet<Sprawdz_zawartosc_faktury> Sprawdz_zawartosc_faktury { get; set; }
         public virtual DbSet<Stan_magazynu> Stan_magazynu { get; set; }
