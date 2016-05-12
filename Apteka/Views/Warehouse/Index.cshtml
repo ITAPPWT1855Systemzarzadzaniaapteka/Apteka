@@ -16,8 +16,14 @@
 }
 @section Panel
 {
-
-<input type="text" id="filter" class="form-control" />
+<div class="input-group custom-search-form">
+    <input type="text" id="filter" class="form-control" placeholder="Filtruj wśród hurtowni...">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+</div>
 <table id="listagem" class="table table-striped tablesorter">
     <tr>
         <th>

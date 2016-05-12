@@ -4,13 +4,17 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<div class="input-group custom-search-form">
+    <input type="text" id="filter" class="form-control" placeholder="Wpisz nazwę leku...">
+    <span class="input-group-btn">
+        <button class="btn btn-default" type="button">
+            <i class="fa fa-search"></i>
+        </button>
+    </span>
+</div>
+<table id="listagem" class="table table-striped tablesorter">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Id_lek)
@@ -33,32 +37,33 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Id_lek)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nazwa)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dawka)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Opakowanie)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postac)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ilosc_zakupionego_leku)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id_faktura }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id_faktura }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id_faktura })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_lek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dawka)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opakowanie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Postac)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ilosc_zakupionego_leku)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id_faktura }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id_faktura }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id_faktura })
+            </td>
+        </tr>
+    }
 
 </table>

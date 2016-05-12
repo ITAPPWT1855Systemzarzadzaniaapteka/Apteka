@@ -288,20 +288,17 @@
                                 </li>
                             </ul>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="tables.html"><i class="fa fa-calculator"></i> Operacje</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="@Url.Action("Sell", "Medicine")">Ostatnie operacje</a>
+                                    <a href="@Url.Action("Summary", "Medicine")">Ostatnie operacje</a>
                                 </li>
                                 <li>
                                     <a href="@Url.Action("Index", "Operation")>Baza operacje</a>
                                 </li>
-                                @*<li>
-                                    <a href="@Url.Action("Create", "Operation")">Nowe operacje</a>
-                                </li>*@
                             </ul>
-                        </li>
+                        </li>*@
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Faktury<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
@@ -358,9 +355,9 @@
                 <div class="panel-footer">@RenderSection("PanelFooter", required: false)</div>
             </div>
             }else
-{
-    <div></div>
-}
+        {
+            <div></div>
+        }
 
         </div><!-- /#page-wrapper -->
     </div><!-- /#wrapper -->
