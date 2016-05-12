@@ -446,6 +446,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\lib\highcharts.js" />
     <Content Include="Scripts\lib\jquery\jquery.js" />
+    <Content Include="js\jquery.datatables.pl.json" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lib\metisMenu.js" />
     <Content Include="Scripts\sb-admin-2.js" />
