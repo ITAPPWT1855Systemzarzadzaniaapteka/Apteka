@@ -6,8 +6,8 @@ namespace Apteka.Models {
     public class InvoiceProductModel {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public string Price { get; set; } //netto per each
-        public string Vat { get; set; }
+        public double Price { get; set; } //netto per each
+        public double Vat { get; set; }
     }
 
     public class CreateInvoiceModel {

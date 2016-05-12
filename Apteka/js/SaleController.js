@@ -1,8 +1,6 @@
 ﻿var sampleMedicinesData;
-var sampleWarehousesData;
 
 $(function () {
-
     $("#listagem").tablesorter();
     function search(search) {
 
@@ -14,22 +12,12 @@ $(function () {
         console.log(text);
         search(text);
     });
-
-
 });
-Date.prototype.toDateInputValue = (function () {
+
+Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 10);
-});
-
-function parseWarehouses(arr) {
-    return _.map(arr, function (warehouse) {
-        return {
-            value: warehouse.Nazwa.toLowerCase() + " " + warehouse.NIP,
-            data: warehouse.Id_hurtownia
-        };
-    })
+    return local.toJSON();
 };
 
 function parseMedicines(arr) {
@@ -105,21 +93,11 @@ function addRow() {
 };
 
 $(document).ready(function () {
-    $.get("/Invoice/GetMedicines", function (data) {
+    $.get("/Sale/GetMedicines", function (data) {
         sampleMedicinesData = data;
         addRow();
     });
     $(".datepicker").val(new Date().toDateInputValue());
-    $.get("/Invoice/GetWarehouses", function (data) {
-        sampleWarehousesData = data;
-        $("#warehouse").autocomplete({
-            lookup: parseWarehouses(sampleWarehousesData),
-            onSelect: function (suggestion) {
-                $("#warehouse-id").val(suggestion.data);
-            }
-        })
-    });
-
     $("#add-row-button").click(addRow);
     $("#form").submit(function (e) {
         e.preventDefault();
@@ -128,12 +106,11 @@ $(document).ready(function () {
             if (!$(this).attr("disabled"))
                 throw new Error("Wypełnij wszystkie pola");
         });
-        if (!$("#warehouse-id").val())
-            throw new Error("Nie wybrano hurtowni");
-        if (!$("#invoiceId").val())
-            throw new Error("Nie wpisano numeru faktury");
         if ($("#form").find("tr").length < 2)
             throw new Error("Nie wybrano żadnych produktów");
+        $(".vat").each(function () {
+            $(this).val($(this).val().replace("%", ""));
+        });
         return this.submit();
     });
 });
