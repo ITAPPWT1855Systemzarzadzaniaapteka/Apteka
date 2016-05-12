@@ -17,7 +17,7 @@ $(function () {
 Date.prototype.toDateInputValue = function () {
     var local = new Date(this);
     local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
-    return local.toJSON().slice(0, 10);
+    return local.toJSON();
 };
 
 function parseMedicines(arr) {
@@ -60,7 +60,6 @@ function addRow() {
             row.find(".med-id").val(med.Id_lek);
             row.find(".med-name").attr("disabled", true);
             row.find(".med-name").autocomplete("dispose");
-            row.find(".quantity").focus();
         }
     });
     $(newRow).find(".quantity, .price, .vat").on("input", function () {
@@ -107,10 +106,11 @@ $(document).ready(function () {
             if (!$(this).attr("disabled"))
                 throw new Error("Wypełnij wszystkie pola");
         });
-        if (!$("#saleNumber").val())
-            throw new Error("Nie wpisano numeru dokumentu sprzedaży");
         if ($("#form").find("tr").length < 2)
             throw new Error("Nie wybrano żadnych produktów");
+        $(".vat").each(function () {
+            $(this).val($(this).val().replace("%", ""));
+        });
         return this.submit();
     });
 });

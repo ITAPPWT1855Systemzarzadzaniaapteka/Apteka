@@ -259,6 +259,7 @@
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\OperacjasController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
@@ -386,6 +387,7 @@
     <Content Include="js\InvoiceController.js" />
     <Content Include="js\MedicineController.js" />
     <Content Include="js\OperationController.js" />
+    <Content Include="js\SaleController.js" />
     <Content Include="js\StoreController.js" />
     <Content Include="js\UsersController.js" />
     <Content Include="js\WarehouseController.js" />
@@ -526,6 +528,8 @@
     <Content Include="Views\Medicine\SaveAlert.cshtml" />
     <Content Include="Views\Medicine\SaveAlerts.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Sale\Create.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />

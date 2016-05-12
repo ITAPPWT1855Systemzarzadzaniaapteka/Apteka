@@ -1,4 +1,4 @@
-@model Apteka.Models.Faktura
+﻿@model Apteka.Models.Faktura
 
 @{
     ViewBag.Title = "Create";
@@ -25,11 +25,14 @@
     }
 </style>
 <br />
-<div class="panel panel-default" ">
+@if (ViewBag.Message != null) {
+    <div class="alert alert-success" role="alert">@ViewBag.Message</div>
+}
+<div class="panel panel-default">
     <div class="panel-heading">
-        <div class="row">
+        <div class="row"> 
             <i class="fa fa-file-text fa-fw col-xs-1"></i>
-            <div class="col-xs-11">Wprowadź nową fakturę</div>
+            <div class="col-xs-11">Panel sprzedaży</div>
         </div>
     </div>
     <div class="panel-body">
@@ -89,4 +92,3 @@
     </div>
 </div>
 <script src="/js/SaleController.js"></script>
-

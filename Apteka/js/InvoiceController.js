@@ -72,7 +72,6 @@ function addRow() {
             row.find(".med-id").val(med.Id_lek);
             row.find(".med-name").attr("disabled", true);
             row.find(".med-name").autocomplete("dispose");
-            row.find(".quantity").focus();
         }
     });
     $(newRow).find(".quantity, .price, .vat").on("input", function () {
