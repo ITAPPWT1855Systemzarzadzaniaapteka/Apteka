@@ -1,0 +1,92 @@
+@model Apteka.Models.Faktura
+
+@{
+    ViewBag.Title = "Create";
+}
+<style>
+    .new-medicines div {
+        margin-bottom: 20px;
+        margin-left: 30px;
+    }
+
+    .medicines div {
+        margin-bottom: 20px;
+        margin-left: 30px;
+    }
+
+    .brutto::-webkit-inner-spin-button,
+    .brutto::-webkit-outer-spin-button,
+    .netto::-webkit-inner-spin-button,
+    .netto::-webkit-outer-spin-button,
+    .price::-webkit-inner-spin-button,
+    .price::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<br />
+<div class="panel panel-default" ">
+    <div class="panel-heading">
+        <div class="row">
+            <i class="fa fa-file-text fa-fw col-xs-1"></i>
+            <div class="col-xs-11">Wprowadź nową fakturę</div>
+        </div>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Create", "Sale", FormMethod.Post, new { @class = "form-horizontal", role = "form", id = "form" })) {
+            <div class="row">
+                <label for="date-input" class="col-md-3">Wprowadź datę:</label>
+            </div>
+            <div class="row inputs">
+                <div class="col-md-3">
+                    <input type="datetime" class="form-control datepicker" name="date">
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <table class="table" id="product-table">
+                    <tr>
+                        <th class="col-xs-1"> Lp. </th>
+                        <th class="col-xs-5"> Nazwa towaru </th>
+                        <th class="col-xs-1"> Ilość </th>
+                        <th class="col-xs-1"> Cena Netto </th>
+                        <th class="col-xs-1"> Wartość Netto </th>
+                        <th class="col-xs-1"> Vat </th>
+                        <th class="col-xs-1"> Wartość Brutto </th>
+                        <th class="col-xs-1"></th>
+                    </tr>
+                </table>
+                <div class="col-md-1 pull-right">
+                    <button type="button" class="btn btn-success" id="add-row-button"><span class="fa fa-plus"></span></button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7"></div>
+                <label for="netto" class="col-md-2">Kwota netto:</label>
+                <div class="col-md-1"></div>
+                <label for="brutto" class="col-md-2">Kwota brutto:</label>
+            </div>
+            <div class="row inputs">
+                <div class="col-md-7"></div>
+                <div class="col-md-2">
+                    <input id="netto" type="number" step="0.01" value="0" ng-model="facture.Netto" class="form-control" tabindex="-1" disabled/>
+                    <div class="text-danger"></div>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                    <input id="brutto" type="number" value="0" ng-model="facture.Brutto" class="form-control" tabindex="-1" disabled />
+                </div>
+            </div>
+            <br/>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2 pull-right">
+                        <input type="submit" value="Zapisz" class="btn btn-success">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script src="/js/SaleController.js"></script>
+
