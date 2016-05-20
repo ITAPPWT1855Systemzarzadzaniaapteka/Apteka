@@ -3,11 +3,20 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}   <head>
+        <title>Faktury</title>
+        <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
+    </head>
+@section PanelName
+{
+    Baza faktur
 }
-<script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
+@section Panel
+{
+
 
 <div class="input-group custom-search-form">
-    <input type="text" id="filter" class="form-control" placeholder="Wpisz nazwę leku...">
+    <input type="text" id="filter" class="form-control" placeholder="Filtruj po wartościach...">
     <span class="input-group-btn">
         <button class="btn btn-default" type="button">
             <i class="fa fa-search"></i>
@@ -53,11 +62,15 @@
                 @Html.DisplayFor(modelItem => item.Brutto)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id_faktura }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id_faktura }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id_faktura })
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_faktura }) 
+
             </td>
         </tr>
     }
 
 </table>
+}
+@section PanelFooter
+{
+    <p>  </p>
+}

@@ -385,6 +385,7 @@
     <Content Include="js\CheckInvoiceController.js" />
     <Content Include="js\HomeController.js" />
     <Content Include="js\InvoiceController.js" />
+    <Content Include="js\jquery.datatables.pl.js" />
     <Content Include="js\MedicineController.js" />
     <Content Include="js\OperationController.js" />
     <Content Include="js\SaleController.js" />
@@ -446,7 +447,6 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\lib\highcharts.js" />
     <Content Include="Scripts\lib\jquery\jquery.js" />
-    <Content Include="js\jquery.datatables.pl.json" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lib\metisMenu.js" />
     <Content Include="Scripts\sb-admin-2.js" />
@@ -501,11 +501,11 @@
     <Content Include="Views\Medicine\Index.cshtml" />
     <Content Include="Views\Medicine\Sell.cshtml" />
     <Content Include="Views\Medicine\Summary.cshtml" />
-    <Content Include="Views\Operation\Create.cshtml" />
-    <Content Include="Views\Operation\Delete.cshtml" />
-    <Content Include="Views\Operation\Details.cshtml" />
-    <Content Include="Views\Operation\Edit.cshtml" />
-    <Content Include="Views\Operation\Index.cshtml" />
+    <Content Include="Views\Product\Operation\Create.cshtml" />
+    <Content Include="Views\Product\Operation\Delete.cshtml" />
+    <Content Include="Views\Product\Operation\Details.cshtml" />
+    <Content Include="Views\Product\Operation\Edit.cshtml" />
+    <Content Include="Views\Product\Operation\Index.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Home\Weather.cshtml" />
     <Content Include="Views\CheckContentInvoice\Create.cshtml" />
@@ -531,6 +531,7 @@
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Sale\Create.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Shared\_MessagesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />

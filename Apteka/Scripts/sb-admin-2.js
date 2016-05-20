@@ -27,8 +27,12 @@ $(function() {
     });
 
     var url = window.location;
-    var element = $('ul.nav a').filter(function() {
-        return this.href == url || url.href.indexOf(this.href) == 0;
+    var element = $('ul.nav a').filter(function () {
+        if (this.href == url || url.href.indexOf(this.href) == 0) {
+            console.log(this.href);
+        }
+        return this.href == url;//|| url.href.indexOf(this.href) == 0; //po kiego ch*** ten warunek?
+                                                                            // szandala
     }).addClass('active').parent().parent().addClass('in').parent();
     if (element.is('li')) {
         element.addClass('active');

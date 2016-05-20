@@ -1,11 +1,11 @@
-/*
- * metismenu - v2.4.3
- * A jQuery menu plugin
- * https://github.com/onokumus/metisMenu#readme
- *
- * Made by Osman Nuri Okumuş <onokumus@gmail.com> (https://github.com/onokumus)
- * Under MIT License
- */
+///*
+// * metismenu - v2.4.3
+// * A jQuery menu plugin
+// * https://github.com/onokumus/metisMenu#readme
+// *
+// * Made by Osman Nuri Okumuş <onokumus@gmail.com> (https://github.com/onokumus)
+// * Under MIT License
+// */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
