@@ -54,6 +54,7 @@
                 <th>Dawka</th>
                 <th>Stan</th>
                 <th>Zapotrzebowanie dzienne</th>
+                <th>Ilość zamówienia</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +65,7 @@
                     <td>@item.Dawka</td>
                     <td>@item.Stan</td> 
                     <td>@item.Zapotrzebowanie</td>
+                    <td>@(item.Zapotrzebowanie*5)</td>
                 </tr>
             }
         </tbody>
