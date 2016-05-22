@@ -20,15 +20,18 @@ namespace Apteka.Controllers
             var LowMeds = context.Lek
                 .Where(m =>
                     m.Operacja.Sum(o => o.Przychod - o.Rozchod)
-                    <= m.Operacja
+                    <= 3.0 * m.Operacja
                         .Where(o => o.Data > DateStart)
-                        .Sum(o => o.Rozchod)
+                        .Sum(o => o.Rozchod) / 5
                 ).Select(i => new MedAvailability {
                     Id = i.Id_lek,
                     Nazwa = i.Nazwa,
                     Dawka = i.Dawka,
                     Opakowanie = i.Opakowanie.HasValue ? i.Opakowanie.Value : 0,
-                    Stan = i.Operacja.Sum(o => o.Przychod - o.Rozchod)
+                    Stan = i.Operacja.Sum(o => o.Przychod - o.Rozchod),
+                    Zapotrzebowanie = 1.0 * i.Operacja
+                        .Where(o => o.Data > DateStart)
+                        .Sum(o => o.Rozchod) / 5
                 }).ToList();
 
             return View(LowMeds);

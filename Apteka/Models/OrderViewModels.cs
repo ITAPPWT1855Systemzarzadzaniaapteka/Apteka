@@ -5,5 +5,6 @@
         public string Dawka;
         public int Opakowanie;
         public int? Stan;
+        public double? Zapotrzebowanie;
     }
 }
