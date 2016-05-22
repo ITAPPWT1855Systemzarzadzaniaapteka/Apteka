@@ -22,7 +22,7 @@ namespace Apteka.Controllers
         public JsonResult SalesToday() {
             var DateStart = DateTime.Today;
             var DateEnd = DateTime.Now;
-            DateEnd = DateEnd.AddHours(3);
+            DateEnd = DateEnd.AddHours(1 + 2);
             var groups = context.Operacja
                 .Where(i => i.Data >= DateStart && i.Rozchod > 0)
                 .OrderBy(i => i.Data)
@@ -54,6 +54,7 @@ namespace Apteka.Controllers
         public JsonResult ExpensesDaily(int days = 7) {
             var DateStart = DateTime.Today.AddDays(-1 * days + 1);
             var DateEnd = DateTime.Today;
+            DateEnd = DateEnd.AddDays(1);
             var groups = context.Operacja
                 .Where(i => i.Data >= DateStart && i.Przychod > 0)
                 .OrderBy(i => i.Data)
