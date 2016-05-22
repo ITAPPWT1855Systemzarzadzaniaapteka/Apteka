@@ -54,11 +54,19 @@
 
     function toHour(date) {
         var a = new Date(parseInt(date.substr(6)));
+        a.setTime(a.getTime() + 2 * 60 * 1000);
         return a.getTime();
     }
 
     var today = new Date();
     today.setHours(0, 0, 0, 0);
+
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+
     $(function () {
         getPromise("/Chart/SalesToday").then(function (dane) {
             var later = new Date();
