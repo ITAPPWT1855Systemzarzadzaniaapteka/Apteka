@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Apteka.Models.MedAvailability>
+
+@{
+    ViewBag.Title = "Index";
+}
+@section PanelName
+{
+    Produkty z niskim stanem magazynowym
+}
+@section Panel
+{
+    <table class="table" id="lowStockMedicines">
+        <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Opakowanie</th>
+                <th>Dawka</th>
+                <th>Stan</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+
+                <tr>
+                    <td>@item.Nazwa</td>
+                    <td>@item.Opakowanie</td>
+                    <td>@item.Dawka</td>
+                    <td>@item.Stan</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<script>
+    $(document).ready(function () {
+        $('#lowStockMedicines').DataTable({
+            "order": [[3, "asc"]],
+            "language": {
+                "url": "js/jquery.datatables.pl.js"
+            }
+        });
+    });
+</script>

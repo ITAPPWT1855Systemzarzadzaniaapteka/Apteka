@@ -258,6 +258,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicineController.cs" />
     <Compile Include="Controllers\OperacjasController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\SaleController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -331,6 +332,7 @@
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\OperationController.cs" />
+    <Compile Include="Models\OrderViewModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Sprawdz_faktury.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
@@ -447,6 +449,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\lib\highcharts.js" />
     <Content Include="Scripts\lib\jquery\jquery.js" />
+    <Content Include="js\jquery.datatables.pl.js" />
     <Content Include="Scripts\lodash.js" />
     <Content Include="Scripts\lib\metisMenu.js" />
     <Content Include="Scripts\sb-admin-2.js" />
@@ -532,6 +535,7 @@
     <Content Include="Views\Sale\Create.cshtml" />
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\Shared\_MessagesPartial.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />
