@@ -250,7 +250,7 @@
                             <a href="@Url.Action("Index", "Store")"><i class="fa fa-database"></i>Magazyn</a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-table fa-fw"></i> Leki<span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Leki<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="@Url.Action("Summary", "Medicine")">Podsumowanie sprzedaży</a>
@@ -262,6 +262,9 @@
                                     <a href="@Url.Action("Create", "Medicine")">Dodaj lek</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Order")"><i class="fa fa-database"></i>Zamówienia</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i>Faktury<span class="fa arrow"></span></a>
@@ -308,7 +311,7 @@
             @RenderBody()
             @if (IsSectionDefined("Panel"))
             {
-                <div class="panel" style="width:80%;margin:10px; background-color:#b0c4de; color:#f0fff0">
+                <div class="panel" style="width:80%;margin:10px; background-color:#b0c4de; color:#000000">
                 <div class="panel-heading">@RenderSection("PanelName", required: false)</div>
                     <div class="panel-body" style="background-color:#d3d3d3 ;color:#000000">
                         <div class="row" style="margin:25px;">@RenderSection("Panel", required: false)</div>
