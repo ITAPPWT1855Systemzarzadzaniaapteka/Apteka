@@ -8,7 +8,6 @@
     <title>Hurtownie</title>
     <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
 </head>
-<h4>Hurtownie</h4>
 
 @section PanelName
 {
@@ -23,7 +22,7 @@
             <i class="fa fa-search"></i>
         </button>
     </span>
-</div>
+</div><br/>
 <table id="listagem" class="table table-striped tablesorter">
     <tr>
         <th>
@@ -46,8 +45,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edytuj", "Edit", new { id = item.Id_hurtownia }) |
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_hurtownia }) |
-                @Html.ActionLink("Usuń", "Delete", new { id = item.Id_hurtownia })
+                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_hurtownia })
             </td>
         </tr>
     }
