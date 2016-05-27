@@ -22,6 +22,7 @@ namespace Apteka.Controllers
         public JsonResult SalesToday() {
             var DateStart = DateTime.Today;
             var DateEnd = DateTime.Now;
+            DateEnd = DateEnd.AddHours(1 + 2);
             var groups = context.Operacja
                 .Where(i => i.Data >= DateStart && i.Rozchod > 0)
                 .OrderBy(i => i.Data)
@@ -29,7 +30,7 @@ namespace Apteka.Controllers
                 .Select(i => new { Key = i.Key, value = i.Sum(it => it.Rozchod * it.Netto) })
                 .ToDictionary(i => i.Key, i => i.value);
 
-            var result = Enumerable.Range(0, (int)(DateEnd - DateStart).TotalHours).Select(h => new { Date = DateStart.AddHours(h), Count = groups.ContainsKey(h) ? groups[h] : 0 });
+            var result = Enumerable.Range(0, (int)(DateEnd - DateStart).TotalHours).Select(h => new { Date = DateStart.AddHours(h-2), Count = groups.ContainsKey(h) ? groups[h] : 0 });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
@@ -37,6 +38,7 @@ namespace Apteka.Controllers
         public JsonResult EarningsDaily(int days = 7) {
             var DateStart = DateTime.Today.AddDays(-1 * days + 1);
             var DateEnd = DateTime.Today;
+            DateEnd = DateEnd.AddDays(1);
             var groups = context.Operacja
                 .Where(i => i.Data >= DateStart && i.Rozchod > 0)
                 .OrderBy(i => i.Data)
@@ -52,6 +54,7 @@ namespace Apteka.Controllers
         public JsonResult ExpensesDaily(int days = 7) {
             var DateStart = DateTime.Today.AddDays(-1 * days + 1);
             var DateEnd = DateTime.Today;
+            DateEnd = DateEnd.AddDays(1);
             var groups = context.Operacja
                 .Where(i => i.Data >= DateStart && i.Przychod > 0)
                 .OrderBy(i => i.Data)
