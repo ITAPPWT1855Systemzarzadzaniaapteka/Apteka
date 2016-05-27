@@ -17,6 +17,7 @@ namespace Apteka.Controllers
         private aptekaEntities1 db = new aptekaEntities1();
         public ActionResult Index()
         {
+            ViewBag.stores = db.Stan_magazynu.Take(5).OrderBy(x => x.Obecny_Stan_Magazynu);
             return View();
         }
 
@@ -43,5 +44,11 @@ namespace Apteka.Controllers
         {
             return View();
         }
+
+        //public PartialViewResult _MessagesPartial()
+        //{
+        //   var stores = db.Stan_magazynu.Take(5).OrderBy(x=>x.Obecny_Stan_Magazynu);
+        //   return PartialView("~/Shared/_MessagesPartial.cshtml", stores);
+        //}
     }
 }
