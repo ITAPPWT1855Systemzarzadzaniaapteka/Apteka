@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\woda2\Apteka\Apteka\Models\AptekaModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Karolinka\Documents\woda2\Apteka\Apteka\Models\AptekaModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

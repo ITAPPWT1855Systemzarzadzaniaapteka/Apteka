@@ -14,7 +14,7 @@ namespace Apteka.Controllers
         {
             return View(context.Operacja
                 .Where(i => i.Rozchod > 0)
-                .OrderByDescending(i => i.Id_operacja)
+                .OrderByDescending(i => i.ID_operacja)
                 .Take(50)
                 .ToList());
         }
@@ -28,11 +28,27 @@ namespace Apteka.Controllers
         [HttpPost]
         public ActionResult Create(CreateInvoiceModel model)
         {
+            foreach (var i in model.Products)
+            {
+                var vat = i.Vat;
+                var price = i.Price;
+                var netto = double.Parse(price.Replace(".", ","));
+                var brutto = (1 + (double.Parse(vat.Replace("%", "")) / 100)) * double.Parse(price.Replace(".", ","));
+                             context.Operacja.Add(new Operacja {
+                    ID_user = System.Web.HttpContext.Current.User.Identity.GetUserId(),
+                    Data = model.Date,
+                    ID_lek = i.Id,
+                    Rozchod = i.Quantity,
+                    Przychod = 0,
+                    Netto = netto,
+                    Brutto =brutto
+                })
+            }
             model.Products.ForEach(i =>
                 context.Operacja.Add(new Operacja {
-                    Id_user = System.Web.HttpContext.Current.User.Identity.GetUserId(),
+                    ID_user = System.Web.HttpContext.Current.User.Identity.GetUserId(),
                     Data = model.Date,
-                    Id_lek = i.Id,
+                    ID_lek = i.Id,
                     Rozchod = i.Quantity,
                     Przychod = 0,
                     Netto = i.Price,

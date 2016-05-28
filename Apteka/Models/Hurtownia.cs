@@ -9,10 +9,8 @@
 
 namespace Apteka.Models
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    using System.Web.Script.Serialization;
     
     public partial class Hurtownia
     {
@@ -21,12 +19,10 @@ namespace Apteka.Models
             this.Faktura = new HashSet<Faktura>();
         }
     
-        public int Id_hurtownia { get; set; }
+        public int ID_hurtownia { get; set; }
         public string Nazwa { get; set; }
         public Nullable<int> NIP { get; set; }
-
-        [JsonIgnore] 
-        [ScriptIgnore]
+    
         public virtual ICollection<Faktura> Faktura { get; set; }
     }
 }

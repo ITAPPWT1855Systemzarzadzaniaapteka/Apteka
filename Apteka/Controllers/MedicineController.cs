@@ -23,7 +23,10 @@ namespace Apteka.Controllers
         {
             return View(db.Lek.ToList());
         }
-
+        public List<Lek> ListAll()
+        {
+            return db.Lek.ToList();
+        }
         // GET: Medicine/Details/5
         public ActionResult Details(int? id)
         {
@@ -77,7 +80,7 @@ namespace Apteka.Controllers
             //    operacja.ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id;
 
             var dataFile = Server.MapPath("~/App_Data/sell/sell.csv");
-            string details = operacja.Id_lek + "," + operacja.Rozchod + "," + operacja.Brutto + "," + operacja.Netto;
+            string details = operacja.ID_lek + "," + operacja.Rozchod + "," + operacja.Brutto + "," + operacja.Netto;
             System.IO.File.AppendAllText(dataFile, details);
             return RedirectToAction("Sell", operacja);
         }
@@ -87,25 +90,25 @@ namespace Apteka.Controllers
                    .Select(x => x.Split(','))
                    .Select(x => new Operacja
                    {
-                       Id_lek = Int32.Parse(x[0]),
+                       ID_lek = Int32.Parse(x[0]),
                        Rozchod = Int32.Parse(x[1]),
                        Brutto = Int32.Parse(x[2]),
                        Netto = Int32.Parse(x[3])
                    }).ToList();
 
            return (from op in operations
-                          group op by op.Id_lek
+                          group op by op.ID_lek
                               into newOp
                               select new Operacja
                               {
-                                  Id_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
-                                  Id_lek = newOp.First().Id_lek,
+                                  ID_operacja = DateTime.Now.Day+DateTime.Now.Hour+ DateTime.Now.Minute + DateTime.Now.Second,
+                                  ID_lek = newOp.First().ID_lek,
                                   Rozchod = newOp.Sum(o => o.Rozchod),
                                   Data =  DateTime.Now,
                                   Netto = newOp.Sum(o => o.Netto),
                                   Brutto = newOp.Sum(o => o.Brutto),
                                   Przychod = 0,
-                                  Id_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
+                                  ID_user = db.AspNetUsers.FirstOrDefault(u => u.UserName == User.Identity.Name).Id
                               }).ToList();
         }
         public ActionResult Summary()

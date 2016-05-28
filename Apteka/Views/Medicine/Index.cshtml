@@ -19,7 +19,7 @@
     </span>
 </div>
     <br/>
-<iframe src="@Url.Action("PostAndShow", "My")" width="400" height="300">
+@*<iframe src="@Url.Action("PostAndShow", "My")" width="400" height="300">*@
     <table id="listagem" class="table table-striped tablesorter">
         <thead>
             <tr>
@@ -62,9 +62,20 @@
             }
         </tbody>
     </table>
-</iframe>
+@*</iframe>*@
 }
 @section PanelFooter
 {
     <p>  </p>
 }
+
+<script>
+    $(document).ready(function () {
+        $('#listagem').DataTable({
+            "order": [[3, "asc"]],
+            "language": {
+                "url": "js/jquery.datatables.pl.js"
+            }
+        });
+    });
+</script>

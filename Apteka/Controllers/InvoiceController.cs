@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Apteka.Models;
 using System.IO;
 using Newtonsoft.Json;
-
+using Microsoft.AspNet.Identity;
 namespace Apteka.Controllers 
 {
 
@@ -22,22 +22,18 @@ namespace Apteka.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Id_hurtownia = new SelectList(context.Hurtownia, "Id_hurtownia", "Nazwa");
+            ViewBag.ID_hurtownia = new SelectList(context.Hurtownia, "ID_hurtownia", "Nazwa");
             ViewBag.Id_lek = new SelectList(context.Lek, "Id_lek", "Nazwa");
             return View();
         }
         
-        [HttpPost]
-        public ActionResult Create(CreateInvoiceModel model)
-        {
-            return Json(model);
-        }
+
 
         [HttpGet]
         public ActionResult GetWarehouses()
         {
             var warehouses = context.Hurtownia.ToList()
-                .Select(i => new { i.Id_hurtownia, i.Nazwa, i.NIP })
+                .Select(i => new { i.ID_hurtownia, i.Nazwa, i.NIP })
                 .ToList();
             return Json(warehouses, JsonRequestBehavior.AllowGet);
         }
@@ -51,15 +47,40 @@ namespace Apteka.Controllers
             return Json(medicines, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpPost]
-        //public ActionResult Create(Faktura faktura)
-        //{
-        //    context.Faktura.Add(faktura);
-        //    context.SaveChanges();
-        //    var data = jsonFacture.Data;
-        //    Faktura facture = new Faktura() { Numer = jsonFacture.nr, Hurtownia = jsonFacture.warehouseNr };
+        [HttpPost]
+        public ActionResult Create(CreateInvoiceModel model)
+        {
+             
+            foreach (var i in model.Products)
+            {
+                var vat = i.Vat;
+                var price = i.Price;
+                var netto = double.Parse(price.Replace(".", ","));
+                var brutto = (1 + (double.Parse(vat.Replace("%", "")) / 100)) * double.Parse(price.Replace(".", ","));
+                Operacja operacja = new Operacja
+                {
+                    ID_user = System.Web.HttpContext.Current.User.Identity.GetUserId(),
+                    Data = model.Date,
+                    ID_lek = i.Id,
+                    Rozchod = i.Quantity,
+                    Przychod = 0,
+                    Netto = netto,
+                    Brutto = brutto
+                };
+                Faktura faktura = new Faktura()
+                {
+                    Numer = model.InvoiceId,
+                    Id_hurtownia = model.WarehouseId,
+                };
+                Faktura_operacja faktura_operacja = new Faktura_operacja() { Faktura = faktura, Operacja = operacja };
+                faktura.Faktura_operacja.Add(faktura_operacja);
+                operacja.Faktura_operacja.Add(faktura_operacja);
+                context.Operacja.Add(operacja);
+                context.Faktura.Add(faktura);
+            }
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            context.SaveChanges();
+            return RedirectToAction("Index", "CheckInvoice");
+        }
     }
 }

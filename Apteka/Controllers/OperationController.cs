@@ -57,8 +57,8 @@ namespace Apteka.Models
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
-            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.ID_lek);
             return View(operacja);
         }
 
@@ -74,8 +74,8 @@ namespace Apteka.Models
             {
                 return HttpNotFound();
             }
-            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
-            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.ID_lek);
             return View(operacja);
         }
 
@@ -92,8 +92,8 @@ namespace Apteka.Models
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.Id_user);
-            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.Id_lek);
+            ViewBag.Id_user = new SelectList(db.AspNetUsers, "Id", "Email", operacja.ID_user);
+            ViewBag.Id_lek = new SelectList(db.Lek, "Id_lek", "Nazwa", operacja.ID_lek);
             return View(operacja);
         }
 
