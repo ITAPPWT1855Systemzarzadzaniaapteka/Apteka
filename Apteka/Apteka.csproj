@@ -318,6 +318,9 @@
     <Compile Include="Models\Faktura.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Faktura_operacja.cs">
+      <DependentUpon>AptekaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hurtownia.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
@@ -327,11 +330,17 @@
     <Compile Include="Models\Lek.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Lista_hurtowni.cs">
+      <DependentUpon>AptekaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Lista_lekow.cs">
+      <DependentUpon>AptekaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Models\Operacja.cs">
       <DependentUpon>AptekaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\OperationController.cs" />
     <Compile Include="Models\OrderViewModels.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\Sprawdz_faktury.cs">

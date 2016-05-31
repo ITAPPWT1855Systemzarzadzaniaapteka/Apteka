@@ -27,7 +27,7 @@ function parseWarehouses(arr) {
     return _.map(arr, function (warehouse) {
         return {
             value: warehouse.Nazwa.toLowerCase() + " " + warehouse.NIP,
-            data: warehouse.Id_hurtownia
+            data: warehouse.ID_hurtownia
         };
     })
 };
@@ -82,9 +82,10 @@ function addRow() {
         var bruttoVal = nettoVal * (100 + parseFloat(row.find(".vat").val())) / 100;
         row.find(".netto").val(nettoVal.toFixed(2));
         row.find(".brutto").val(bruttoVal.toFixed(2));
-
         var sumNetto = 0;
         var sumBrutto = 0;
+        console.log('price', priceVal, nettoVal);
+
         $(".product-row").each(function () {
             var row = $(this);
             sumNetto += +row.find(".netto").val();

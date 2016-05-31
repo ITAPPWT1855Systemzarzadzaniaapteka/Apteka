@@ -2,15 +2,12 @@
     ViewBag.Title = "Lista użytkowników";
 }
 
-<h4>@ViewBag.Title</h4>
 @section PanelName
 {
-
+    <p>Lista użytkowników</p>
 }
 @section Panel
 {
-
-
 <ul class="list-group">
     @foreach (var user in ViewBag.Users) {
         <li class="list-group-item">

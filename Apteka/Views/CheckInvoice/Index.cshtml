@@ -22,7 +22,7 @@
             <i class="fa fa-search"></i>
         </button>
     </span>
-</div>
+</div><br/>
 <table id="listagem" class="table table-striped tablesorter">
     <tr>
         <th>
@@ -61,10 +61,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Brutto)
             </td>
-            <td>
-                @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_faktura }) 
-
-            </td>
+        
         </tr>
     }
 

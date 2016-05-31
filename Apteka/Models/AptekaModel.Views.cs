@@ -11,7 +11,7 @@ using System.Data.Entity.Infrastructure.MappingViews;
 
 [assembly: DbMappingViewCacheTypeAttribute(
     typeof(Apteka.Models.aptekaEntities1),
-    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySets059fa4199b4b830f0627609110cd822d0960dceeb62b50294ac7c85f4d46ca2b))]
+    typeof(Edm_EntityMappingGeneratedViews.ViewsForBaseEntitySetse4ae167d4a7a9bad861ad8d499a6f792eeee5c7a8b774ef2f3b98155d39ddc50))]
 
 namespace Edm_EntityMappingGeneratedViews
 {
@@ -23,14 +23,14 @@ namespace Edm_EntityMappingGeneratedViews
     /// Implements a mapping view cache.
     /// </summary>
     [GeneratedCode("Entity Framework Power Tools", "0.9.0.0")]
-    internal sealed class ViewsForBaseEntitySets059fa4199b4b830f0627609110cd822d0960dceeb62b50294ac7c85f4d46ca2b : DbMappingViewCache
+    internal sealed class ViewsForBaseEntitySetse4ae167d4a7a9bad861ad8d499a6f792eeee5c7a8b774ef2f3b98155d39ddc50 : DbMappingViewCache
     {
         /// <summary>
         /// Gets a hash value computed over the mapping closure.
         /// </summary>
         public override string MappingHashValue
         {
-            get { return "059fa4199b4b830f0627609110cd822d0960dceeb62b50294ac7c85f4d46ca2b"; }
+            get { return "e4ae167d4a7a9bad861ad8d499a6f792eeee5c7a8b774ef2f3b98155d39ddc50"; }
         }
 
         /// <summary>
@@ -82,27 +82,27 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView6();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Hurtownia")
+            if (extentName == "aptekaModelStoreContainer.Faktura_operacja")
             {
                 return GetView7();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Lek")
+            if (extentName == "aptekaModelStoreContainer.Hurtownia")
             {
                 return GetView8();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Operacja")
+            if (extentName == "aptekaModelStoreContainer.Lek")
             {
                 return GetView9();
             }
 
-            if (extentName == "aptekaModelStoreContainer.AspNetUserRoles")
+            if (extentName == "aptekaModelStoreContainer.Operacja")
             {
                 return GetView10();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Faktura_operacja")
+            if (extentName == "aptekaModelStoreContainer.AspNetUserRoles")
             {
                 return GetView11();
             }
@@ -132,27 +132,27 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView16();
             }
 
-            if (extentName == "aptekaEntities1.Hurtownia")
+            if (extentName == "aptekaEntities1.Faktura_operacja")
             {
                 return GetView17();
             }
 
-            if (extentName == "aptekaEntities1.Lek")
+            if (extentName == "aptekaEntities1.Hurtownia")
             {
                 return GetView18();
             }
 
-            if (extentName == "aptekaEntities1.Operacja")
+            if (extentName == "aptekaEntities1.Lek")
             {
                 return GetView19();
             }
 
-            if (extentName == "aptekaEntities1.AspNetUserRoles")
+            if (extentName == "aptekaEntities1.Operacja")
             {
                 return GetView20();
             }
 
-            if (extentName == "aptekaEntities1.Faktura_operacja")
+            if (extentName == "aptekaEntities1.AspNetUserRoles")
             {
                 return GetView21();
             }
@@ -167,34 +167,54 @@ namespace Edm_EntityMappingGeneratedViews
                 return GetView23();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Sprawdz_faktury")
+            if (extentName == "aptekaModelStoreContainer.Lista_hurtowni")
             {
                 return GetView24();
             }
 
-            if (extentName == "aptekaEntities1.Sprawdz_faktury")
+            if (extentName == "aptekaEntities1.Lista_hurtowni")
             {
                 return GetView25();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Sprawdz_zawartosc_faktury")
+            if (extentName == "aptekaModelStoreContainer.Lista_lekow")
             {
                 return GetView26();
             }
 
-            if (extentName == "aptekaEntities1.Sprawdz_zawartosc_faktury")
+            if (extentName == "aptekaEntities1.Lista_lekow")
             {
                 return GetView27();
             }
 
-            if (extentName == "aptekaModelStoreContainer.Stan_magazynu")
+            if (extentName == "aptekaModelStoreContainer.Sprawdz_faktury")
             {
                 return GetView28();
             }
 
-            if (extentName == "aptekaEntities1.Stan_magazynu")
+            if (extentName == "aptekaEntities1.Sprawdz_faktury")
             {
                 return GetView29();
+            }
+
+            if (extentName == "aptekaModelStoreContainer.Sprawdz_zawartosc_faktury")
+            {
+                return GetView30();
+            }
+
+            if (extentName == "aptekaEntities1.Sprawdz_zawartosc_faktury")
+            {
+                return GetView31();
+            }
+
+            if (extentName == "aptekaModelStoreContainer.Stan_magazynu")
+            {
+                return GetView32();
+            }
+
+            if (extentName == "aptekaEntities1.Stan_magazynu")
+            {
+                return GetView33();
             }
 
             return null;
@@ -345,17 +365,36 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for aptekaModelStoreContainer.Hurtownia.
+        /// Gets the view for aptekaModelStoreContainer.Faktura_operacja.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView7()
         {
             return new DbMappingView(@"
-    SELECT VALUE -- Constructing Hurtownia
-        [aptekaModel.Store.Hurtownia](T1.[Hurtownia.Id_hurtownia], T1.Hurtownia_Nazwa, T1.Hurtownia_NIP)
+    SELECT VALUE -- Constructing Faktura_operacja
+        [aptekaModel.Store.Faktura_operacja](T1.[Faktura_operacja.ID_faktura], T1.[Faktura_operacja.ID_operacja], T1.[Faktura_operacja.ID_faktura_operacja])
     FROM (
         SELECT 
-            T.Id_hurtownia AS [Hurtownia.Id_hurtownia], 
+            T.ID_faktura AS [Faktura_operacja.ID_faktura], 
+            T.ID_operacja AS [Faktura_operacja.ID_operacja], 
+            T.ID_faktura_operacja AS [Faktura_operacja.ID_faktura_operacja], 
+            True AS _from0
+        FROM aptekaEntities1.Faktura_operacja AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for aptekaModelStoreContainer.Hurtownia.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView8()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Hurtownia
+        [aptekaModel.Store.Hurtownia](T1.[Hurtownia.ID_hurtownia], T1.Hurtownia_Nazwa, T1.Hurtownia_NIP)
+    FROM (
+        SELECT 
+            T.ID_hurtownia AS [Hurtownia.ID_hurtownia], 
             T.Nazwa AS Hurtownia_Nazwa, 
             T.NIP AS Hurtownia_NIP, 
             True AS _from0
@@ -367,7 +406,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaModelStoreContainer.Lek.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView8()
+        private static DbMappingView GetView9()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Lek
@@ -388,17 +427,17 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaModelStoreContainer.Operacja.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView9()
+        private static DbMappingView GetView10()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Operacja
-        [aptekaModel.Store.Operacja](T1.[Operacja.Id_operacja], T1.[Operacja.Id_lek], T1.Operacja_Data, T1.[Operacja.Id_user], T1.Operacja_Przychod, T1.Operacja_Rozchod, T1.Operacja_Netto, T1.Operacja_Brutto)
+        [aptekaModel.Store.Operacja](T1.[Operacja.ID_operacja], T1.[Operacja.ID_lek], T1.Operacja_Data, T1.[Operacja.ID_user], T1.Operacja_Przychod, T1.Operacja_Rozchod, T1.Operacja_Netto, T1.Operacja_Brutto)
     FROM (
         SELECT 
-            T.Id_operacja AS [Operacja.Id_operacja], 
-            T.Id_lek AS [Operacja.Id_lek], 
+            T.ID_operacja AS [Operacja.ID_operacja], 
+            T.ID_lek AS [Operacja.ID_lek], 
             T.Data AS Operacja_Data, 
-            T.Id_user AS [Operacja.Id_user], 
+            T.ID_user AS [Operacja.ID_user], 
             T.Przychod AS Operacja_Przychod, 
             T.Rozchod AS Operacja_Rozchod, 
             T.Netto AS Operacja_Netto, 
@@ -412,7 +451,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaModelStoreContainer.AspNetUserRoles.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView10()
+        private static DbMappingView GetView11()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -423,24 +462,6 @@ namespace Edm_EntityMappingGeneratedViews
             Key(T.AspNetRoles).Id AS AspNetUserRoles_RoleId, 
             True AS _from0
         FROM aptekaEntities1.AspNetUserRoles AS T
-    ) AS T1");
-        }
-
-        /// <summary>
-        /// Gets the view for aptekaModelStoreContainer.Faktura_operacja.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView11()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing Faktura_operacja
-        [aptekaModel.Store.Faktura_operacja](T1.[Faktura_operacja.Id_faktura], T1.[Faktura_operacja.Id_operacja])
-    FROM (
-        SELECT 
-            Key(T.Faktura).Id_faktura AS [Faktura_operacja.Id_faktura], 
-            Key(T.Operacja).Id_operacja AS [Faktura_operacja.Id_operacja], 
-            True AS _from0
-        FROM aptekaEntities1.Faktura_operacja AS T
     ) AS T1");
         }
 
@@ -549,17 +570,36 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for aptekaEntities1.Hurtownia.
+        /// Gets the view for aptekaEntities1.Faktura_operacja.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView17()
         {
             return new DbMappingView(@"
-    SELECT VALUE -- Constructing Hurtownia
-        [aptekaModel.Hurtownia](T1.[Hurtownia.Id_hurtownia], T1.Hurtownia_Nazwa, T1.Hurtownia_NIP)
+    SELECT VALUE -- Constructing Faktura_operacja
+        [aptekaModel.Faktura_operacja](T1.[Faktura_operacja.ID_faktura], T1.[Faktura_operacja.ID_operacja], T1.[Faktura_operacja.ID_faktura_operacja])
     FROM (
         SELECT 
-            T.Id_hurtownia AS [Hurtownia.Id_hurtownia], 
+            T.ID_faktura AS [Faktura_operacja.ID_faktura], 
+            T.ID_operacja AS [Faktura_operacja.ID_operacja], 
+            T.ID_faktura_operacja AS [Faktura_operacja.ID_faktura_operacja], 
+            True AS _from0
+        FROM aptekaModelStoreContainer.Faktura_operacja AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for aptekaEntities1.Hurtownia.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView18()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Hurtownia
+        [aptekaModel.Hurtownia](T1.[Hurtownia.ID_hurtownia], T1.Hurtownia_Nazwa, T1.Hurtownia_NIP)
+    FROM (
+        SELECT 
+            T.ID_hurtownia AS [Hurtownia.ID_hurtownia], 
             T.Nazwa AS Hurtownia_Nazwa, 
             T.NIP AS Hurtownia_NIP, 
             True AS _from0
@@ -571,7 +611,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaEntities1.Lek.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView18()
+        private static DbMappingView GetView19()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Lek
@@ -592,17 +632,17 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaEntities1.Operacja.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView19()
+        private static DbMappingView GetView20()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Operacja
-        [aptekaModel.Operacja](T1.[Operacja.Id_operacja], T1.[Operacja.Id_lek], T1.Operacja_Data, T1.[Operacja.Id_user], T1.Operacja_Przychod, T1.Operacja_Rozchod, T1.Operacja_Netto, T1.Operacja_Brutto)
+        [aptekaModel.Operacja](T1.[Operacja.ID_operacja], T1.[Operacja.ID_lek], T1.Operacja_Data, T1.[Operacja.ID_user], T1.Operacja_Przychod, T1.Operacja_Rozchod, T1.Operacja_Netto, T1.Operacja_Brutto)
     FROM (
         SELECT 
-            T.Id_operacja AS [Operacja.Id_operacja], 
-            T.Id_lek AS [Operacja.Id_lek], 
+            T.ID_operacja AS [Operacja.ID_operacja], 
+            T.ID_lek AS [Operacja.ID_lek], 
             T.Data AS Operacja_Data, 
-            T.Id_user AS [Operacja.Id_user], 
+            T.ID_user AS [Operacja.ID_user], 
             T.Przychod AS Operacja_Przychod, 
             T.Rozchod AS Operacja_Rozchod, 
             T.Netto AS Operacja_Netto, 
@@ -616,7 +656,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaEntities1.AspNetUserRoles.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView20()
+        private static DbMappingView GetView21()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing AspNetUserRoles
@@ -635,34 +675,6 @@ namespace Edm_EntityMappingGeneratedViews
                     T.UserId AS AspNetUserRoles_AspNetUsers_Id, 
                     True AS _from0
                 FROM aptekaModelStoreContainer.AspNetUserRoles AS T
-            ) AS T1
-        ) AS T2
-    ) AS T3");
-        }
-
-        /// <summary>
-        /// Gets the view for aptekaEntities1.Faktura_operacja.
-        /// </summary>
-        /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView21()
-        {
-            return new DbMappingView(@"
-    SELECT VALUE -- Constructing Faktura_operacja
-        [aptekaModel.Faktura_operacja](T3.[Faktura_operacja.Faktura], T3.[Faktura_operacja.Operacja])
-    FROM (
-        SELECT -- Constructing Faktura
-            CreateRef(aptekaEntities1.Faktura, row(T2.[Faktura_operacja.Faktura.Id_faktura]), [aptekaModel.Faktura]) AS [Faktura_operacja.Faktura], 
-            T2.[Faktura_operacja.Operacja]
-        FROM (
-            SELECT -- Constructing Operacja
-                T1.[Faktura_operacja.Faktura.Id_faktura], 
-                CreateRef(aptekaEntities1.Operacja, row(T1.[Faktura_operacja.Operacja.Id_operacja]), [aptekaModel.Operacja]) AS [Faktura_operacja.Operacja]
-            FROM (
-                SELECT 
-                    T.Id_faktura AS [Faktura_operacja.Faktura.Id_faktura], 
-                    T.Id_operacja AS [Faktura_operacja.Operacja.Id_operacja], 
-                    True AS _from0
-                FROM aptekaModelStoreContainer.Faktura_operacja AS T
             ) AS T1
         ) AS T2
     ) AS T3");
@@ -711,10 +723,90 @@ namespace Edm_EntityMappingGeneratedViews
         }
 
         /// <summary>
-        /// Gets the view for aptekaModelStoreContainer.Sprawdz_faktury.
+        /// Gets the view for aptekaModelStoreContainer.Lista_hurtowni.
         /// </summary>
         /// <returns>The mapping view.</returns>
         private static DbMappingView GetView24()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Lista_hurtowni
+        [aptekaModel.Store.Lista_hurtowni](T1.[Lista_hurtowni.ID_hurtownia], T1.[Lista_hurtowni.Nazwa], T1.[Lista_hurtowni.NIP])
+    FROM (
+        SELECT 
+            T.ID_hurtownia AS [Lista_hurtowni.ID_hurtownia], 
+            T.Nazwa AS [Lista_hurtowni.Nazwa], 
+            T.NIP AS [Lista_hurtowni.NIP], 
+            True AS _from0
+        FROM aptekaEntities1.Lista_hurtowni AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for aptekaEntities1.Lista_hurtowni.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView25()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Lista_hurtowni
+        [aptekaModel.Lista_hurtowni](T1.[Lista_hurtowni.ID_hurtownia], T1.[Lista_hurtowni.Nazwa], T1.[Lista_hurtowni.NIP])
+    FROM (
+        SELECT 
+            T.ID_hurtownia AS [Lista_hurtowni.ID_hurtownia], 
+            T.Nazwa AS [Lista_hurtowni.Nazwa], 
+            T.NIP AS [Lista_hurtowni.NIP], 
+            True AS _from0
+        FROM aptekaModelStoreContainer.Lista_hurtowni AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for aptekaModelStoreContainer.Lista_lekow.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView26()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Lista_lekow
+        [aptekaModel.Store.Lista_lekow](T1.[Lista_lekow.Id_lek], T1.[Lista_lekow.Nazwa], T1.[Lista_lekow.Postac], T1.[Lista_lekow.Opakowanie], T1.[Lista_lekow.Dawka])
+    FROM (
+        SELECT 
+            T.Id_lek AS [Lista_lekow.Id_lek], 
+            T.Nazwa AS [Lista_lekow.Nazwa], 
+            T.Postac AS [Lista_lekow.Postac], 
+            T.Opakowanie AS [Lista_lekow.Opakowanie], 
+            T.Dawka AS [Lista_lekow.Dawka], 
+            True AS _from0
+        FROM aptekaEntities1.Lista_lekow AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for aptekaEntities1.Lista_lekow.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView27()
+        {
+            return new DbMappingView(@"
+    SELECT VALUE -- Constructing Lista_lekow
+        [aptekaModel.Lista_lekow](T1.[Lista_lekow.Id_lek], T1.[Lista_lekow.Nazwa], T1.[Lista_lekow.Postac], T1.[Lista_lekow.Opakowanie], T1.[Lista_lekow.Dawka])
+    FROM (
+        SELECT 
+            T.Id_lek AS [Lista_lekow.Id_lek], 
+            T.Nazwa AS [Lista_lekow.Nazwa], 
+            T.Postac AS [Lista_lekow.Postac], 
+            T.Opakowanie AS [Lista_lekow.Opakowanie], 
+            T.Dawka AS [Lista_lekow.Dawka], 
+            True AS _from0
+        FROM aptekaModelStoreContainer.Lista_lekow AS T
+    ) AS T1");
+        }
+
+        /// <summary>
+        /// Gets the view for aptekaModelStoreContainer.Sprawdz_faktury.
+        /// </summary>
+        /// <returns>The mapping view.</returns>
+        private static DbMappingView GetView28()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Sprawdz_faktury
@@ -736,7 +828,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaEntities1.Sprawdz_faktury.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView25()
+        private static DbMappingView GetView29()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Sprawdz_faktury
@@ -758,7 +850,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaModelStoreContainer.Sprawdz_zawartosc_faktury.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView26()
+        private static DbMappingView GetView30()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Sprawdz_zawartosc_faktury
@@ -781,7 +873,7 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaEntities1.Sprawdz_zawartosc_faktury.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView27()
+        private static DbMappingView GetView31()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Sprawdz_zawartosc_faktury
@@ -804,14 +896,14 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaModelStoreContainer.Stan_magazynu.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView28()
+        private static DbMappingView GetView32()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Stan_magazynu
-        [aptekaModel.Store.Stan_magazynu](T1.[Stan_magazynu.Id_lek], T1.[Stan_magazynu.Nazwa], T1.[Stan_magazynu.Dawka], T1.[Stan_magazynu.Postac], T1.[Stan_magazynu.Opakowanie], T1.[Stan_magazynu.Obecny_Stan_Magazynu])
+        [aptekaModel.Store.Stan_magazynu](T1.[Stan_magazynu.ID_lek], T1.[Stan_magazynu.Nazwa], T1.[Stan_magazynu.Dawka], T1.[Stan_magazynu.Postac], T1.[Stan_magazynu.Opakowanie], T1.[Stan_magazynu.Obecny_Stan_Magazynu])
     FROM (
         SELECT 
-            T.Id_lek AS [Stan_magazynu.Id_lek], 
+            T.ID_lek AS [Stan_magazynu.ID_lek], 
             T.Nazwa AS [Stan_magazynu.Nazwa], 
             T.Dawka AS [Stan_magazynu.Dawka], 
             T.Postac AS [Stan_magazynu.Postac], 
@@ -826,14 +918,14 @@ namespace Edm_EntityMappingGeneratedViews
         /// Gets the view for aptekaEntities1.Stan_magazynu.
         /// </summary>
         /// <returns>The mapping view.</returns>
-        private static DbMappingView GetView29()
+        private static DbMappingView GetView33()
         {
             return new DbMappingView(@"
     SELECT VALUE -- Constructing Stan_magazynu
-        [aptekaModel.Stan_magazynu](T1.[Stan_magazynu.Id_lek], T1.[Stan_magazynu.Nazwa], T1.[Stan_magazynu.Dawka], T1.[Stan_magazynu.Postac], T1.[Stan_magazynu.Opakowanie], T1.[Stan_magazynu.Obecny_Stan_Magazynu])
+        [aptekaModel.Stan_magazynu](T1.[Stan_magazynu.ID_lek], T1.[Stan_magazynu.Nazwa], T1.[Stan_magazynu.Dawka], T1.[Stan_magazynu.Postac], T1.[Stan_magazynu.Opakowanie], T1.[Stan_magazynu.Obecny_Stan_Magazynu])
     FROM (
         SELECT 
-            T.Id_lek AS [Stan_magazynu.Id_lek], 
+            T.ID_lek AS [Stan_magazynu.ID_lek], 
             T.Nazwa AS [Stan_magazynu.Nazwa], 
             T.Dawka AS [Stan_magazynu.Dawka], 
             T.Postac AS [Stan_magazynu.Postac], 

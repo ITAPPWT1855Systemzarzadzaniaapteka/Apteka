@@ -1,3 +1,14 @@
+
+.panel-esculap {
+    width: 80%;
+    margin: 10px;
+    background-color: #b0c4de;
+    color: #000000;
+}
+.panel-body-esculap{
+    background-color:#d3d3d3 ;color:#000000
+}
+
 /*
  * metismenu - v2.4.3
  * A jQuery menu plugin
