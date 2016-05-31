@@ -15,10 +15,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> Zobacz także
-
             </div>
             <div class="panel-body">
-                
+                <div id="SoldDaily" style="height:150px;"></div>
+                <div id="BoughtDaily" style="height:150px;"></div>                
             </div>
         </div>
     </div>
@@ -105,8 +105,7 @@
                 series: serier
             });
         });
-
-        Promise.all([getPromise("/Chart/EarningsDaily?days=31"), getPromise("/Chart/ExpensesDaily?days=31")]).then(function (dane) {
+        Promise.all([getPromise("/Chart/SoldDaily?days=31"), getPromise("/Chart/ExpensesDaily?days=31")]).then(function (dane) {
             var start = new Date();
             start.setTime(today.getTime() - (31 * 24 * 60 * 60 * 1000));
             var serier = [{
@@ -154,6 +153,110 @@
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
                     pointFormat: '{point.x:%e. %b}: {point.y:.2f}'
+                },
+
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: serier
+            });
+        });
+        getPromise("/Chart/SoldDaily?days=14").then(function (dane) {
+            var start = new Date();
+            start.setTime(today.getTime() - (14 * 24 * 60 * 60 * 1000));
+            var serier = [{
+                showInLegend: false,
+                yAxis: 0,
+                name: "Sprzedaż",
+                data: _.map(dane, function (i) { return [toHour(i.Date), i.Count]; })
+            }];
+            console.log(serier);
+            $('#SoldDaily').highcharts({
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickInterval: 24 * 3600 * 1000,
+                    min: start.getTime(),
+                    max: today.getTime(),
+                    dateTimeLabelFormats: { // don't display the dummy year/month
+                        day: '%e',
+                        month: '%e',
+                        year: '%e'
+                    },
+                    title: {
+                        text: 'Dzień'
+                    }
+                },
+                yAxis: [{
+                    title: {
+                        text: 'Sprzedaż'
+                    },
+                    min: 0
+                }],
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x:%e. %b}: {point.y:.0f}'
+                },
+
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            enabled: true
+                        }
+                    }
+                },
+                series: serier
+            });
+        });
+        getPromise("/Chart/BoughtDaily?days=14").then(function (dane) {
+            var start = new Date();
+            start.setTime(today.getTime() - (14 * 24 * 60 * 60 * 1000));
+            var serier = [{
+                showInLegend: false,
+                yAxis: 0,
+                name: "Zakup",
+                data: _.map(dane, function (i) { return [toHour(i.Date), i.Count]; })
+            }];
+            console.log(serier);
+            $('#BoughtDaily').highcharts({
+                title: {
+                    text: ''
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    tickInterval: 24 * 3600 * 1000,
+                    min: start.getTime(),
+                    max: today.getTime(),
+                    dateTimeLabelFormats: { // don't display the dummy year/month
+                        day: '%e',
+                        month: '%e',
+                        year: '%e'
+                    },
+                    title: {
+                        text: 'Dzień'
+                    }
+                },
+                yAxis: [{
+                    title: {
+                        text: 'Zakup'
+                    },
+                    min: 0
+                }],
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x:%e. %b}: {point.y:.0f}'
                 },
 
                 plotOptions: {

@@ -65,5 +65,38 @@ namespace Apteka.Controllers
             var result = Enumerable.Range(0, (int)(DateEnd - DateStart).TotalDays).Select(h => new { Date = DateStart.AddDays(h), Count = groups.ContainsKey(DateStart.AddDays(h)) ? groups[DateStart.AddDays(h)] : 0 });
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public JsonResult SoldDaily(int days = 7) {
+            var DateStart = DateTime.Today.AddDays(-1 * days + 1);
+            var DateEnd = DateTime.Today;
+            DateEnd = DateEnd.AddDays(1);
+            var groups = context.Operacja
+                .Where(i => i.Data >= DateStart && i.Rozchod > 0)
+                .OrderBy(i => i.Data)
+                .GroupBy(i => DbFunctions.TruncateTime(i.Data))
+                .Select(i => new { Key = i.Key, value = i.Sum(it => it.Rozchod) })
+                .ToDictionary(i => i.Key, i => i.value);
+
+            var result = Enumerable.Range(0, (int)(DateEnd - DateStart).TotalDays).Select(h => new { Date = DateStart.AddDays(h), Count = groups.ContainsKey(DateStart.AddDays(h)) ? groups[DateStart.AddDays(h)] : 0 });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult BoughtDaily(int days = 7) {
+            var DateStart = DateTime.Today.AddDays(-1 * days + 1);
+            var DateEnd = DateTime.Today;
+            DateEnd = DateEnd.AddDays(1);
+            var groups = context.Operacja
+                .Where(i => i.Data >= DateStart && i.Przychod > 0)
+                .OrderBy(i => i.Data)
+                .GroupBy(i => DbFunctions.TruncateTime(i.Data))
+                .Select(i => new { Key = i.Key, value = i.Sum(it => it.Przychod) })
+                .ToDictionary(i => i.Key, i => i.value);
+
+            var result = Enumerable.Range(0, (int)(DateEnd - DateStart).TotalDays).Select(h => new { Date = DateStart.AddDays(h), Count = groups.ContainsKey(DateStart.AddDays(h)) ? groups[DateStart.AddDays(h)] : 0 });
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
