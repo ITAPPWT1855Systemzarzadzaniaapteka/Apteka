@@ -31,7 +31,7 @@ namespace Apteka.Controllers
             foreach (var i in model.Products)
             {
                 var vat = i.Vat;
-                var price = i.Price;
+                var price = double.Parse(i.Price);
                 var netto = double.Parse(price.Replace(".", ","));
                 var brutto = (1 + (double.Parse(vat.Replace("%", "")) / 100)) * double.Parse(price.Replace(".", ","));
                 context.Operacja.Add(new Operacja
@@ -52,8 +52,8 @@ namespace Apteka.Controllers
                     ID_lek = i.Id,
                     Rozchod = i.Quantity,
                     Przychod = 0,
-                    Netto = i.Price,
-                    Brutto = (1 + (i.Vat / 100)) * i.Price
+                    Netto = double.Parse(i.price.Replace(".", ",")),
+                    Brutto = (1 + (double.Parse(vat.Replace("%", "")) / 100)) * double.Parse(price.Replace(".", ","))
                 })
             );
             context.SaveChanges();
