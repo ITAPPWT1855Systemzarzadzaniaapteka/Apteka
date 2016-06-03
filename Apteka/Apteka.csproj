@@ -540,6 +540,7 @@
     <Content Include="Views\Sale\Index.cshtml" />
     <Content Include="Views\Shared\_MessagesPartial.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Order\_UploadPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Lek\" />

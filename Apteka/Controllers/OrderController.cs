@@ -6,7 +6,7 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-
+using System.IO;
 
 namespace Apteka.Controllers
 {
@@ -35,6 +35,14 @@ namespace Apteka.Controllers
                 }).ToList();
 
             return View(LowMeds);
+        }
+        [HttpPost]
+        public string UploadCSV()
+        {
+            var path = Server.MapPath("~/App_Data/cenniki");
+            var file = Request.Files[0];
+            file.SaveAs(Path.Combine(path, file.FileName));
+            return "Added successfully contacts from " + file.FileName;
         }
     }
 }

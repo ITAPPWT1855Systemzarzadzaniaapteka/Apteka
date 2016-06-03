@@ -15,11 +15,15 @@
                 <i class="fa fa-user"></i>
                 @user.UserName
             </span>
-            @*<span class="pull-right">
+@if (User.Identity.Name.Contains("admin"))
+{
+            <span class="pull-right">
                 @if (!user.UserName.Contains("admin")) {
                     <a href="@Url.Action("Delete", "Users", new { Id = user.Id })" data-username="@user.UserName" data-toggle="modal" class="delete-user"><i class="fa fa-remove"></i></a>     
                 }
-            </span>*@
+            </span>
+
+}
         </li>
     }
 </ul>

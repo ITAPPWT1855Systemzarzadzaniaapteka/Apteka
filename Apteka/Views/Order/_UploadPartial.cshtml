@@ -1,0 +1,23 @@
+﻿<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" id="alert" style="display:none">Plik przesłano do serwera pomyślnie</div>
+                <div class="alert alert-danger" id="alert-danger" style="display:none">Problem z uploadem - upewnij się co do pliku</div>
+                <div class="row">
+                    <div class="col-md-4"><input type="file" id="tariff" value="Cennik" class="input-append" /></div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4"><div class="btn btn-primary" onclick="uploadCSV()">Importuj cennik</div></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
