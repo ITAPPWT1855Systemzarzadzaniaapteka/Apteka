@@ -48,7 +48,7 @@
     }
     @section Panel
 {
-
+    <div id="part-1">
         <div class="row">
             <button class="btn btn-default pull-right" type="button" data-toggle="modal" onclick="showModal()">Zaktualizuj cennik</button>
         </div>
@@ -94,6 +94,11 @@
                 }
             </tbody>
         </table>
+        <div class="row">
+            <button class="btn btn-default pull-right" id="frw-button">Dalej <i class="fa fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div id="part-2">
         <h2> Zamówienia </h2>
         <div id="orders" class="row" ng-repeat="hurtownia in hurtownias">
             <h3>{{hurtownia.name}}</h3>
@@ -102,11 +107,11 @@
                 <thead>
                     <tr>
                         <th class="col-sm-1">Lp</th>
-                        <th class="col-sm-5">Nazwa</th>
+                        <th class="col-sm-4">Nazwa</th>
                         <th class="col-sm-2">Opakowanie</th>
                         <th class="col-sm-1">Dawka</th>
                         <th class="col-sm-1">Ilosc</th>
-                        <th class="col-sm-1">Cena</th>
+                        <th class="col-sm-2">Cena</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,6 +126,8 @@
                 </tbody>
             </table>
         </div>
+        <button class="btn btn-default" id="back-button"><i class="fa fa-arrow-left"></i> Popraw</button><br />
+    </div>
     }
 </div>
 

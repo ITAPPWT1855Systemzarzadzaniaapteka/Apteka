@@ -67,6 +67,17 @@ $(window).ready(function () {
         $(".status-cell-" + itemID).html("<i class=\"fa fa-check-circle-o\"></i>")
         sc.$apply();
     });
+
+    $("#part-2").hide();
+    $("#frw-button").click(function () {
+        $("#part-1").hide();
+        $("#part-2").show();
+    });
+
+    $("#back-button").click(function () {
+        $("#part-1").show();
+        $("#part-2").hide();
+    });
 })
 
 var Apteka = angular.module('Apteka', []);
