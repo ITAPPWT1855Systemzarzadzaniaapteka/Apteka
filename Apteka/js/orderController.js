@@ -2,14 +2,33 @@
 function uploadCSV() {
     var file = document.getElementById("tariff");
     var formData = new FormData();
-
+    if (!file.files.length) {
+        return;
+    }
     formData.append('Cennik', file.files[0]);
+    $(".icon-uploading").html("<i class=\"fa fa-spinner\"></i>")
+    $(".text-uploading").html("Trwa wgrywanie pliku")
+    $(".text-parsing").html("")
+    $(".icon-parsing").html("")
+    $("#tariff").hide();
     xhr('/Order/UploadCSV', formData, function (fName) {
-        console.log('Posted', fName);
-        $('#alert').toggle();
+        $(".icon-uploading").html("<i class=\"fa fa-check\"></i>")
+        $(".text-uploading").html("Plik wgrany na serwer")
+        $(".icon-parsing").html("<i class=\"fa fa-spinner\"></i>")
+        $(".text-parsing").html("Trwa parsowanie pliku. To może trochę potrwać.")
+        $.get("/Order/transformExcel").done(function (data) {
+            $(".icon-parsing").html("<i class=\"fa fa-check\"></i>")
+            $(".text-parsing").html("Plik pomyślnie sparsowany. Utworzono " + data.count + " pozycji");
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        }).fail(function () {
+            $(".icon-parsing").html("<i class=\"fa fa-times\"></i>")
+            $(".text-parsing").html("Błąd parsowania. Sprawdź czy plik jest poprawny.");
+        });
     }, function () {
-        //$('#alert-danger').toggle();
-        console.log('problem')
+        $(".icon-uploading").html("<i class=\"fa fa-times\"></i>")
+        $(".text-uploading").html("Błąd w trakcie wgrywania pliku")
     });
 }
 
@@ -91,7 +110,7 @@ Apteka.controller('order', function OrderController($scope) {
             suma = suma + (+i.cena.replace(',', '.'));
         });
         hurtownia.suma = ("" + suma).replace(".", ",");
-        $.post("Order/Proform", hurtownia, function (data) {
+        $.post("/Order/Proform", hurtownia, function (data) {
             var win=window.open('about:blank');
             with(win.document)
             {
