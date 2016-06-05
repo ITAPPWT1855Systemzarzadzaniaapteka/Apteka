@@ -471,6 +471,8 @@
       <DependentUpon>AptekaModel.edmx</DependentUpon>
       <LastGenOutput>AptekaModel.cs</LastGenOutput>
     </Content>
+    <Content Include="App_Data\cennik.json" />
+    <Content Include="App_Data\cenniki\Cenniki_znormalizowane.csv" />
     <None Include="Properties\PublishProfiles\apteka.pubxml" />
     <Content Include="Scripts\jquery-latest.js" />
     <Content Include="Scripts\jquery.metadata.js" />
@@ -482,7 +484,7 @@
     <Content Include="Scripts\jquery.dataTables.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\lib\highcharts.js" />
-    <Content Include="Scripts\lib\jquery\angular.js" />
+    <Content Include="Scripts\lib\other\angular.js" />
     <Content Include="Scripts\lib\jquery\jquery.js" />
     <Content Include="js\jquery.datatables.pl.js" />
     <Content Include="Scripts\lodash.js" />
@@ -568,11 +570,9 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Order\_UploadPartial.cshtml" />
     <Content Include="Views\Invoice\Edit.cshtml" />
-    <Content Include="Views\Fakturas\Create.cshtml" />
     <Content Include="Views\Order\Proform.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\cenniki\" />
     <Folder Include="Views\Lek\" />
     <Folder Include="Views\WeatherHelper\" />
   </ItemGroup>

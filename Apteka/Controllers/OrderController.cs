@@ -87,6 +87,7 @@ namespace Apteka.Controllers {
             while (!reader.EndOfStream) {
                 var line = reader.ReadLine();
                 var values = line.Split(';');
+                values[1] = values[1];
                 var lek = rgx.Replace(values[1].ToLower(), "").Split(' ').First();
                 var postac = values[2].ToLower().Replace("-", "");
                 List<int> dawka;
