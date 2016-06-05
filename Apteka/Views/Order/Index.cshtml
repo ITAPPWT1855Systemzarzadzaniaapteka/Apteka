@@ -42,84 +42,74 @@
 }
 @section PanelName
 {
-    Produkty z niskim stanem magazynowym
-}
-@section Panel
+        Produkty z niskim stanem magazynowym
+    }
+    @section Panel
 {
-    <table class="table" id="lowStockMedicines">
-        <thead>
-            <tr>
-                <th>Nazwa</th>
-                <th>Opakowanie</th>
-                <th>Dawka</th>
-                <th>Stan</th>
-                <th>Zapotrzebowanie dzienne</th>
-                <th>Ilość zamówienia</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
+        <table class="table" id="lowStockMedicines">
+            <thead>
                 <tr>
-                    <td>@item.Nazwa</td>
-                    <td>@item.Opakowanie</td>
-                    <td>@item.Dawka</td>
-                    <td>@item.Stan</td> 
-                    <td>@item.Zapotrzebowanie</td>
-                    <td>@(item.Zapotrzebowanie*5)</td>
+                    <th>Nazwa</th>
+                    <th>Opakowanie</th>
+                    <th>Dawka</th>
+                    <th>Stan</th>
+                    <th>Zapotrzebowanie dzienne</th>
+                    <th>Ilość zamówienia</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.Raw(Json.Encode(item))</td>
-    </tr>
-}
-    <br/><br/>
-    <div class="row">
-        <div class="pull-right">
-            <button type="button" class="btn btn-default" data-toggle="modal" onclick="showModal()">Zaktualizuj cennik</button>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Nazwa</td>
+                        <td>@item.Opakowanie</td>
+                        <td>@item.Dawka</td>
+                        <td>@item.Stan</td>
+                        <td>@item.Zapotrzebowanie</td>
+                        <td>@(item.Zapotrzebowanie * 5)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <button type="button" data-toggle="modal" onclick="showModal()">Importer</button>
+            </div>
         </div>
-    </div>
-}
-@Html.Partial("_UploadPartial")
-<script>
-    function uploadCSV() {
-        var file = document.getElementById("tariff");
-        var formData = new FormData();
 
-        formData.append('Cennik', file.files[0]);
-        xhr('/Order/UploadCSV', formData, function (fName) {
-            console.log('Posted', fName);
-            $('#alert').toggle();
-        }, function () {
-            //$('#alert-danger').toggle();
-            console.log('problem')
-        });
+
     }
-    function xhr(url, data, callback, onError) {
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function () {
-            if (request.readyState == 4 && request.status == 200) {
-                callback(request.responseText);
-            } else {
-                console.log('problem');
-                onError();
-            }
-        };
-        request.open('POST', url);
-        request.send(data);
-    }
-    function showModal() {
-        console.log('show modal');
-        $('#myModal').modal('show');
-    }
-    $(document).ready(function () {       
-        $('#lowStockMedicines').DataTable({
-            "order": [[3, "asc"]],
-            "language": {
-                "url": "js/jquery.datatables.pl.js"
-            }
-        });
-    });
-</script>
+    @Html.Partial("_UploadPartial")
+    <script>
+        function uploadCSV() {
+            var file = document.getElementById("tariff");
+            var formData = new FormData();
+
+            formData.append('Cennik', file.files[0]);
+            xhr('/Order/UploadCSV', formData, function (fName) {
+                console.log('Posted', fName);
+                $('#alert').toggle();
+            }, function () {
+                //$('#alert-danger').toggle();
+                console.log('problem')
+            });
+        }
+        function xhr(url, data, callback, onError) {
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = function () {
+                if (request.readyState == 4 && request.status == 200) {
+                    callback(request.responseText);
+                } else {
+                    console.log('problem');
+                    onError();
+                }
+            };
+            request.open('POST', url);
+            request.send(data);
+        }
+        function showModal() {
+            console.log('show modal');
+            $('#myModal').modal('show');
+        }
+    </script>

@@ -61,6 +61,7 @@
                         <i class="fa fa-tasks fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-tasks">
+                        @DateTime.Now
                         @*@foreach (var item in stores)
                         {
                         <li>
@@ -122,9 +123,6 @@
                             <a href="@Url.Action("Create", "Sale")"><i class="fa fa-bar-chart-o fa-fw"></i> Sprzedaj lek</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "Report")"><i class="fa fa-list-alt"></i> Raporty</a>
-                        </li>
-                        <li>
                             <a href="@Url.Action("Index", "Store")"><i class="fa fa-database"></i> Magazyn</a>
                         </li>
                         <li>
@@ -154,6 +152,9 @@
                                     <a href="@Url.Action("Create", "Invoice")">Wprowadż fakturę</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "Report")"><i class="fa fa-list-alt"></i> Raporty</a>
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-truck"></i> Hurtownie</a>

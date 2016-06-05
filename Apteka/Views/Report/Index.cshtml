@@ -3,17 +3,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Generuj Raporty</h2>
-
 <div class="col-md-12">
+    @section PanelName
+{
+    
     <div class="row" style="padding-bottom:30px;">
-        <h3>Magazyn</h3><br />
-        <a href="@Url.Action("Store", "Report")" class="btn btn-default">Stan Magazynu</a>
+        <div class="col-md-1"></div>
+        <h4 style="margin-left:20px">Magazyn</h4><br />
+        <a href="@Url.Action("Store", "Report")" class="btn btn-default" style="margin-left:15px">Stan Magazynu</a>
         <a href="@Url.Action("Medicine", "Report")" class="btn btn-default">Dostępne Leki</a>
     </div>
-
+    }@section Panel
+{
     <div class="row" style="padding-bottom:15px;">
-        <h3>Sprzedaż</h3><br />
+        <h4>Operacje</h4><br />
         @using (Html.BeginForm("SellHistory", "Report", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
             <div class="row">
                 <div class="col-md-4">
@@ -33,7 +36,7 @@
             </div>
         }
     </div>
-
+}
     <script>
         Date.prototype.toDateInputValue = (function () {
             var local = new Date(this);

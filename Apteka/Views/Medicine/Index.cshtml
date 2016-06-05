@@ -1,81 +1,73 @@
 ﻿@model IEnumerable<Apteka.Models.Lek>
 
 <head>
-    <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
-    <title>Dodaj Lek</title>
+    @*<script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>*@
+    <title>Leki</title>
 </head>
-@section PanelName
-{
-   Baza leków
-}
-@section Panel
-{
-<div class="input-group custom-search-form">
-    <input type="text" id="filter" class="form-control" placeholder="Wpisz nazwę leku...">
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
-            <i class="fa fa-search"></i>
-        </button>
-    </span>
-</div>
-    <br/>
-@*<iframe src="@Url.Action("PostAndShow", "My")" width="400" height="300">*@
-    <table id="listagem" class="table table-striped tablesorter">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nazwa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Postac)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Opakowanie)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Dawka)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="panel-esculap">
+    <div class="panel-heading">
+        <div class="row">
+            <i class="fa fa-file-text fa-fw col-xs-1"></i>
+            <div class="col-xs-11">Baza leków</div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table id="listagem" class="table table-striped tablesorter">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nazwa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Postac)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Opakowanie)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dawka)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Zmień", "Edit", new { id = item.Id_lek }) |
-                        @Html.ActionLink("Szczegóły", "Details", new { id = item.Id_lek }) |
-                    </td>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nazwa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Postac)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Opakowanie)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dawka)
+                    </th>
+                    <th>
+                      Edycja
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
-@*</iframe>*@
-}
-@section PanelFooter
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nazwa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postac)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Opakowanie)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dawka)
+                        </td>
+                        <td>
+@if (User.Identity.Name.Contains("admin"))
 {
-    <p>  </p>
+                            @Html.ActionLink("Zmień", "Edit", new { id = item.Id_lek }) 
 }
-
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         $('#listagem').DataTable({
-            "order": [[0, "desc"]],
+            "order": [[0, "asc"]],
             "language": {
                 "url": "js/jquery.datatables.pl.js"
             }
         });
     });
 </script>
+
