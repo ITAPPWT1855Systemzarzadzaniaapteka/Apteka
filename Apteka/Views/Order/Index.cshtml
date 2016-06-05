@@ -70,14 +70,17 @@
             }
         </tbody>
     </table>
-<div class="row">
-    <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <button type="button" data-toggle="modal" onclick="showModal()">Importer</button>
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.Raw(Json.Encode(item))</td>
+    </tr>
+}
+    <br/><br/>
+    <div class="row">
+        <div class="pull-right">
+            <button type="button" class="btn btn-default" data-toggle="modal" onclick="showModal()">Zaktualizuj cennik</button>
         </div>
     </div>
-
-
 }
 @Html.Partial("_UploadPartial")
 <script>
@@ -111,9 +114,7 @@
         console.log('show modal');
         $('#myModal').modal('show');
     }
-    $(document).ready(function () {
-
-        
+    $(document).ready(function () {       
         $('#lowStockMedicines').DataTable({
             "order": [[3, "asc"]],
             "language": {
