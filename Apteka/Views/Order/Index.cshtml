@@ -75,7 +75,7 @@
                         <td>@item.Dawka</td>
                         <td>@item.Stan</td>
                         <td>@item.Zapotrzebowanie</td>
-                        <td class="need-@item.Id">@(item.Zapotrzebowanie * 5)</td>
+                        <td class="need-@item.Id">@item.DoZamowienia</td>
                         <td><a href="#@item.Id">@item.Hurtownie.Count hurtownie</a></td>
                     </tr>
                     if (@item.Hurtownie.Count > 0) {

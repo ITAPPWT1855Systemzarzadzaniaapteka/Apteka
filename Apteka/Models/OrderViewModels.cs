@@ -9,6 +9,7 @@ namespace Apteka.Models {
         public string Postac;
         public int? Stan;
         public double? Zapotrzebowanie;
+        public double DoZamowienia;
         public List<fileMed> Hurtownie;
     }
 

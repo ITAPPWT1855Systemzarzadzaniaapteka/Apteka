@@ -41,12 +41,12 @@ namespace Apteka.Controllers {
                     Postac = i.Postac,
                     Opakowanie = i.Opakowanie.HasValue ? i.Opakowanie.Value : 0,
                     Stan = i.Operacja.Sum(o => o.Przychod - o.Rozchod),
-                    Zapotrzebowanie = weatherRatio * 1.0 * i.Operacja
+                    Zapotrzebowanie = 1.0 * i.Operacja
                         .Where(o => o.Data > DateStart)
                         .Sum(o => o.Rozchod) / 5
                 })
                 .ToList().Select(i => {
-                    i.Zapotrzebowanie = Math.Ceiling(i.Zapotrzebowanie.GetValueOrDefault(0));
+                    i.DoZamowienia = Math.Ceiling(5.0 * weatherRatio * i.Zapotrzebowanie.GetValueOrDefault(0));
                     return i;
                 });
 
