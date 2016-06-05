@@ -3,71 +3,82 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}   <head>
-        <title>Faktury</title>
-        <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
-    </head>
-@section PanelName
-{
-    Baza faktur
 }
-@section Panel
-{
+<head>
+    <title>Faktury</title>
+    <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
+</head>
 
+<div class="panel-esculap">
+    <div class="panel-heading">
+        <div class="row">
+            <i class="fa fa-file-text fa-fw col-xs-1"></i>
+            <div class="col-xs-11">Spis faktur</div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table id="listagem" class="table table-striped tablesorter">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Data)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Numer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nazwa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Netto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Brutto)
+                    </th>
+                    <th>
+                      Edycja
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Data)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Numer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nazwa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Netto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Brutto)
+                        </td>
+                        <td>
+                            @if (User.Identity.Name.Contains("admin"))
+                            {
+                                @Html.ActionLink("Zmień", "Edit", "Invoice", new { id = item.Id_faktura}, null)
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#listagem').DataTable({
+            "order": [[0, "desc"]],
+            "language": {
+                "url": "js/jquery.datatables.pl.js"
+            }
+        });
+    });
+</script>
 
-<div class="input-group custom-search-form">
-    <input type="text" id="filter" class="form-control" placeholder="Filtruj po wartościach...">
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
-            <i class="fa fa-search"></i>
-        </button>
-    </span>
-</div><br/>
-<table id="listagem" class="table table-striped tablesorter">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Data)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Numer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Nazwa)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Netto)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Brutto)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Numer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nazwa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Netto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Brutto)
-            </td>
-        
-        </tr>
-    }
-
-</table>
-}
-@section PanelFooter
-{
-    <p>  </p>
-}

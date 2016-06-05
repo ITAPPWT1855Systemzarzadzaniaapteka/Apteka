@@ -4,75 +4,74 @@
     <title>Stan magazynu</title>
     <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
 </head>
-@section PanelName
-{
-    Wyszukiwanie na stanie magazynu
-}
-@section Panel
-{
 
 
-<div class="input-group custom-search-form">
-    <input type="text" id="filter" class="form-control" placeholder="Wpisz nazwę leku...">
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="button">
-            <i class="fa fa-search"></i>
-        </button>
-    </span>
-</div>
-   
-    <br />
-    <table id="listagem" class="table table-striped tablesorter">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Nazwa)<i class="fa fa-arrows-v"></i>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Dawka)<i class="fa fa-arrows-v"></i>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Postac)<i class="fa fa-arrows-v"></i>
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Opakowanie)<i class="fa fa-arrows-v"></i>
-                </th>
-                <th>
-                    Stan magazynu<i class="fa fa-arrows-v"></i>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="panel-esculap">
+    <div class="panel-heading">
+        <div class="row">
+            <i class="fa fa-file-text fa-fw col-xs-1"></i>
+            <div class="col-xs-11"> Wyszukiwanie na stanie magazynu</div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <table id="listagem" class="table table-striped tablesorter">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Nazwa)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Dawka)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Postac)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Opakowanie)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Obecny_Stan_Magazynu)
-                    </td>
-                    @*<td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.ID_lek }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.ID_lek }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.ID_lek })
-                    </td>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nazwa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Dawka)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Postac)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Opakowanie)
+                    </th>
+                    <th>
+                        Stan magazynu
+                    </th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nazwa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dawka)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postac)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Opakowanie)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Obecny_Stan_Magazynu)
+                        </td>
+                        @*<td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ID_lek }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.ID_lek }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.ID_lek })
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#listagem').DataTable({
+            "order": [[3, "desc"]],
+            "language": {
+                "url": "js/jquery.datatables.pl.js"
             }
-        </tbody>
-    </table>
-    }
-@section PanelFooter
-{
-    <p>  </p>
-}
+        });
+    });
+</script>
+

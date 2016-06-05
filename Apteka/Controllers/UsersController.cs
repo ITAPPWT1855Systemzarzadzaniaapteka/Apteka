@@ -31,26 +31,29 @@ namespace Apteka.Controllers {
         public ActionResult Create() {
             return View();
         }
+        //public ActionResult Delete() {
+        //    return View();
+        //}
+        //// POST: Users/Create
+        //[HttpPost]
+        //public async Task<ActionResult> Create(CreateUserModel model)
+        //{
+        //    if (ModelState.IsValid && !model.UserName.Contains("admin"))
+        //    {
+        //        var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, EmailConfirmed = true };
+        //        var result = await UserManager.CreateAsync(user, model.Password);
+        //        if (result.Succeeded)
+        //        {
+        //            await UserManager.AddToRoleAsync(user.Id, "Employee");
+        //            return RedirectToAction("Index", "Users");
+        //        }
+        //        AddErrors(result);
+        //    }
 
-        // POST: Users/Create
-        [HttpPost]
-        public async Task<ActionResult> Create(CreateUserModel model)
-        {
-            if (ModelState.IsValid && !model.UserName.Contains("admin"))
-            {
-                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, EmailConfirmed = true };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await UserManager.AddToRoleAsync(user.Id, "Employee");
-                    return RedirectToAction("Index", "Users");
-                }
-                AddErrors(result);
-            }
+        //    // If we got this far, something failed, redisplay form
+        //    return View(model);
+        //}
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
 
         // GET: Users/Delete/5
         //public async Task<ActionResult> Delete(string id) {

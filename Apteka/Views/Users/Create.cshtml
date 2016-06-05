@@ -1,13 +1,12 @@
 ﻿@model Apteka.Models.CreateUserModel
 
-<div style="margin-top:35px"></div>
+<div style="margin-top:10px"></div>
 @section PanelName
 {
     Dodawanie nowego użytkownika
 }
 @section Panel
 {
-
 @using (Html.BeginForm("Create", "Users", FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
     @Html.AntiForgeryToken()
     <h4>Wprowadź dane</h4>

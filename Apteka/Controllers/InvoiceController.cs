@@ -7,6 +7,8 @@ using Apteka.Models;
 using System.IO;
 using Newtonsoft.Json;
 using Microsoft.AspNet.Identity;
+using System.Data.Entity;
+using System.Net;
 namespace Apteka.Controllers 
 {
 
@@ -26,7 +28,37 @@ namespace Apteka.Controllers
             ViewBag.Id_lek = new SelectList(context.Lek, "Id_lek", "Nazwa");
             return View();
         }
-        
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Faktura faktura = context.Faktura.Find(id);
+            if (faktura == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.Id_hurtownia = new SelectList(context.Hurtownia, "Id_hurtownia", "Nazwa", faktura.Id_hurtownia);
+            return View(faktura);
+        }
+
+        // POST: Fakturas/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id_faktura,Id_hurtownia,Numer")] Faktura faktura)
+        {
+            if (ModelState.IsValid)
+            {
+                context.Entry(faktura).State = EntityState.Modified;
+                context.SaveChanges();
+                return RedirectToAction("Index", "CheckInvoice");
+            }
+            ViewBag.Id_hurtownia = new SelectList(context.Hurtownia, "Id_hurtownia", "Nazwa", faktura.Id_hurtownia);
+            return RedirectToAction("Index", "CheckInvoice");
+        }
 
 
         [HttpGet]
