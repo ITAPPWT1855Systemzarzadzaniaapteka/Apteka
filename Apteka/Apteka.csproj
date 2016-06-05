@@ -423,6 +423,7 @@
     <Content Include="js\jquery.datatables.pl.js" />
     <Content Include="js\MedicineController.js" />
     <Content Include="js\OperationController.js" />
+    <Content Include="js\orderController.js" />
     <Content Include="js\SaleController.js" />
     <Content Include="js\StoreController.js" />
     <Content Include="js\UsersController.js" />
@@ -475,6 +476,7 @@
     <Content Include="Scripts\jquery.metadata.js" />
     <Content Include="Scripts\jquery.tablesorter.js" />
     <Content Include="Scripts\jquery.toaster.js" />
+    <Content Include="Scripts\lib\angular.min.js" />
     <Content Include="Scripts\lib\bootstrap-datepicker.js" />
     <Content Include="Scripts\lib\bootstrap.js" />
     <Content Include="Scripts\jquery.autocomplete.js" />

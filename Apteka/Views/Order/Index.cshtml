@@ -1,73 +1,92 @@
 ﻿@model IEnumerable<Apteka.Models.MedAvailability>
 <style>
-.tip {
-  position: relative;
-  text-decoration: none;
-}
-.tip:hover:before {
-  display: block;
-  position: absolute;
-  padding: .5em;
-  content: attr(title);
-  min-width: 120px;
-  text-align: center;
-  width: auto;
-  height: auto;
-  white-space: nowrap;
-  top: -32px;
-  background: rgba(0,0,0,.8);
-  -moz-border-radius:10px;
-  -webkit-border-radius:10px;
-  border-radius:10px;
+    .tip {
+        position: relative;
+        text-decoration: none;
+    }
 
-  color: #fff;
-  font-size: .86em;
-}
-.tip:hover:after {
-  position: absolute;
-  display: block;
-  content: "";
-  border-color: rgba(0,0,0,.8) transparent transparent transparent;
-  border-style: solid;
-  border-width: 10px;
-  height:0;
-  width:0;
-  position:absolute;
-  top: -8px;
-  left:1em;
-}
+        .tip:hover:before {
+            display: block;
+            position: absolute;
+            padding: .5em;
+            content: attr(title);
+            min-width: 120px;
+            text-align: center;
+            width: auto;
+            height: auto;
+            white-space: nowrap;
+            top: -32px;
+            background: rgba(0,0,0,.8);
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: .86em;
+        }
+
+        .tip:hover:after {
+            position: absolute;
+            display: block;
+            content: "";
+            border-color: rgba(0,0,0,.8) transparent transparent transparent;
+            border-style: solid;
+            border-width: 10px;
+            height: 0;
+            width: 0;
+            position: absolute;
+            top: -8px;
+            left: 1em;
+        }
 </style>
 @{
     ViewBag.Title = "Index";
 }
-@section PanelName
+<div class="row">
+    @section PanelName
 {
         Produkty z niskim stanem magazynowym
     }
     @section Panel
 {
+        <h2> Brakujące produkty </h2>
         <table class="table" id="lowStockMedicines">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Nazwa</th>
                     <th>Opakowanie</th>
                     <th>Dawka</th>
                     <th>Stan</th>
                     <th>Zapotrzebowanie dzienne</th>
                     <th>Ilość zamówienia</th>
+                    <th>Zamównienie</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
+                @foreach (var item in Model) {
+                    <tr class="product-row-@item.Id">
+                        <td class="status-cell-@item.Id"></td>
                         <td>@item.Nazwa</td>
                         <td>@item.Opakowanie</td>
                         <td>@item.Dawka</td>
                         <td>@item.Stan</td>
                         <td>@item.Zapotrzebowanie</td>
-                        <td>@(item.Zapotrzebowanie * 5)</td>
+                        <td class="need-@item.Id">@(item.Zapotrzebowanie * 5)</td>
+                        <td><a href="#@item.Id">Dost. w @item.Hurtownie.Count hurtownie</a></td>
                     </tr>
+                    if (@item.Hurtownie.Count > 0) {
+                        <tr data-id="@item.Id" class="detail-row detail-row-@item.Id">
+                            <td colspan="1"></td>
+                            <td colspan="6">Wybierz najlepszą ofertę:</td>
+                        </tr>
+                        foreach (var offer in item.Hurtownie) {
+                            <tr data-id="@item.Id" class="detail-row detail-row-@item.Id">
+                                <td colspan="1"></td>
+                                <td colspan="1"><button class="btn btn-default btn-xs add-btn pull-right"><i class="fa fa-plus"></i></button></td>
+                                <td colspan="6" class="offer-desc" data-count="@(item.Zapotrzebowanie * 5)">@offer.opis</td>
+                            </tr>
+                        }
+                    }
                 }
             </tbody>
         </table>
@@ -77,39 +96,35 @@
                 <button type="button" data-toggle="modal" onclick="showModal()">Importer</button>
             </div>
         </div>
-
-
+        <h2> Zamówienia </h2>
+        <div id="orders" class="row" ng-repeat="hurtownia in hurtownias">
+            <h3>{{hurtownia.name}}</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-sm-1">Lp</th>
+                        <th class="col-sm-5">Nazwa</th>
+                        <th class="col-sm-2">Opakowanie</th>
+                        <th class="col-sm-1">Dawka</th>
+                        <th class="col-sm-1">Ilosc</th>
+                        <th class="col-sm-1">Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in hurtownia.produkty">
+                        <td>{{$index+1}}</td>
+                        <td>{{item.lek}}</td>
+                        <td>{{item.opakowanie}}</td>
+                        <td>{{item.dawka}}</td>
+                        <td>{{item.ilosc}}</td>
+                        <td>{{item.cena}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     }
-    @Html.Partial("_UploadPartial")
-    <script>
-        function uploadCSV() {
-            var file = document.getElementById("tariff");
-            var formData = new FormData();
+</div>
 
-            formData.append('Cennik', file.files[0]);
-            xhr('/Order/UploadCSV', formData, function (fName) {
-                console.log('Posted', fName);
-                $('#alert').toggle();
-            }, function () {
-                //$('#alert-danger').toggle();
-                console.log('problem')
-            });
-        }
-        function xhr(url, data, callback, onError) {
-            var request = new XMLHttpRequest();
-            request.onreadystatechange = function () {
-                if (request.readyState == 4 && request.status == 200) {
-                    callback(request.responseText);
-                } else {
-                    console.log('problem');
-                    onError();
-                }
-            };
-            request.open('POST', url);
-            request.send(data);
-        }
-        function showModal() {
-            console.log('show modal');
-            $('#myModal').modal('show');
-        }
-    </script>
+
+@Html.Partial("_UploadPartial")
+
