@@ -16,6 +16,7 @@ using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using MinimumEditDistance;
 using System.Web;
+using Apteka.Helpers;
 
 namespace Apteka.Controllers {
     public class OrderController : Controller {
@@ -25,10 +26,12 @@ namespace Apteka.Controllers {
         public ActionResult Index() {
             var DateStart = DateTime.Today.AddDays(-5);
 
+            double weatherRatio = calcWeatherRadio();
+
             var LowMeds = context.Lek
                 .Where(m =>
                     m.Operacja.Sum(o => o.Przychod - o.Rozchod)
-                    <= 3.0 * m.Operacja
+                    <= weatherRatio * 3.0 * m.Operacja
                         .Where(o => o.Data > DateStart)
                         .Sum(o => o.Rozchod) / 5
                 ).Select(i => new MedAvailability {
@@ -38,7 +41,7 @@ namespace Apteka.Controllers {
                     Postac = i.Postac,
                     Opakowanie = i.Opakowanie.HasValue ? i.Opakowanie.Value : 0,
                     Stan = i.Operacja.Sum(o => o.Przychod - o.Rozchod),
-                    Zapotrzebowanie = 1.0 * i.Operacja
+                    Zapotrzebowanie = weatherRatio * 1.0 * i.Operacja
                         .Where(o => o.Data > DateStart)
                         .Sum(o => o.Rozchod) / 5
                 }).ToList();
@@ -143,6 +146,15 @@ namespace Apteka.Controllers {
         [HttpPost]
         public ActionResult Proform(ProForm pro) {
             return View(pro);
+        }
+
+        private double calcWeatherRadio() {
+            var w = new WeatherHelper();
+            double ratio = 0;
+            ratio += -0.16 * Math.Log(w.Temperatures.Average()) + 1.33;
+            ratio += 0.44 * Math.Exp(w.Rain.Average() * 100 * 0.0131);
+            ratio += 6.67 * Math.Exp(w.Pressure.Average() * -0.002);
+            return Math.Ceiling(ratio / 3);
         }
     }
 }

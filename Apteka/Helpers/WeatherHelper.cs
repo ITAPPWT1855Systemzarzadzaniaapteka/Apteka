@@ -42,7 +42,7 @@ namespace Apteka.Helpers
         public IEnumerable<double> Temperatures {
             get {
                 return (
-                    from day in cityWeather.list
+                    from day in CityWeather.list
                     select day.temp.day
                 );
             }
@@ -51,7 +51,7 @@ namespace Apteka.Helpers
         public IEnumerable<double> Rain {
             get {
                 return (
-                    from day in cityWeather.list
+                    from day in CityWeather.list
                     select (day.rain ?? 0)
                 );
             }
@@ -60,7 +60,7 @@ namespace Apteka.Helpers
         public IEnumerable<double> Pressure {
             get {
                 return (
-                    from day in cityWeather.list
+                    from day in CityWeather.list
                     select day.pressure
                 );
             }
