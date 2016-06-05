@@ -18,7 +18,7 @@ function uploadCSV() {
         $(".text-parsing").html("Trwa parsowanie pliku. To może trochę potrwać.")
         $.get("/Order/transformExcel").done(function (data) {
             $(".icon-parsing").html("<i class=\"fa fa-check\"></i>")
-            $(".text-parsing").html("Plik pomyślnie sparsowany. Utworzono " + data.count + " pozycji");
+            $(".text-parsing").html("Plik pomyślnie sparsowany. Utworzono " + data.count + " pozycji.");
             setTimeout(function () {
                 location.reload();
             }, 1000);
