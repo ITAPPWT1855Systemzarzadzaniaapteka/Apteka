@@ -15,6 +15,7 @@ using System.Globalization;
 using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using MinimumEditDistance;
+using System.Web;
 
 namespace Apteka.Controllers {
     public class OrderController : Controller {
@@ -52,7 +53,7 @@ namespace Apteka.Controllers {
                     return lek;
                 }).ToList();
             }
-            catch (Exception e) {
+            catch (Exception) {
                 //Not so bad;
             }
 
@@ -136,6 +137,11 @@ namespace Apteka.Controllers {
             file.SaveAs(Path.Combine(path, file.FileName));
 
             return "Added successfully contacts from " + file.FileName;
+        }
+
+        [HttpPost]
+        public ActionResult Proform(ProForm pro) {
+            return View(pro);
         }
     }
 }

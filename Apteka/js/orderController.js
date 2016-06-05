@@ -34,6 +34,7 @@ function showModal() {
 //#endregion Upload JS
 
 var descRgx = /^(.+):(.+)\((.+),(.+),(.+)\) - ([0-9,]+)/;
+var secRgx = /^.+: (.*\))/;
 var sc;
 $(window).on('hashchange', function () {
     $(".detail-row:not(.hidden)").addClass("hidden");
@@ -47,7 +48,6 @@ $(window).ready(function () {
         var itemID = row.attr("data-id");
         var toOrder = row.find(".offer-desc").text();
         var result = descRgx.exec(toOrder);
-        console.log("Duia", $(".need-" + itemID).text());
         var lek = {
             hurtownia: result[1],
             lek: result[2],
@@ -55,6 +55,7 @@ $(window).ready(function () {
             dawka: result[4],
             opakowanie: result[5],
             cena: result[6],
+            opis: secRgx.exec(toOrder)[1],
             ilosc: $(".need-" + itemID).text()
         };
         window.location.hash = "";
@@ -72,4 +73,21 @@ var Apteka = angular.module('Apteka', []);
 Apteka.controller('order', function OrderController($scope) {
     $scope.hurtownias = [];
     sc = $scope;
+
+    $scope.generateProForm = function (hurtownia) {
+        var suma = 0;
+        _.each(hurtownia.produkty, function (i) {
+            suma = suma + (+i.cena.replace(',', '.'));
+        });
+        hurtownia.suma = ("" + suma).replace(".", ",");
+        $.post("Order/Proform", hurtownia, function (data) {
+            var win=window.open('about:blank');
+            with(win.document)
+            {
+                open();
+                write(data);
+                close();
+            }
+        });
+    }
 });

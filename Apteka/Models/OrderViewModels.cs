@@ -21,4 +21,21 @@ namespace Apteka.Models {
         public float netto;
         public string opis;
     }
+
+    public class ProFormProdukty {
+        public string hurtownia { get; set; }
+        public string lek { get; set; }
+        public string postac { get; set; }
+        public string dawka { get; set; }
+        public string opakowanie { get; set; }
+        public string cena { get; set; }
+        public string opis { get; set; }
+        public string ilosc { get; set; }
+    }
+
+    public class ProForm {
+        public string name { get; set; }
+        public List<ProFormProdukty> produkty { get; set; }
+        public string suma { get; set; }
+    }
 }

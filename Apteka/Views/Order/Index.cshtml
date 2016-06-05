@@ -48,6 +48,10 @@
     }
     @section Panel
 {
+
+        <div class="row">
+            <button class="btn btn-default pull-right" type="button" data-toggle="modal" onclick="showModal()">Zaktualizuj cennik</button>
+        </div>
         <h2> Brakujące produkty </h2>
         <table class="table" id="lowStockMedicines">
             <thead>
@@ -59,7 +63,7 @@
                     <th>Stan</th>
                     <th>Zapotrzebowanie dzienne</th>
                     <th>Ilość zamówienia</th>
-                    <th>Zamównienie</th>
+                    <th>Dostępność</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,7 +76,7 @@
                         <td>@item.Stan</td>
                         <td>@item.Zapotrzebowanie</td>
                         <td class="need-@item.Id">@(item.Zapotrzebowanie * 5)</td>
-                        <td><a href="#@item.Id">Dost. w @item.Hurtownie.Count hurtownie</a></td>
+                        <td><a href="#@item.Id">@item.Hurtownie.Count hurtownie</a></td>
                     </tr>
                     if (@item.Hurtownie.Count > 0) {
                         <tr data-id="@item.Id" class="detail-row detail-row-@item.Id">
@@ -90,15 +94,10 @@
                 }
             </tbody>
         </table>
-        <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4">
-                <button type="button" data-toggle="modal" onclick="showModal()">Importer</button>
-            </div>
-        </div>
         <h2> Zamówienia </h2>
         <div id="orders" class="row" ng-repeat="hurtownia in hurtownias">
             <h3>{{hurtownia.name}}</h3>
+            <a ng-click="generateProForm(hurtownia)">Generuj Zamówienie</a>
             <table class="table">
                 <thead>
                     <tr>
@@ -117,7 +116,7 @@
                         <td>{{item.opakowanie}}</td>
                         <td>{{item.dawka}}</td>
                         <td>{{item.ilosc}}</td>
-                        <td>{{item.cena}}</td>
+                        <td>{{item.cena}} zł</td>
                     </tr>
                 </tbody>
             </table>
