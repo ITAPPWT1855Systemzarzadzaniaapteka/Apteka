@@ -44,7 +44,11 @@ namespace Apteka.Controllers {
                     Zapotrzebowanie = weatherRatio * 1.0 * i.Operacja
                         .Where(o => o.Data > DateStart)
                         .Sum(o => o.Rozchod) / 5
-                }).ToList();
+                })
+                .ToList().Select(i => {
+                    i.Zapotrzebowanie = Math.Ceiling(i.Zapotrzebowanie.GetValueOrDefault(0));
+                    return i;
+                });
 
 
             try {
@@ -151,10 +155,13 @@ namespace Apteka.Controllers {
         private double calcWeatherRadio() {
             var w = new WeatherHelper();
             double ratio = 0;
-            ratio += -0.16 * Math.Log(w.Temperatures.Average()) + 1.33;
-            ratio += 0.44 * Math.Exp(w.Rain.Average() * 100 * 0.0131);
-            ratio += 6.67 * Math.Exp(w.Pressure.Average() * -0.002);
-            return Math.Ceiling(ratio / 3);
+            var a = -0.16 * Math.Log(w.Temperatures.Average()) + 1.33;
+            var b = 0.44 * Math.Exp(w.Rain.Average() * 0.0131);
+            var c = 6.67 * Math.Exp(w.Pressure.Average() * -0.002);
+            ratio += a;
+            ratio += b;
+            ratio += c;
+            return ratio / 3;
         }
     }
 }
