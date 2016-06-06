@@ -48,11 +48,11 @@
     }
     @section Panel
 {
-
+    <div id="part-1">
+        <h2> Brakujące produkty </h2>
         <div class="row">
             <button class="btn btn-default pull-right" type="button" data-toggle="modal" onclick="showModal()">Zaktualizuj cennik</button>
         </div>
-        <h2> Brakujące produkty </h2>
         <table class="table" id="lowStockMedicines">
             <thead>
                 <tr>
@@ -75,7 +75,7 @@
                         <td>@item.Dawka</td>
                         <td>@item.Stan</td>
                         <td>@item.Zapotrzebowanie</td>
-                        <td class="need-@item.Id">@(item.Zapotrzebowanie * 5)</td>
+                        <td class="need-@item.Id">@item.DoZamowienia</td>
                         <td><a href="#@item.Id">@item.Hurtownie.Count hurtownie</a></td>
                     </tr>
                     if (@item.Hurtownie.Count > 0) {
@@ -94,19 +94,24 @@
                 }
             </tbody>
         </table>
+        <div class="row">
+            <button class="btn btn-default pull-right" id="frw-button">Dalej <i class="fa fa-arrow-right"></i></button>
+        </div>
+    </div>
+    <div id="part-2">
         <h2> Zamówienia </h2>
         <div id="orders" class="row" ng-repeat="hurtownia in hurtownias">
-            <h3>{{hurtownia.name}}</h3>
-            <a ng-click="generateProForm(hurtownia)">Generuj Zamówienie</a>
+            <h3 class="pull-left">{{hurtownia.name}}</h3>
+            <button class="btn btn-default pull-right" ng-click="generateProForm(hurtownia)"><i class="fa fa-file-pdf-o"></i> Generuj Zamówienie</button>
             <table class="table">
                 <thead>
                     <tr>
                         <th class="col-sm-1">Lp</th>
-                        <th class="col-sm-5">Nazwa</th>
+                        <th class="col-sm-4">Nazwa</th>
                         <th class="col-sm-2">Opakowanie</th>
                         <th class="col-sm-1">Dawka</th>
                         <th class="col-sm-1">Ilosc</th>
-                        <th class="col-sm-1">Cena</th>
+                        <th class="col-sm-2">Cena</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -121,6 +126,8 @@
                 </tbody>
             </table>
         </div>
+        <button class="btn btn-default" id="back-button"><i class="fa fa-arrow-left"></i> Popraw</button><br />
+    </div>
     }
 </div>
 

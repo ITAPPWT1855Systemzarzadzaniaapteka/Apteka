@@ -1,11 +1,5 @@
 ﻿@model IEnumerable<Apteka.Models.Stan_magazynu>
 
-<head>
-    <title>Stan magazynu</title>
-    <script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
-</head>
-
-
 <div class="panel-esculap">
     <div class="panel-heading">
         <div class="row">
@@ -14,7 +8,7 @@
         </div>
     </div>
     <div class="panel-body">
-        <table id="listagem" class="table table-striped tablesorter">
+        <table id="listagem" class="table">
             <thead>
                 <tr>
                     <th>
@@ -53,17 +47,13 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Obecny_Stan_Magazynu)
                         </td>
-                        @*<td>
-                                @Html.ActionLink("Edit", "Edit", new { id = item.ID_lek }) |
-                                @Html.ActionLink("Details", "Details", new { id = item.ID_lek }) |
-                                @Html.ActionLink("Delete", "Delete", new { id = item.ID_lek })
-                            </td>*@
                     </tr>
                 }
             </tbody>
         </table>
     </div>
 </div>
+
 <script>
     $(document).ready(function () {
         $('#listagem').DataTable({

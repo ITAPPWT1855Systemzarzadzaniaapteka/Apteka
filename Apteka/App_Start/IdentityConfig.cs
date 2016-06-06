@@ -20,33 +20,34 @@ namespace Apteka
 {
     public class EmailService : IIdentityMessageService {
         public async Task SendAsync(IdentityMessage message) {
-            await configSendGridasync(message);
+            await configSMTPasync(message);
         }
 
-        // Use NuGet to install SendGrid (Basic C# client lib) 
-        private async Task configSendGridasync(IdentityMessage message) {
-            var myMessage = new SendGridMessage(); 
-            myMessage.AddTo(message.Destination);
-            myMessage.From = new System.Net.Mail.MailAddress("admin@apteka.azurewebsites.net", "Apteka Admin");
-            myMessage.Subject = message.Subject;
-            myMessage.Text = message.Body;
-            myMessage.Html = message.Body;
+        // send email via smtp service
+        private async Task configSMTPasync(IdentityMessage message) {
+            // Plug in your email service here to send an email.
+            var credentialUserName = "zellus93@gmail.com";
+            var sentFrom = "zellus93@gmail.com";
+            var pwd = "QRpFBmsRrek5Z";
 
-            var credentials = new NetworkCredential(
-                       ConfigurationManager.AppSettings["mailAccount"],
-                       ConfigurationManager.AppSettings["mailPassword"]
-                 );
+            // Configure the client:
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp-pulse.com", 2525);
+            
+            client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+            client.UseDefaultCredentials = false;
 
-            // Create a Web transport for sending email.
-            var transportWeb = new Web(credentials);
+            // Creatte the credentials:
+            System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
+            client.EnableSsl = false;
+            client.Credentials = credentials;
 
-            // Send the email.
-            if (transportWeb != null) {
-                await transportWeb.DeliverAsync(myMessage);
-            } else {
-                Trace.TraceError("Failed to create Web transport.");
-                await Task.FromResult(0);
-            }
+            // Create the message:
+            var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+            mail.Subject = message.Subject;
+            mail.Body = message.Body;
+            mail.IsBodyHtml = true;
+
+            await client.SendMailAsync(mail);
         }
     }
 
