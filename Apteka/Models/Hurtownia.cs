@@ -11,6 +11,7 @@ namespace Apteka.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Hurtownia
     {
@@ -21,6 +22,7 @@ namespace Apteka.Models
     
         public int ID_hurtownia { get; set; }
         public string Nazwa { get; set; }
+        [RegularExpression("\\d{10}", ErrorMessage = "NIP musi zawieraæ 10 cyfr")]
         public Nullable<int> NIP { get; set; }
     
         public virtual ICollection<Faktura> Faktura { get; set; }

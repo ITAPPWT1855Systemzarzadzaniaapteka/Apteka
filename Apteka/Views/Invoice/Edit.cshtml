@@ -29,7 +29,8 @@
                 <label for="Id_hurtownia">Id hurtowni:</label>
                 </div>
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.Id_hurtownia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Hurtownia.Nazwa, new { htmlAttributes = new { @class = "form-control", @id="warehouse" } })
+                    <input type="hidden" name="WarehouseId" id="warehouse-id" />
                     @Html.ValidationMessageFor(model => model.Id_hurtownia, "", new { @class = "text-danger" })
                 </div>
             </div>

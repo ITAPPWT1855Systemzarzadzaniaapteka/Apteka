@@ -22,12 +22,23 @@ namespace Apteka.Controllers {
     public class OrderController : Controller {
         aptekaEntities1 context = new aptekaEntities1();
 
+        private WeatherHelper weatherHelper = new WeatherHelper();
         [HttpGet]
         public ActionResult Index() {
             var DateStart = DateTime.Today.AddDays(-5);
-
+            CityWeather JsonObject = weatherHelper.CityWeather;
+            double zapotrzebowanieKoncowe = Convert.ToDouble(context.Operacja
+                .Where(o => o.Data > DateStart)
+                .Sum(o => o.Rozchod))/5;
+            var temp = Math.Log(weatherHelper.Temperatures.Average())*(-0.16) + 1.33;
+            var rain = Math.Exp(weatherHelper.Rain.Average() * 0.0131) * 0.44;
+            var sumTempRain = temp + rain;
+            var press = Math.Exp(weatherHelper.Pressure.Average() *(- 0.002)) *6.67;
+            var sumTempPressure = temp + press;
+            var sumAll = sumTempRain + press;
+            var orderCount = Math.Ceiling(sumAll/3);
+            @ViewBag.orderCount = orderCount;
             double weatherRatio = calcWeatherRadio();
-
             var LowMeds = context.Lek
                 .Where(m =>
                     m.Operacja.Sum(o => o.Przychod - o.Rozchod)
@@ -49,14 +60,13 @@ namespace Apteka.Controllers {
                     i.DoZamowienia = Math.Ceiling(5.0 * weatherRatio * i.Zapotrzebowanie.GetValueOrDefault(0));
                     return i;
                 });
-
-
             try {
                 var json = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/cennik.json"));
                 var list = new JavaScriptSerializer().Deserialize<List<fileMed>>(json);
 
                 LowMeds = LowMeds.Select(lek => {
                     lek.Hurtownie = findMatches(lek, list);
+                    //lek
                     return lek;
                 }).ToList();
             }
