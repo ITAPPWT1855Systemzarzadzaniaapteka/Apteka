@@ -94,8 +94,8 @@ namespace Apteka.Controllers
                     ID_user = System.Web.HttpContext.Current.User.Identity.GetUserId(),
                     Data = model.Date,
                     ID_lek = i.Id,
-                    Rozchod = i.Quantity,
-                    Przychod = 0,
+                    Rozchod = 0,
+                    Przychod = i.Quantity,
                     Netto = netto,
                     Brutto = brutto
                 };
