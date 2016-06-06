@@ -4,7 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="~/Scripts/jquery.tablesorter.js"></script>
 
 <div class="input-group custom-search-form">
     <input type="text" id="filter" class="form-control" placeholder="Wpisz nazwę leku...">
@@ -14,7 +13,7 @@
         </button>
     </span>
 </div>
-<table id="listagem" class="table table-striped tablesorter">
+<table id="listagem" class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Id_lek)
