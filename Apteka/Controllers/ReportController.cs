@@ -3,6 +3,7 @@ using Apteka.Models;
 using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -193,7 +194,8 @@ namespace Apteka.Controllers {
                 Netto = o.Netto,
                 Brutto = o.Brutto
             }).ToList()
-            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo))
+            .OrderBy(operacja => operacja.Data);
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data) {
@@ -218,7 +220,7 @@ namespace Apteka.Controllers {
             aptekaEntities1 context = new aptekaEntities1();
 
             var data = context.Operacja.Where(o => o.Rozchod != 0)
-            .GroupBy(o => o.Data)
+            .GroupBy(o => DbFunctions.TruncateTime(o.Data))
             .Select(o => new {
                 Data = o.FirstOrDefault().Data,
                 NettoDzienne = o.Sum(s => s.Netto),
@@ -260,7 +262,8 @@ namespace Apteka.Controllers {
                 Faktura = o.Faktura_operacja.FirstOrDefault<Faktura_operacja>().Faktura
             })
             .ToList()
-            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo))
+            .OrderBy(operacja => operacja.Data);
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var buy in data) {
@@ -304,7 +307,8 @@ namespace Apteka.Controllers {
                 BruttoDzienne = o.Sum(s => s.Brutto)
             })
             .ToList()
-            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo));
+            .Where(o => (o.Data >= dateFrom) && (o.Data <= dateTo))
+           . OrderBy(operacja => operacja.Data);
 
             var dataDict = new List<Dictionary<string, string>>();
             foreach (var sell in data) {
