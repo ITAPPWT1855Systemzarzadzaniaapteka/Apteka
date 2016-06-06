@@ -16,15 +16,28 @@ using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using MinimumEditDistance;
 using System.Web;
+using Apteka.Helpers;
 
 namespace Apteka.Controllers {
     public class OrderController : Controller {
         aptekaEntities1 context = new aptekaEntities1();
 
+        private WeatherHelper weatherHelper = new WeatherHelper();
         [HttpGet]
         public ActionResult Index() {
             var DateStart = DateTime.Today.AddDays(-5);
-
+            CityWeather JsonObject = weatherHelper.CityWeather;
+            double zapotrzebowanieKoncowe = Convert.ToDouble(context.Operacja
+                .Where(o => o.Data > DateStart)
+                .Sum(o => o.Rozchod))/5;
+            var temp = Math.Log(weatherHelper.Temperatures.Average())*(-0.16) + 1.33;
+            var rain = Math.Exp(weatherHelper.Rain.Average() * 0.0131) * 0.44;
+            var sumTempRain = temp + rain;
+            var press = Math.Exp(weatherHelper.Pressure.Average() *(- 0.002)) *6.67;
+            var sumTempPressure = temp + press;
+            var sumAll = sumTempRain + press;
+            var orderCount = Math.Ceiling(sumAll/3);
+            @ViewBag.orderCount = orderCount;
             var LowMeds = context.Lek
                 .Where(m =>
                     m.Operacja.Sum(o => o.Przychod - o.Rozchod)
@@ -38,11 +51,11 @@ namespace Apteka.Controllers {
                     Postac = i.Postac,
                     Opakowanie = i.Opakowanie.HasValue ? i.Opakowanie.Value : 0,
                     Stan = i.Operacja.Sum(o => o.Przychod - o.Rozchod),
-                    Zapotrzebowanie = 1.0 * i.Operacja
-                        .Where(o => o.Data > DateStart)
-                        .Sum(o => o.Rozchod) / 5
+                    Zapotrzebowanie = zapotrzebowanieKoncowe
                 }).ToList();
-
+             //1.0 * i.Operacja
+             //           .Where(o => o.Data > DateStart)
+             //           .Sum(o => o.Rozchod) / 5
 
             try {
                 var json = System.IO.File.ReadAllText(Server.MapPath("~/App_Data/cennik.json"));
@@ -50,6 +63,7 @@ namespace Apteka.Controllers {
 
                 LowMeds = LowMeds.Select(lek => {
                     lek.Hurtownie = findMatches(lek, list);
+                    //lek
                     return lek;
                 }).ToList();
             }

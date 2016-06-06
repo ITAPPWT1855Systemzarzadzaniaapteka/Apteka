@@ -14,6 +14,7 @@
 
 
 });
+
 //var Apteka = angular.module('Apteka', []);
 //Apteka.controller('warehouse', ["$scope", "$http", function ($scope, $http) {
 
